@@ -19,6 +19,10 @@ public class Test : MonoBehaviour
         //    Managers.UI.ShowPopupUI<UI_Test>();
         // UI_popup을 close 하는 방법
         //Managers.UI.ClosePopupUI();
+
+        // Sound Test
+        //Managers.Sound.Play("(Sound산하 경로)/(Sound이름)", Define.Sound.BGM); //Bgm
+        //Managers.Sound.Play("(Sound산하 경로)/(Sound이름)"); //Effect
     }
 
     // 전투 시스템 테스트

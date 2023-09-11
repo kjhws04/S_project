@@ -26,6 +26,19 @@ public class Define
         Drag,
     }
 
+    // <surmmary>
+    // 게임을 구성하는 Sound 종류
+    // </surmmary>
+    public enum Sound
+    {
+        Bgm,
+        Effect,
+        MaxCount
+    }
+
+    // <surmmary>
+    // 물리, 마법
+    // </surmmary>
     public enum AttackType
     {
         Physical,

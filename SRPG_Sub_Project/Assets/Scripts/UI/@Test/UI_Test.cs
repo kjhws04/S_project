@@ -30,6 +30,15 @@ public class UI_Test : UI_Popup
     private void Start()
     {
         Init();
+
+        List<GameObject> list = new List<GameObject>();
+        for (int i = 0; i < 5; i++)
+            list.Add(Managers.Resource.Instantiate("Test"));
+
+        foreach (GameObject obj in list)
+        {
+            Managers.Resource.Destroy(obj);
+        }
     }
 
     public override void Init()

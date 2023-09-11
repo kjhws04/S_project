@@ -22,8 +22,9 @@ public class UIManager
             return root;
         }
     }
+
     // <summary>
-    // 팝업 UI의 sorting 순서를 관리하는 함수
+    // Popup UI의 sorting 순서를 관리하는 함수
     // </summary>
     public void SetCanvas(GameObject go, bool sort = true)
     {
@@ -60,7 +61,7 @@ public class UIManager
     }
 
     // <summary>
-    // 팝업 UI를 보여주는 함수, 스택(info)로 팝업의 sorting order를 관리
+    // Popup UI를 보여주는 함수, 스택(info)로 팝업의 sorting order를 관리
     // </summary>
     public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
@@ -76,7 +77,7 @@ public class UIManager
     }
 
     // <summary>
-    // 팝업 UI를 닫는 함수, 스택(info)의 순서로 닫기
+    // Popup UI를 닫는 함수, 스택(info)의 순서로 닫기
     // </summary>
     public void ClosePopupUI()
     {
@@ -90,7 +91,7 @@ public class UIManager
     }
 
     // <summary>
-    // 닫으려는 팝업창과 stack의 peek한 팝업창이 같은지 확인 후, 같다면 팝업창을 닫는 함수
+    // 닫으려는 Popup stack의 peek한 팝업창이 같은지 확인 후, 같다면 팝업창을 닫는 함수
     // </summary>
     public void ClosePopupUI(UI_Popup popup)
     {
@@ -107,11 +108,20 @@ public class UIManager
     }
 
     // <summary>
-    // 모든 팝업 UI를 닫는 함수
+    // 모든 Popup UI를 닫는 함수
     // </summary>
     public void CloseAllPopupUI()
     {
         while (_popupStack.Count > 0)
             ClosePopupUI();
+    }
+
+    // <summary>
+    // 모든 Popup UI와 Scene UI를 초기화 하는 함수
+    // </summary>
+    public void Clear()
+    {
+        CloseAllPopupUI();
+        _scene = null;
     }
 }
