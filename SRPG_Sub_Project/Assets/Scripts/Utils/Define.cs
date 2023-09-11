@@ -15,6 +15,16 @@ public class Define
         BattleField,
         Recall,
         Maintain,
+    }    
+    
+    // <surmmary>
+    // 소환 재화에 따른 타입
+    // </surmmary>
+    public enum RecallType
+    {
+        None,
+        Ticket,
+        Heart,
     }
 
     // <surmmary>

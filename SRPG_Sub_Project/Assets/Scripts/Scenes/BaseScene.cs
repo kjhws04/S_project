@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class BaseScene : MonoBehaviour
+public abstract class BaseScene : UI_Base
 {
     public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown; //get은 자유, set은 자식 component만,
-
-    protected virtual void Init()
+    
+    public virtual void Init()
     {
         #region EventSystem Setting
         // <summary>

@@ -72,7 +72,7 @@ public class UI_Test : UI_Popup
     public void OnButtonClicked(PointerEventData data)
     {
         Debug.Log("Event(Extension) Test!");
-        GetText((int)Texts.TestText).text = "Test Complete!";
+        GetTextMeshProUGUI((int)Texts.TestText).text = "Test Complete!";
     }
 
     public void GoToBattleFieldScene()

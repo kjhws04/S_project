@@ -8,7 +8,8 @@ public class MaintainScene : BaseScene
     {
         Init();
     }
-    protected override void Init()
+
+    public override void Init()
     {
         base.Init();
 

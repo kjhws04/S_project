@@ -14,11 +14,12 @@ public class UnknownScene : BaseScene
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
     }
 
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
         SceneType = Define.Scene.Unknown;
 
+        Debug.Log("Init");
         Managers.UI.ShowPopupUI<UI_Test>();
     }
 
