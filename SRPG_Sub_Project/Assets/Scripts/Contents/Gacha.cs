@@ -34,6 +34,15 @@ using System;
 
 public class Gacha<T>
 {
+    //public double itemWeightDict;
+    //public int istMore4Stars;
+
+    //public Gacha(double _itemWeigthDict, int _istMore4Stars)
+    //{
+    //    itemWeightDict = _itemWeigthDict;
+    //    istMore4Stars = _istMore4Stars;
+    //}
+
     // 전체 아이템의 가중치 합 (읽기 전용)
     public double SumOfWeights
     {
@@ -46,10 +55,10 @@ public class Gacha<T>
 
     private System.Random randomInstance;
     private readonly Dictionary<T, double> itemWeightDict;
-    // 확률이 정규화된 아이템 목록
+    //확률이 정규화된 아이템 목록
     private readonly Dictionary<T, double> normalizedItemWeightDict;
 
-    //중치 합이 계산되지 않은 상태인지 여부
+    //가중치 합이 계산되지 않은 상태인지 여부
     private bool isDirty;
     private double _sumOfWeights;
 

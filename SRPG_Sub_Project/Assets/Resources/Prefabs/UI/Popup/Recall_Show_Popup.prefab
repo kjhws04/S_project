@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 7755871222157967773}
   - component: {fileID: 9079578575451460608}
   m_Layer: 5
-  m_Name: Image (7)
+  m_Name: Card7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5403920353477112919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33,10 +33,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1520, y: -1013}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7755871222157967773
 CanvasRenderer:
@@ -88,12 +88,12 @@ GameObject:
   - component: {fileID: 1009947000935171566}
   - component: {fileID: 2950880613857018701}
   m_Layer: 5
-  m_Name: Image (6)
+  m_Name: Card6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3763483148203635735
 RectTransform:
   m_ObjectHideFlags: 0
@@ -109,10 +109,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1100, y: -1013}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1009947000935171566
 CanvasRenderer:
@@ -164,12 +164,12 @@ GameObject:
   - component: {fileID: 7343528995065271883}
   - component: {fileID: 3690572051256107354}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: Card5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4009052313510596417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -185,10 +185,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 680, y: -1013}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7343528995065271883
 CanvasRenderer:
@@ -240,12 +240,12 @@ GameObject:
   - component: {fileID: 6614499891840010439}
   - component: {fileID: 8816803715206108118}
   m_Layer: 5
-  m_Name: Image (9)
+  m_Name: Card9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4211003323796023032
 RectTransform:
   m_ObjectHideFlags: 0
@@ -261,10 +261,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2360, y: -1013}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6614499891840010439
 CanvasRenderer:
@@ -463,12 +463,12 @@ GameObject:
   - component: {fileID: 8301116330381522572}
   - component: {fileID: 1302559613922007377}
   m_Layer: 5
-  m_Name: Image (8)
+  m_Name: Card8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3422829631558712462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -484,10 +484,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1940, y: -1013}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8301116330381522572
 CanvasRenderer:
@@ -644,7 +644,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isShowing: 1
-  recallTime: 0
+  images:
+  - {fileID: 1206990581891165694}
+  - {fileID: 8609164204323063039}
+  - {fileID: 6159003212425413221}
+  - {fileID: 6006571585890639601}
+  - {fileID: 6591913564447319908}
+  - {fileID: 3690572051256107354}
+  - {fileID: 2950880613857018701}
+  - {fileID: 9079578575451460608}
+  - {fileID: 1302559613922007377}
+  - {fileID: 8816803715206108118}
 --- !u!1 &4333735050261270688
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,12 +791,12 @@ GameObject:
   - component: {fileID: 6056328297650234527}
   - component: {fileID: 6006571585890639601}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Card3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5928773618822698102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -802,10 +812,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1940, y: -427}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6056328297650234527
 CanvasRenderer:
@@ -857,12 +867,12 @@ GameObject:
   - component: {fileID: 4077475799956714373}
   - component: {fileID: 6591913564447319908}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: Card4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5376644102384869927
 RectTransform:
   m_ObjectHideFlags: 0
@@ -878,10 +888,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 2360, y: -427}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4077475799956714373
 CanvasRenderer:
@@ -933,12 +943,12 @@ GameObject:
   - component: {fileID: 7310841558633338152}
   - component: {fileID: 1206990581891165694}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Card0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7546057050157039001
 RectTransform:
   m_ObjectHideFlags: 0
@@ -954,10 +964,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 680, y: -427}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7310841558633338152
 CanvasRenderer:
@@ -1103,12 +1113,12 @@ GameObject:
   - component: {fileID: 458382466405183905}
   - component: {fileID: 8609164204323063039}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Card1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8504498233040383414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1124,10 +1134,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1100, y: -427}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &458382466405183905
 CanvasRenderer:
@@ -1179,12 +1189,12 @@ GameObject:
   - component: {fileID: 3358363974375135928}
   - component: {fileID: 6159003212425413221}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Card2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2438264400833369332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1200,10 +1210,10 @@ RectTransform:
   m_Father: {fileID: 7360403524299443146}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1520, y: -427}
+  m_SizeDelta: {x: 400, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3358363974375135928
 CanvasRenderer:

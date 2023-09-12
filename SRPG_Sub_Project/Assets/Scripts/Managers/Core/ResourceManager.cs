@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceManager
 {
@@ -35,6 +36,18 @@ public class ResourceManager
         GameObject go = Object.Instantiate(org, parent);
         go.name = org.name;
         return go;
+    }
+
+    public Sprite SpriteLoad(string path)
+    {
+        Sprite org = Load<Sprite>($"Card/{path}");
+        if (org == null)
+        {
+            Debug.Log($"Failed to load image : {path}");
+            return null;
+        }
+
+        return org;
     }
 
     public void Destroy(GameObject go)

@@ -1,9 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+//[CreateAssetMenu(fileName = "New Card", menuName = "New Card/Card")]
 public class Stat : MonoBehaviour
 {
+    // <surmmary>
+    // 카드 속성
+    // </surmmary>
+    #region Character Level
+    public enum CardType { Character, Item }
+    public Image cardImage; //카드 이미지
+    public int cardStars; //카드 성급
+    public CardType cardType; //카드 종류
+    #endregion
+
     // <surmmary>
     // 캐릭터의 레벨
     // </surmmary>

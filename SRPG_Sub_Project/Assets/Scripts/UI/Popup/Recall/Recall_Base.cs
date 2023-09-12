@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 
 public class Recall_Base : UI_Popup
 {
-    public Define.RecallType _type = Define.RecallType.None;
+    public Define.RecallType _type;
+    bool isHave = true;
+    UserData _data;
 
     enum Buttons
     {
@@ -22,21 +24,84 @@ public class Recall_Base : UI_Popup
         Bind<Button>(typeof(Buttons));
         #endregion
 
+        _data = Managers.Game.GetUserData().GetComponent<UserData>();
 
+        #region Mapping
         GetButton((int)Buttons.Recall1_Btn).gameObject.AddUIEvent(BtnRecall1Time);
         GetButton((int)Buttons.Recall10_Btn).gameObject.AddUIEvent(BtnRecall10Time);
+        #endregion
     }
 
+    #region RecallTime
     public void BtnRecall1Time(PointerEventData data)
     {
-        Debug.Log("1회 소환");
-        Managers.UI.ShowPopupUI<Recall_Show_Popup>();
-    }
+        int recallTime = 1;
+        CheckRecallTicketType(recallTime);
+        if (!isHave)
+            return;
 
+        Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
+        NowRecall(popup, recallTime);
+    }
     public void BtnRecall10Time(PointerEventData data)
     {
-        Debug.Log("10회 소환");
+        int recallTime = 10;
+        CheckRecallTicketType(recallTime);
+        if (!isHave)
+            return;
+
         Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
-        popup.recallTime = 10;
+        NowRecall(popup, recallTime);
     }
+
+    void CheckRecallTicketType(int recallTime)
+    {
+        switch (_type)
+        {
+            case Define.RecallType.Ticket1:
+                if (_data.Ticket1 >= recallTime)
+                    _data.Ticket1 -= recallTime;
+                else
+                {
+                    Managers.UI.ShowPopupUI<RecallWaring>();
+                    isHave = false;
+                }
+                break;
+            case Define.RecallType.Ticket2:
+                if (_data.Ticket2 >= recallTime)
+                    _data.Ticket2 -= recallTime;
+                else
+                {
+                    Managers.UI.ShowPopupUI<RecallWaring>();
+                    isHave = false;
+                }
+                break;
+            case Define.RecallType.FriendTicket:
+                if (_data.TicketFriend >= recallTime)
+                    _data.TicketFriend -= recallTime;
+                else
+                {
+                    Managers.UI.ShowPopupUI<RecallWaring>();
+                    isHave = false;
+                }
+                break;
+        }
+    }
+    void NowRecall(Recall_Show_Popup _popup, int _recallTime)
+    {
+        switch (_type)
+        {
+            case Define.RecallType.Ticket1:
+                _popup.NormalRecall(_recallTime);
+                break;
+            case Define.RecallType.Ticket2:
+                _popup.SpecialRecall(_recallTime);
+                break;
+            case Define.RecallType.FriendTicket:
+                _popup.FrendRecall(_recallTime);
+                break;
+        }
+    }
+    #endregion
+
 }

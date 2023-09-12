@@ -32,6 +32,7 @@ public class CombatManager
 
     private void Start()
     {
+
     }
 
     public void Init()

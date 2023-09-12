@@ -30,6 +30,22 @@ public class MainScene : BaseScene
         Init();
     }
 
+    public override void Init()
+    {
+        base.Init();
+        SceneType = Define.Scene.Main;
+
+        #region Bind
+        Bind<Image>(typeof(Images));
+        Bind<TextMeshProUGUI>(typeof(Texts));
+        #endregion
+
+        UserData _data = Managers.Game.GetUserData().GetComponent<UserData>();
+
+        GetTextMeshProUGUI((int)Texts.Soldier_Name).text = _data.UserName;
+        model = GetImage((int)Images.Character_Model).gameObject;
+    }
+
     private void FixedUpdate()
     {
         runningTime += Time.fixedDeltaTime * speed;
@@ -41,24 +57,12 @@ public class MainScene : BaseScene
             model.transform.localScale = new Vector2(model.transform.localScale.x - scaleSpeed, model.transform.localScale.y - scaleSpeed);
     }
 
-    public override void Init()
-    {
-        base.Init();
-        SceneType = Define.Scene.Main;
-
-        #region Bind
-        Bind<Image>(typeof(Images));
-        Bind<TextMeshProUGUI>(typeof(Texts));
-        #endregion
-
-        GetTextMeshProUGUI((int)Texts.Soldier_Name).text = "ShyAI2523";
-        model = GetImage((int)Images.Character_Model).gameObject;
-    }
-
+    //Clear 부분
     public override void Clear()
     {
     }
 
+    //버튼
     #region Buttons
     public void BtnBattleField()
     {

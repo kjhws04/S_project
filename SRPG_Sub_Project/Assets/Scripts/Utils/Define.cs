@@ -23,8 +23,9 @@ public class Define
     public enum RecallType
     {
         None,
-        Ticket,
-        Heart,
+        Ticket1,
+        Ticket2,
+        FriendTicket,
     }
 
     // <surmmary>

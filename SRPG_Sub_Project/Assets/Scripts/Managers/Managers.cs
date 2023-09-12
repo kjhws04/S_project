@@ -9,8 +9,10 @@ public class Managers : MonoBehaviour
 
     #region Contents
     CombatManager _combat = new CombatManager();
+    GameManager _game = new GameManager();
 
     public static CombatManager Combat { get { return Instance._combat; } }
+    public static GameManager Game { get { return Instance._game; } }
     #endregion
 
     #region Core
@@ -57,6 +59,8 @@ public class Managers : MonoBehaviour
     // </summary>
     public static void ManagersInit()
     {
+        s_instance._game.Init();
+
         s_instance._data.Init();
         s_instance._pool.Init();
         s_instance._sound.Init();
