@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//[CreateAssetMenu(fileName = "New Card", menuName = "New Card/Card")]
 public class Stat : MonoBehaviour
 {
     // <surmmary>
@@ -11,8 +10,8 @@ public class Stat : MonoBehaviour
     // </surmmary>
     #region Character Level
     public enum CardType { Character, Item }
-    public Image cardImage; //카드 이미지
-    public int cardStars; //카드 성급
+    public Sprite modelImg; //모델 이미지
+    public Sprite cardImage; //카드 이미지
     public CardType cardType; //카드 종류
     #endregion
 
@@ -20,15 +19,17 @@ public class Stat : MonoBehaviour
     // 캐릭터의 레벨
     // </surmmary>
     #region Character Level
-    [SerializeField] int _level;
+    [SerializeField] int _level = 1;
     [SerializeField] int _maxLevel = 50;
     [SerializeField] int _exp;
     [SerializeField] int _maxExp = 100;
+    [SerializeField] int _charPiece = 0;
 
     public int Level { get { return _level; } set { _level = value; } }
     public int MaxLevel { get { return _maxLevel; } set { _maxLevel = value; } }
     public int Exp { get { return _exp; } set { _exp = value; } }
     public int MaxExp { get { return _maxExp; } set { _maxExp = value; } }
+    public int CharPiece { get { return _charPiece; } set { _charPiece = value; } }
     #endregion
 
     // <surmmary>

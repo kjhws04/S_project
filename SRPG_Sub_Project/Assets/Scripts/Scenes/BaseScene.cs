@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 public abstract class BaseScene : UI_Base
 {
     public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown; //get은 자유, set은 자식 component만,
-    
+    public UserData _data;
+
     public virtual void Init()
     {
         #region EventSystem Setting
@@ -17,6 +18,8 @@ public abstract class BaseScene : UI_Base
         if (obj == null)
             Managers.Resource.Instantiate("UI/EventSystem").name = "@EventSystem";
         #endregion
+
+        _data = Managers.Game.GetUserData().GetComponent<UserData>();
     }
 
     public abstract void Clear();

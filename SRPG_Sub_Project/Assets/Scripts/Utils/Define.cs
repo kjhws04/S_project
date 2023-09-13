@@ -15,6 +15,7 @@ public class Define
         BattleField,
         Recall,
         Maintain,
+        Character
     }    
     
     // <surmmary>

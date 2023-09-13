@@ -15,19 +15,13 @@ public class MainScene : BaseScene
 
     GameObject model;
 
-    enum Texts
-    {
-        Soldier_Name,
-    }
-
-    enum Images
-    {
-        Character_Model,
-    }
+    enum Texts { Soldier_Name }
+    enum Images { Character_Model }
 
     private void Start()
     {
         Init();
+
     }
 
     public override void Init()
@@ -40,10 +34,9 @@ public class MainScene : BaseScene
         Bind<TextMeshProUGUI>(typeof(Texts));
         #endregion
 
-        UserData _data = Managers.Game.GetUserData().GetComponent<UserData>();
-
         GetTextMeshProUGUI((int)Texts.Soldier_Name).text = _data.UserName;
         model = GetImage((int)Images.Character_Model).gameObject;
+        GetImage((int)Images.Character_Model).sprite = _data._modelImg;
     }
 
     private void FixedUpdate()
@@ -57,26 +50,42 @@ public class MainScene : BaseScene
             model.transform.localScale = new Vector2(model.transform.localScale.x - scaleSpeed, model.transform.localScale.y - scaleSpeed);
     }
 
-    //Clear 부분
-    public override void Clear()
-    {
-    }
-
     //버튼
     #region Buttons
-    public void BtnBattleField()
+    public void BtnChangeModel()
+    {
+        _data.ChangeModel();
+        GetImage((int)Images.Character_Model).sprite = _data._modelImg;
+    }
+    public void BtnBattle()
     {
         Managers.Scene.LoadScene(Define.Scene.BattleField);
     }
-
-    public void BtnRecallField()
+    public void BtnRecall()
     {
         Managers.Scene.LoadScene(Define.Scene.Recall);
     }
-
     public void BtnEventField()
     {
         //TODO
     }
+    public void BtnMaintain()
+    {
+        Managers.Scene.LoadScene(Define.Scene.Maintain);
+    }
+    public void BtnMission()
+    {
+        //Managers.UI.ShowPopupUI<Mission_Popup>();
+    }
+    public void BtnCharacter()
+    {
+        Managers.Scene.LoadScene(Define.Scene.Character);
+    }
     #endregion
+
+    //Clear 부분
+    public override void Clear()
+    {
+
+    }
 }

@@ -41,13 +41,10 @@ public class CharacterDefine : MonoBehaviour
     public enum Rating
     {
         Unknown,
-        SSS,
-        SS,
-        S,
-        A,
-        B,
-        C,
-        D,
-        F
+        S1,
+        S2,
+        S3,
+        S4,
+        S5,
     }
 }

@@ -15,6 +15,8 @@ public class Class : MonoBehaviour
         Ax,
         Bow,
         Pistol,
+        Staff,
+        Dagger
     }    
     
     // <surmmary>
@@ -36,5 +38,10 @@ public class Class : MonoBehaviour
         Unknown,
         Cityzen,
         Swrodsman,
+        Lancer,
+        Woodcutter,
+        Acrcher,
+        Assassin,
+        Wizard
     }
 }
