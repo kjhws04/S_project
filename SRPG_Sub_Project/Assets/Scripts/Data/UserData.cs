@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UserData : MonoBehaviour
 {
+    #region UserInfo
     [SerializeField] string _userName = "ShyAI5364";
     [SerializeField] int _userLevel = 15;
     [SerializeField] int _heart = 200;
@@ -20,15 +21,38 @@ public class UserData : MonoBehaviour
     public int Ticket1 { get { return _ticket1; } set { _ticket1 = value; } }
     public int Ticket2 { get { return _ticket2; } set { _ticket2 = value; } }
     public int TicketFriend { get { return _ticketFriend; } set { _ticketFriend = value; } }
+    #endregion
+
+    #region Character Data
+    public Dictionary<string, Stat> _userCharData;
+    #endregion
 
     private void Awake()
     {
-        GameObject go = Managers.Resource.Instantiate("SPUM_Units/Knight");
-        _modelImg = go.GetComponent<Stat>().modelImg;
+        GameObject go = Managers.Resource.Instantiate("Character/Knight");
+        _modelImg = go.GetComponent<Stat>().modelImg; 
+        _userCharData = new Dictionary<string, Stat>();
+    }
+
+    public void AddCharater(string _charName, Stat _charStat)
+    {
+        if(_userCharData.ContainsKey(_charName))
+        {
+            //캐릭터가 중복일 때, TODO
+        }
+        else
+        {
+            _userCharData.Add(_charName, _charStat);
+        }
     }
 
     public void ChangeModel()
     {
         Debug.Log("TODO");
+    }
+
+    public void Test()
+    {
+        Debug.Log("TEST");
     }
 }

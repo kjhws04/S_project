@@ -12,6 +12,7 @@ public class Stat : MonoBehaviour
     public enum CardType { Character, Item }
     public Sprite modelImg; //모델 이미지
     public Sprite cardImage; //카드 이미지
+    public Sprite proflieImg; //프로필 이미지
     public CardType cardType; //카드 종류
     #endregion
 

@@ -57,6 +57,7 @@ public class Gacha<T>
     private readonly Dictionary<T, double> itemWeightDict;
     //확률이 정규화된 아이템 목록
     private readonly Dictionary<T, double> normalizedItemWeightDict;
+    private readonly Dictionary<T, bool> isChar;
 
     //가중치 합이 계산되지 않은 상태인지 여부
     private bool isDirty;
@@ -68,6 +69,7 @@ public class Gacha<T>
         randomInstance = new System.Random();
         itemWeightDict = new Dictionary<T, double>();
         normalizedItemWeightDict = new Dictionary<T, double>();
+        isChar = new Dictionary<T, bool>();
         isDirty = true;
         _sumOfWeights = 0.0;
     }
@@ -77,23 +79,25 @@ public class Gacha<T>
         randomInstance = new System.Random(randomSeed);
         itemWeightDict = new Dictionary<T, double>();
         normalizedItemWeightDict = new Dictionary<T, double>();
+        isChar = new Dictionary<T, bool>();
         isDirty = true;
         _sumOfWeights = 0.0;
     }
 
     //Add 함수
     //새로운 아이템 가중치 쌍 추가
-    public void Add(T item, double weight)
+    public void Add(T item, double weight, bool _isChar)
     {
         CheckDuplicatedItem(item);
         CheckValidWeight(weight);
 
         itemWeightDict.Add(item, weight);
+        isChar.Add(item, _isChar);
         isDirty = true;
     }
 
     //새로운 아이템 가중치 쌍들 추가
-    public void Add(params (T item, double weight)[] pairs)
+    public void Add(params (T item, double weight, bool _isChar)[] pairs)
     {
         foreach (var pair in pairs)
         {
@@ -101,6 +105,7 @@ public class Gacha<T>
             CheckValidWeight(pair.weight);
 
             itemWeightDict.Add(pair.item, pair.weight);
+            isChar.Add(pair.item, pair._isChar);
         }
     }
 
@@ -122,6 +127,11 @@ public class Gacha<T>
 
         itemWeightDict[item] = weight;
         isDirty = true;
+    }
+
+    public bool CheckIsChar(T item)
+    {
+        return isChar[item];
     }
 
     // 랜덤 시드 재설정

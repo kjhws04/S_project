@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(go);
 
-        _userData = go;
+        _userData = go; 
     }
+
 }

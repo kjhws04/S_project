@@ -50,6 +50,17 @@ public class ResourceManager
         return org;
     }
 
+    public GameObject SaveCharData(string path)
+    {
+        GameObject go = Load<GameObject>($"Prefabs/Character/{path}"); 
+        if (go == null)
+        {
+            Debug.Log($"Failed to load image : {path}");
+            return null;
+        }
+        return go;
+    }
+
     public void Destroy(GameObject go)
     {
         if (go == null)

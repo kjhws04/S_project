@@ -8,18 +8,18 @@ public class Recall_Show_Popup : UI_Popup
 {
     public bool isShowing;
     public Image[] images;
+    public UserData _userData;
+
+    private void Start()
+    {
+        Init();
+        _userData = Managers.Game.GetUserData().GetComponent<UserData>();
+    }
 
     public override void Init()
     {
         base.Init();
-        isShowing = true;
-
-        for (int i = 0; i < images.Length; i++)
-        {
-            images[i].gameObject.SetActive(false);
-        }
-        #region Bind
-        #endregion
+        isShowing = false;
     }
 
     public void BtnExitShowPopup()
@@ -38,63 +38,58 @@ public class Recall_Show_Popup : UI_Popup
         #region Percent List
             //Weapon
             //1stars(10%)
-            ("Bronze DG", 200),
-            ("Iron Sword", 200),
-            ("Old Spear", 200),
-            ("Old Staff", 200),
-            ("Wood Shield", 200),
+            ("Bronze DG", 200, false),
+            ("Iron Sword", 200, false),
+            ("Old Spear", 200, false),
+            ("Old Staff", 200, false),
+            ("Wood Shield", 200, false),
 
             //2stars(10%)
-            ("Axe", 500),
-            ("Magic Spear", 500),
+            ("Axe", 500, false),
+            ("Magic Spear", 500, false),
 
             //3stars(20%)
-            ("Bronze Shield", 500),
-            ("Dagger", 500),
-            ("Ice Sword", 500),
-            ("Wind Staff", 500),
+            ("Bronze Shield", 500, false),
+            ("Dagger", 500, false),
+            ("Ice Sword", 500, false),
+            ("Wind Staff", 500, false),
 
             //4stars(12%)
-            ("Amethyst Staff", 300),
-            ("Battle Axe", 300),
-            ("Ice Spear", 300),
-            ("Magic Bow", 300),
+            ("Amethyst Staff", 300, false),
+            ("Battle Axe", 300, false),
+            ("Ice Spear", 300, false),
+            ("Magic Bow", 300, false),
 
             //5stars(4%)
-            ("Ancient Bow", 100),
-            ("Flame Axe", 100),
-            ("King's Sword", 100),
-            ("Stiletto", 100),
+            ("Ancient Bow", 100, false),
+            ("Flame Axe", 100, false),
+            ("King's Sword", 100, false),
+            ("Stiletto", 100, false),
 
             //Character
             //1stars(10%)
-            ("Aqua", 1000),
+            ("Aqua", 1000, true),
 
             //2stars(10%)
-            ("Zion", 1000),
+            ("Zion", 1000, true),
 
             //3stars(20%)
-            ("Dmitry", 500),
-            ("Elie", 500),
-            ("Mars", 500),
-            ("Sakura", 500),
+            ("Dmitry", 500, true),
+            ("Elie", 500, true),
+            ("Mars", 500, true),
+            ("Sakura", 500, true),
 
             //4stars(3%)
-            ("Shy", 150),
-            ("Van", 150),
+            ("Shy", 150, true),
+            ("Van", 150, true),
 
             //5stars(1%)
-            ("Broyna", 50),
-            ("Kan", 50)
+            ("Broyna", 50, true),
+            ("Kan", 50, true)
         #endregion
         );
 
-        for (int i = 0; i < recallTime; i++)
-        {
-            images[i].gameObject.SetActive(true);
-            images[i].sprite = Managers.Resource.SpriteLoad(wRecall.GetRandomPick());
-            Debug.Log($"{images[i].sprite.name}");
-        }
+        RecallCard(wRecall, recallTime);
         StartCoroutine(WaitingSecond(2));
         isShowing = false;
     }
@@ -107,44 +102,39 @@ public class Recall_Show_Popup : UI_Popup
         #region Percent List
             //Weapon
             //3stars(30%)
-            ("Bronze Shield", 750),
-            ("Dagger", 750),
-            ("Ice Sword", 750),
-            ("Wind Staff", 750),
+            ("Bronze Shield", 750, false),
+            ("Dagger", 750, false),
+            ("Ice Sword", 750, false),
+            ("Wind Staff", 750, false),
 
             //4stars(20%)
-            ("Amethyst Staff", 500),
-            ("Battle Axe", 500),
-            ("Ice Spear", 500),
-            ("Magic Bow", 500),
+            ("Amethyst Staff", 500, false),
+            ("Battle Axe", 500, false),
+            ("Ice Spear", 500, false),
+            ("Magic Bow", 500, false),
 
             //5stars(6%)
-            ("Ancient Bow", 150),
-            ("Flame Axe", 150),
-            ("King's Sword", 150),
-            ("Stiletto", 150),
+            ("Ancient Bow", 150, false),
+            ("Flame Axe", 150, false),
+            ("King's Sword", 150, false),
+            ("Stiletto", 150, false),
 
             //3stars(30%)
-            ("Dmitry", 750),
-            ("Elie", 750),
-            ("Mars", 750),
-            ("Sakura", 750),
+            ("Dmitry", 750, true),
+            ("Elie", 750, true),
+            ("Mars", 750, true),
+            ("Sakura", 750, true),
 
             //4stars(10%)
-            ("Shy", 500),
-            ("Van", 500),
+            ("Shy", 500, true),
+            ("Van", 500, true),
 
             //5stars(4%)
-            ("Knight", 400)
+            ("Knight", 400, true)
         #endregion
         );
 
-        for (int i = 0; i < recallTime; i++)
-        {
-            images[i].gameObject.SetActive(true);
-            images[i].sprite = Managers.Resource.SpriteLoad(wRecall.GetRandomPick());
-            Debug.Log($"{images[i].sprite.name}");
-        }
+        RecallCard(wRecall, recallTime);
         StartCoroutine(WaitingSecond(2));
         isShowing = false;
     }
@@ -157,45 +147,65 @@ public class Recall_Show_Popup : UI_Popup
         #region Percent List
             //Weapon
             //1stars(10%)
-            ("Bronze DG", 200),
-            ("Iron Sword", 200),
-            ("Old Spear", 200),
-            ("Old Staff", 200),
-            ("Wood Shield", 200),
+            ("Bronze DG", 200, false),
+            ("Iron Sword", 200, false),
+            ("Old Spear", 200, false),
+            ("Old Staff", 200, false),
+            ("Wood Shield", 200, false),
 
             //2stars(16%)
-            ("Axe", 800),
-            ("Magic Spear", 800),
+            ("Axe", 800, false),
+            ("Magic Spear", 800, false),
 
             //3stars(30%)
-            ("Bronze Shield", 750),
-            ("Dagger", 750),
-            ("Ice Sword", 750),
-            ("Wind Staff", 750),
+            ("Bronze Shield", 750, false),
+            ("Dagger", 750, false),
+            ("Ice Sword", 750, false),
+            ("Wind Staff", 750, false),
 
             //Character
             //1stars(10%)
-            ("Aqua", 1000),
+            ("Aqua", 1000, true),
 
             //2stars(10%)
-            ("Zion", 1000),
+            ("Zion", 1000, true),
 
             //3stars(24%)
-            ("Dmitry", 600),
-            ("Elie", 600),
-            ("Mars", 600),
-            ("Sakura", 600)
+            ("Dmitry", 600, true),
+            ("Elie", 600, true),
+            ("Mars", 600, true),
+            ("Sakura", 600, true)
         #endregion
         );
+
+        RecallCard(wRecall, recallTime);
+        StartCoroutine(WaitingSecond(2));
+        isShowing = false;
+    }
+
+    //카드 소환 부분
+    private void RecallCard(Gacha<string> wRecall, int recallTime)
+    {
 
         for (int i = 0; i < recallTime; i++)
         {
             images[i].gameObject.SetActive(true);
-            images[i].sprite = Managers.Resource.SpriteLoad(wRecall.GetRandomPick());
-            Debug.Log($"{images[i].sprite.name}");
+            string pickUpName = wRecall.GetRandomPick();
+
+            if (wRecall.CheckIsChar(pickUpName))
+            {
+                _userData = Managers.Game.GetUserData().GetComponent<UserData>();
+                GameObject go = Managers.Resource.SaveCharData(pickUpName);
+                Stat _statData = go.GetComponent<Stat>();
+
+                images[i].sprite = _statData.cardImage;
+                _userData.AddCharater(pickUpName, _statData);
+            }
+            else
+            {
+                images[i].sprite = Managers.Resource.SpriteLoad(pickUpName);
+            }
         }
-        StartCoroutine(WaitingSecond(2));
-        isShowing = false;
     }
 
     IEnumerator WaitingSecond(int sec)
