@@ -55,10 +55,21 @@ public class ResourceManager
         GameObject go = Load<GameObject>($"Prefabs/Character/{path}"); 
         if (go == null)
         {
-            Debug.Log($"Failed to load image : {path}");
+            Debug.Log($"Failed to load data : {path}");
             return null;
         }
         return go;
+    }
+
+    public WeaponStat SaveWeaponData(string path)
+    {
+        WeaponStat ws = Load<WeaponStat>($"Data/Weapon/{path}");
+        if (ws == null)
+        {
+            Debug.Log($"Failed to load data : {path}");
+            return null;
+        }
+        return ws;
     }
 
     public void Destroy(GameObject go)

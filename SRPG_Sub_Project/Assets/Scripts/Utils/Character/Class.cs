@@ -16,7 +16,8 @@ public class Class : MonoBehaviour
         Bow,
         Pistol,
         Staff,
-        Dagger
+        Dagger,
+        Shield,
     }    
     
     // <surmmary>

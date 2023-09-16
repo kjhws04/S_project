@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class Recall_Show_Popup : UI_Popup
 {
     public bool isShowing;
-    public Image[] images;
+    public Image[] cardImage;
     public UserData _userData;
 
     private void Start()
@@ -186,24 +186,26 @@ public class Recall_Show_Popup : UI_Popup
     //카드 소환 부분
     private void RecallCard(Gacha<string> wRecall, int recallTime)
     {
+        _userData = Managers.Game.GetUserData().GetComponent<UserData>();
 
         for (int i = 0; i < recallTime; i++)
         {
-            images[i].gameObject.SetActive(true);
+            cardImage[i].gameObject.SetActive(true);
             string pickUpName = wRecall.GetRandomPick();
 
-            if (wRecall.CheckIsChar(pickUpName))
+            if (wRecall.CheckIsChar(pickUpName)) //캐릭터 카드 이미지, 저장
             {
-                _userData = Managers.Game.GetUserData().GetComponent<UserData>();
-                GameObject go = Managers.Resource.SaveCharData(pickUpName);
-                Stat _statData = go.GetComponent<Stat>();
+                Stat _statData = Managers.Resource.SaveCharData(pickUpName).gameObject.GetComponent<Stat>();
 
-                images[i].sprite = _statData.cardImage;
+                cardImage[i].sprite = _statData.cardImage;
                 _userData.AddCharater(pickUpName, _statData);
             }
-            else
+            else//캐릭터 카드 이미지, 저장
             {
-                images[i].sprite = Managers.Resource.SpriteLoad(pickUpName);
+                WeaponStat stat = Managers.Resource.SaveWeaponData(pickUpName);
+
+                cardImage[i].sprite = stat.weaponCardImg;
+                _userData.AddWeapon(pickUpName, stat);
             }
         }
     }
@@ -211,5 +213,5 @@ public class Recall_Show_Popup : UI_Popup
     IEnumerator WaitingSecond(int sec)
     {
         yield return new WaitForSeconds(sec);
-    }
+    } 
 }

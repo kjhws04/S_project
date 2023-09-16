@@ -19,4 +19,13 @@ public class Weapon : MonoBehaviour
     {
         None
     }
+
+    // <surmmary>
+    // 무기 타입
+    // </surmmary>
+    public enum WeaponType
+    {
+        AD,
+        AP
+    }
 }

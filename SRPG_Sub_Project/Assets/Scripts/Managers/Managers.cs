@@ -10,9 +10,11 @@ public class Managers : MonoBehaviour
     #region Contents
     CombatManager _combat = new CombatManager();
     GameManager _game = new GameManager();
+    MissionManager _mission = new MissionManager();
 
     public static CombatManager Combat { get { return Instance._combat; } }
     public static GameManager Game { get { return Instance._game; } }
+    public static MissionManager Mission { get { return Instance._mission; } }
     #endregion
 
     #region Core

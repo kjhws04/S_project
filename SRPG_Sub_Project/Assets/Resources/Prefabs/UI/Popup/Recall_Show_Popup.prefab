@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isShowing: 1
-  images:
+  cardImage:
   - {fileID: 1206990581891165694}
   - {fileID: 8609164204323063039}
   - {fileID: 6159003212425413221}
@@ -655,6 +655,7 @@ MonoBehaviour:
   - {fileID: 9079578575451460608}
   - {fileID: 1302559613922007377}
   - {fileID: 8816803715206108118}
+  _userData: {fileID: 0}
 --- !u!1 &4333735050261270688
 GameObject:
   m_ObjectHideFlags: 0

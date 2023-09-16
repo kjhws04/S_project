@@ -21,7 +21,6 @@ public class MainScene : BaseScene
     private void Start()
     {
         Init();
-
     }
 
     public override void Init()

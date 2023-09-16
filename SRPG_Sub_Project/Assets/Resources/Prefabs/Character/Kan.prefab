@@ -3956,7 +3956,7 @@ MonoBehaviour:
   _tribe: 1
   _belong: 1
   _rating: 5
-  _rank: 0
+  _rank: 5
   _magicTalent: 1
   _sPower: 1
   _explanation: 
@@ -3978,8 +3978,8 @@ MonoBehaviour:
   _spd: 12
   _def: 7
   _Mdef: 5
-  _luk: 0
-  _wei: 8
+  _luk: 8
+  _wei: 0
   _mov: 4
 --- !u!1 &8882596137038171103
 GameObject:

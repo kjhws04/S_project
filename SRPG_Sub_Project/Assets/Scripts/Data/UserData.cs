@@ -23,15 +23,20 @@ public class UserData : MonoBehaviour
     public int TicketFriend { get { return _ticketFriend; } set { _ticketFriend = value; } }
     #endregion
 
-    #region Character Data
-    public Dictionary<string, Stat> _userCharData;
+    #region Character/Weapon Data
+    public Dictionary<string, Stat> _userCharData = new Dictionary<string, Stat>();
+    public Dictionary<string, WeaponStat> _userWeaponData = new Dictionary<string, WeaponStat>();
+    #endregion
+
+    #region Mission Data
     #endregion
 
     private void Awake()
     {
         GameObject go = Managers.Resource.Instantiate("Character/Knight");
         _modelImg = go.GetComponent<Stat>().modelImg; 
-        _userCharData = new Dictionary<string, Stat>();
+        //_userCharData = new Dictionary<string, Stat>();
+        //_userWeaponData = new Dictionary<string, WeaponStat>();
     }
 
     public void AddCharater(string _charName, Stat _charStat)
@@ -39,6 +44,7 @@ public class UserData : MonoBehaviour
         if(_userCharData.ContainsKey(_charName))
         {
             //캐릭터가 중복일 때, TODO
+            _charStat.CharPiece += 20;
         }
         else
         {
@@ -46,13 +52,20 @@ public class UserData : MonoBehaviour
         }
     }
 
+    public void AddWeapon(string _weaponName, WeaponStat weaponStat)
+    {
+        if (_userWeaponData.ContainsKey(_weaponName))
+        {
+            //무기가 중복일 때, TODO
+        }
+        else
+        {
+            _userWeaponData.Add(_weaponName, weaponStat);
+        }
+    }
+
     public void ChangeModel()
     {
         Debug.Log("TODO");
-    }
-
-    public void Test()
-    {
-        Debug.Log("TEST");
     }
 }

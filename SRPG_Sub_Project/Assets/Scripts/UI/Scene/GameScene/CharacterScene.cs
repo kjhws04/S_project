@@ -11,10 +11,12 @@ public class CharacterScene : BaseScene
 
     UserData _userData;
     Stat _stat;
+    List<Stat> _charStat;
 
     enum Images
     {
-        Char_Select_Model
+        Char_Select_Model, 
+        Weapon_Img
     }
 
     enum Texts 
@@ -47,17 +49,27 @@ public class CharacterScene : BaseScene
         #endregion
 
         SceneType = Define.Scene.Character;
-
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         List<Stat> _statList = new List<Stat>(_userData._userCharData.Values);
-        for (int i = 0; i < _statList.Count; i++)
+        _charStat = _statList;
+
+        Sorting(_statList);
+        //ModelInfoChange(_stat);
+    }
+
+    //정렬
+    private void Sorting(List<Stat> _list)
+    {
+        List<Stat> list = _list.OrderByDescending(character => character.Rank).ToList();
+
+        for (int i = 0; i < list.Count; i++)
         {
-            string key = _userData._userCharData.Keys.ElementAt(i);
-            _stat = _statList[i];
+            string key_WeaponName = _userData._userCharData.Keys.ElementAt(i);
+            _stat = list[i];
+            SaveCharInfo(_stat, i);
             _charSlot[i].gameObject.GetComponent<Image>().sprite = _stat.proflieImg;
         }
-
-        ModelInfoChange(_stat);
+        ModelInfoChange(list[0]);
     }
 
     public override void Clear()
@@ -65,8 +77,45 @@ public class CharacterScene : BaseScene
         //TODO 정보 초기화
     }
 
+    //값이 바뀌었을 때, userDic에 저장
+    public void ModifyStat(string _charName, Stat _stat)
+    {
+        //userCharData에 있는 Stat 값을 가져와서
+        //값을 변경
+        if(_userData._userCharData.ContainsKey(_charName))
+        {
+            //TODO
+        }
+    }
+
+    public void SaveCharInfo(Stat _stat, int i)
+    {
+        Stat _copy = _charSlot[i].gameObject.AddComponent<Stat>();
+        ChangeStat(_copy, _stat);
+    }
+
+    // _orgStat = UserCharDic에 있는 스텟, _changeStat 값을 바꿀 스텟
+    public void ChangeStat(Stat _orgStat, Stat _changeStat)
+    {
+        _orgStat.Name = _changeStat.Name;
+        _orgStat.CurClass = _changeStat.CurClass;
+        _orgStat.WeaponClass = _changeStat.WeaponClass;
+        _orgStat.Hp = _changeStat.Hp;
+        _orgStat.Str = _changeStat.Str;
+        _orgStat.Int = _changeStat.Int;
+        _orgStat.Tec = _changeStat.Tec;
+        _orgStat.Spd = _changeStat.Spd;
+        _orgStat.Def = _changeStat.Def;
+        _orgStat.MDef = _changeStat.MDef;
+        _orgStat.Luk = _changeStat.Luk;
+        _orgStat.Wei = _changeStat.Wei;
+        _orgStat.Level = _changeStat.Level;
+        _orgStat.modelImg = _changeStat.modelImg;
+    }
+
     public void ModelInfoChange(Stat _changeStat)
     {
+        _stat = _changeStat;
         GetTextMeshProUGUI((int)Texts.Char_Name).text = _changeStat.Name;
         GetTextMeshProUGUI((int)Texts.Char_ClassnWeapon).text = $"{_changeStat.CurClass} / {_changeStat.WeaponClass}";
         GetTextMeshProUGUI((int)Texts.Hp).text = $"{_changeStat.Hp}";
@@ -85,5 +134,9 @@ public class CharacterScene : BaseScene
     public void BtnMain()
     {
         Managers.Scene.LoadScene(Define.Scene.Main);
+    }
+    public void BtnChangeWeapon()
+    {
+        Managers.UI.ShowPopupUI<WeaponSlot_Popup>().SaveCharType(_stat);
     }
 }

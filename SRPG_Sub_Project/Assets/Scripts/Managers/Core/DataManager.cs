@@ -14,12 +14,12 @@ public class DataManager
 
     public void Init()
     {
-        StatDict = LoadJson<Data.StatData, int, Data.Stat>("StatData").MakeDic();
+        //StatDict = LoadJson<Data.StatData, int, Data.Stat>("StatData").MakeDic();
     }
 
-    Loader LoadJson<Loader, Key, Val>(string path) where Loader : ILoader<Key, Val>
-    {
-        TextAsset text = Managers.Resource.Load<TextAsset>($"Data/{path}");
-        return JsonUtility.FromJson<Loader>(text.text);
-    }
+    //Loader LoadJson<Loader, Key, Val>(string path) where Loader : ILoader<Key, Val>
+    //{
+    //    TextAsset text = Managers.Resource.Load<TextAsset>($"Data/{path}");
+    //    return JsonUtility.FromJson<Loader>(text.text);
+    //}
 }

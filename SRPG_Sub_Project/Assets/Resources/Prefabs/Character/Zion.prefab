@@ -2836,7 +2836,7 @@ MonoBehaviour:
   _tribe: 1
   _belong: 1
   _rating: 2
-  _rank: 0
+  _rank: 1
   _magicTalent: 1
   _sPower: 1
   _explanation: 
