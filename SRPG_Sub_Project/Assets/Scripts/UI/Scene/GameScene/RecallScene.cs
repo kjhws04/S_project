@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class RecallScene : BaseScene
 {
-    UserData _data;
-
     enum Texts
     {
         Goods1_Txt,
@@ -45,9 +43,6 @@ public class RecallScene : BaseScene
         #region Bind
         Bind<TextMeshProUGUI>(typeof(Texts));
         #endregion
-
-        _data = Managers.Game.GetUserData().GetComponent<UserData>();
-
     }
 
     public override void Clear()

@@ -59,4 +59,18 @@ public class Util
             return null;
         return transform.gameObject;
     }
+    
+    // <summary>
+    // Dic에서 유닛이름에 해당하는 데이터 (Stat)뽑기
+    // </summary>
+    public static Stat GetStatData(Dictionary<string, Stat> _charData, string _charName)
+    {
+        if (_charData.ContainsKey(_charName))
+            return _charData[_charName];
+        else
+        {
+            Debug.Log($"UserData에 {_charName}은 존재하지 않습니다.");
+            return null;
+        }
+    }
 }

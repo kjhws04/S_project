@@ -17,13 +17,18 @@ public class WeaponSlot_Popup : UI_Popup
     private void Start()
     {
         Init();
+    }
+
+    public override void Init()
+    {
+        base.Init();
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
-        _chooseData = ExtractSwordWeapons(_userData._userWeaponData, _weaponClass);
+        _chooseData = ExtractWeapons(_userData._userWeaponData, _weaponClass);
         ShowWeaponCard(_chooseData);
     }
 
     // WeaponType이 _weaponClass인 데이터 추출하는 함수
-    private Dictionary<string, WeaponStat> ExtractSwordWeapons(Dictionary<string, WeaponStat> dictionary, Class.WeaponClass type)
+    private Dictionary<string, WeaponStat> ExtractWeapons(Dictionary<string, WeaponStat> dictionary, Class.WeaponClass type)
     {
         Dictionary<string, WeaponStat> weaponType = new Dictionary<string, WeaponStat>();
 
@@ -47,11 +52,23 @@ public class WeaponSlot_Popup : UI_Popup
             Slot[i].SetActive(true);
             Slot[i].GetComponent<Image>().sprite = sortedWeapons[i].weaponCardImg;
         }
+        _chooseList = sortedWeapons;
+        ResetSlotColor();
     }
 
-    public override void Init()
+    public void ResetSlotColor()
     {
-        base.Init();
+        for (int i = 0; i < Mathf.Min(Slot.Length, _chooseList.Count); i++)
+        {
+            if (_chooseList[i].isUsed)
+            {
+                Slot[i].GetComponent<Image>().color = Color.gray;
+            }
+            else
+            {
+                Slot[i].GetComponent<Image>().color = Color.white;
+            }
+        }
     }
 
     public void SaveCharType(Stat _stat)

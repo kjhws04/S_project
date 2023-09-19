@@ -85,12 +85,12 @@ public class Stat : MonoBehaviour
     #region Character KnightOrder
     [SerializeField] bool _haveOrder = false;
     [SerializeField] Order.KnightOrder _knight = Order.KnightOrder.None;
-    [SerializeField] Weapon.MainWeapon _mianWeapon = Weapon.MainWeapon.None;
+    [SerializeField] WeaponStat _mianWeapon;
     [SerializeField] Weapon.SubWeapon _subWeapon = Weapon.SubWeapon.None;
 
     public bool HaveOrder { get { return _haveOrder; } set { _haveOrder = value; } }
     public Order.KnightOrder KnightOrder { get { return _knight; } set { _knight = value; } }
-    public Weapon.MainWeapon MainWeapon { get { return _mianWeapon; } set { _mianWeapon = value; } }
+    public WeaponStat MainWeapon { get { return _mianWeapon; } set { _mianWeapon = value; } }
     public Weapon.SubWeapon SubWeapon { get { return _subWeapon; } set { _subWeapon = value; } }
     #endregion
 
@@ -120,4 +120,32 @@ public class Stat : MonoBehaviour
     public int Wei { get { return _wei; } set { _wei = value; } }
     public int Move { get { return _mov; } set { _mov = value; } }
     #endregion
+
+    public void WeaponApply(WeaponStat _weapon, bool _isUesd)
+    {
+        if (_isUesd)
+        {
+            switch (_weapon.weaponAttackType)
+            {
+                case Weapon.WeaponType.AD:
+                    _str += _weapon.increaseVal;
+                    break;
+                case Weapon.WeaponType.AP:
+                    _int += _weapon.increaseVal;
+                    break;
+            }
+        }
+        else
+        {
+            switch (_weapon.weaponAttackType)
+            {
+                case Weapon.WeaponType.AD:
+                    _str -= _weapon.increaseVal;
+                    break;
+                case Weapon.WeaponType.AP:
+                    _int -= _weapon.increaseVal;
+                    break;
+            }
+        }
+    }
 }

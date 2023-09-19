@@ -2651,7 +2651,7 @@ public class SPUM_Manager : MonoBehaviour
     
     public void InstallSpriteData()
     {
-        bool Chk = false;
+        //bool Chk = false;
         //기본 폴더 제작
         if(Directory.Exists("Assets/Resources/SPUM/SPUM_Sprites/Items"))
         {

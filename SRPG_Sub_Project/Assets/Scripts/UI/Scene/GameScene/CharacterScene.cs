@@ -12,6 +12,7 @@ public class CharacterScene : BaseScene
     UserData _userData;
     Stat _stat;
     List<Stat> _charStat;
+    Sprite glowImage;
 
     enum Images
     {
@@ -51,10 +52,10 @@ public class CharacterScene : BaseScene
         SceneType = Define.Scene.Character;
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         List<Stat> _statList = new List<Stat>(_userData._userCharData.Values);
-        _charStat = _statList;
+
+        glowImage = GetImage((int)Images.Weapon_Img).sprite;
 
         Sorting(_statList);
-        //ModelInfoChange(_stat);
     }
 
     //정렬
@@ -115,6 +116,16 @@ public class CharacterScene : BaseScene
 
     public void ModelInfoChange(Stat _changeStat)
     {
+        if (_changeStat.MainWeapon != null)
+        {
+            GetImage((int)Images.Weapon_Img).sprite = _changeStat.MainWeapon.weaponCardImg;
+        }
+        else
+        {
+            GetImage((int)Images.Weapon_Img).sprite = glowImage;
+        }
+
+        _userData.CurrentChar = _changeStat;
         _stat = _changeStat;
         GetTextMeshProUGUI((int)Texts.Char_Name).text = _changeStat.Name;
         GetTextMeshProUGUI((int)Texts.Char_ClassnWeapon).text = $"{_changeStat.CurClass} / {_changeStat.WeaponClass}";
@@ -129,6 +140,13 @@ public class CharacterScene : BaseScene
         GetTextMeshProUGUI((int)Texts.Wei).text = $"{_changeStat.Wei}";
         GetTextMeshProUGUI((int)Texts.Lv).text = $"Lv. {_changeStat.Level}";
         GetImage((int)Images.Char_Select_Model).sprite = _changeStat.modelImg;
+
+    }
+
+    public void WeaponBaseReset()
+    {
+        //아이콘 리셋
+        GetImage((int)Images.Weapon_Img).sprite = glowImage;
     }
 
     public void BtnMain()
@@ -137,6 +155,16 @@ public class CharacterScene : BaseScene
     }
     public void BtnChangeWeapon()
     {
-        Managers.UI.ShowPopupUI<WeaponSlot_Popup>().SaveCharType(_stat);
+        WeaponSlot_Popup _popup = Managers.UI.ShowPopupUI<WeaponSlot_Popup>();
+        _popup.SaveCharType(_stat);
+
+        if (_userData.CurrentChar.MainWeapon != null)
+        {
+            WeaponBaseReset();
+            _userData.CurrentChar.WeaponApply(_userData.CurrentChar.MainWeapon, false); //Data 차감
+            _userData.CurrentChar.MainWeapon.isUsed = false; // 무기 사용 false
+            _userData.CurrentChar.MainWeapon = null; // 해당 캐릭터 main weapon = null
+            ModelInfoChange(_userData.CurrentChar); //스텟 보여주기 반영
+        }
     }
 }

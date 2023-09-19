@@ -13,7 +13,7 @@ public class MainScene : BaseScene
     private float runningTime = 0f;
     private float yPos = 0f;
 
-    GameObject model;
+    public GameObject model;
 
     enum Texts { Soldier_Name }
     enum Images { Character_Model }
