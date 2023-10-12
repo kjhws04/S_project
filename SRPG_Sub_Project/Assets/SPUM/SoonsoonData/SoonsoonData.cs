@@ -34,7 +34,7 @@ public class SoonsoonData
     }
 
     public SoonData _soonData2 = new SoonData();
-
+    public BattleManager SAM;
     public SPUM_Manager _spumManager;
     public bool _gifAlphaTrigger; // for using gif trigger at Soonsoon Exporter.
     public Color _gifBasicColor; //for using gif bg color at Soonsoon Exporter.

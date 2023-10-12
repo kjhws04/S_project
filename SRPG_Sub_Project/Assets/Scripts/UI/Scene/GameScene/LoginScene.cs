@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class LoginScene : BaseScene
 {
-    private void Start()
-    {
-        Init();
-    }
-
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
 

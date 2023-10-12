@@ -23,7 +23,7 @@ public class MainScene : BaseScene
         Init();
     }
 
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
         SceneType = Define.Scene.Main;
@@ -38,6 +38,7 @@ public class MainScene : BaseScene
         GetImage((int)Images.Character_Model).sprite = _data._modelImg;
     }
 
+    //model up down
     private void FixedUpdate()
     {
         runningTime += Time.fixedDeltaTime * speed;

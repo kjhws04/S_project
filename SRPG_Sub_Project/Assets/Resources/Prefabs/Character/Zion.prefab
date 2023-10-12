@@ -2760,6 +2760,9 @@ GameObject:
   - component: {fileID: 2086593760218669709}
   - component: {fileID: 9198472570944163183}
   - component: {fileID: 7323793459018866983}
+  - component: {fileID: -3539677753506491747}
+  - component: {fileID: -2903758927097945766}
+  - component: {fileID: 7497459158580549498}
   m_Layer: 5
   m_Name: Zion
   m_TagString: Untagged
@@ -2775,7 +2778,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5967897301899050580}
   m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00015256465}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2785,7 +2788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -170}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9198472570944163183
@@ -2826,6 +2829,7 @@ MonoBehaviour:
   cardImage: {fileID: 21300000, guid: c2c20db2d611c9f4295d99f4663bd0b2, type: 3}
   proflieImg: {fileID: 21300000, guid: ad23b59862ae2ef40806f0a2bde77bc6, type: 3}
   cardType: 0
+  attackType: 1
   _level: 1
   _maxLevel: 50
   _exp: 0
@@ -2849,7 +2853,7 @@ MonoBehaviour:
   _active: 1
   _haveOrder: 0
   _knight: 0
-  _mianWeapon: 0
+  _mainWeapon: {fileID: 0}
   _subWeapon: 0
   _hp: 23
   _str: 6
@@ -2861,6 +2865,59 @@ MonoBehaviour:
   _luk: 6
   _wei: 0
   _mov: 4
+  _currentHp: 0
+  _spumPref: {fileID: 9198472570944163183}
+  _target: {fileID: 0}
+  _unitFR: 20
+  _unitAR: 1
+  _unitAS: 1
+  _dir: {x: 0, y: 0}
+  _tempDis: {x: 0, y: 0}
+  findTimer: 0
+  attackTimer: 0
+  _unitState: 0
+--- !u!136 &-3539677753506491747
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967897301899050580}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!54 &-2903758927097945766
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967897301899050580}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &7497459158580549498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967897301899050580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fc47cd6e4f46f419bc4c50db6babb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6118702621183189541
 GameObject:
   m_ObjectHideFlags: 0

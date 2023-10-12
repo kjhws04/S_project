@@ -15,6 +15,7 @@ public class UserData : MonoBehaviour
     [SerializeField] Stat _currentChar;
     public Sprite _modelImg;
     public Sprite _moedlDotImg;
+    public int _stageCount = 1;
     
     public string UserName { get { return _userName; } set { _userName = value; } }
     public int UserLevel { get { return _userLevel; } set { _userLevel = value; } }
@@ -23,9 +24,11 @@ public class UserData : MonoBehaviour
     public int Ticket2 { get { return _ticket2; } set { _ticket2 = value; } }
     public int TicketFriend { get { return _ticketFriend; } set { _ticketFriend = value; } }
     public Stat CurrentChar { get { return _currentChar; } set { _currentChar = value; } }
+    public int StageCount { get { return _stageCount; } set { _stageCount = value; } }
     #endregion
 
     #region Character/Weapon Data
+    //보유 캐릭터 & 무기 데이터
     public Dictionary<string, Stat> _userCharData = new Dictionary<string, Stat>();
     public Dictionary<string, WeaponStat> _userWeaponData = new Dictionary<string, WeaponStat>();
     #endregion
@@ -35,23 +38,21 @@ public class UserData : MonoBehaviour
 
     private void Awake()
     {
+        //TODO 현재 아무씬에서 동작하면 awake로 knight가 생성
         GameObject go = Managers.Resource.Instantiate("Character/Knight");
-        _modelImg = go.GetComponent<Stat>().modelImg; 
-        //_userCharData = new Dictionary<string, Stat>();
-        //_userWeaponData = new Dictionary<string, WeaponStat>();
+        go.transform.position = new Vector3(2000f, 2000f, 0f);
+        go.GetComponent<CapsuleCollider>().enabled = false;
+        //go.GetComponent<UI_HpBar>().enabled = false;
+
+        _modelImg = go.GetComponent<Stat>().modelImg;
     }
 
     public void AddCharater(string _charName, Stat _charStat)
     {
         if(_userCharData.ContainsKey(_charName))
-        {
-            //캐릭터가 중복일 때, TODO
-            _charStat.CharPiece += 20;
-        }
+            _charStat.CharPiece += 20; //캐릭터가 중복일 때
         else
-        {
             _userCharData.Add(_charName, _charStat);
-        }
     }
 
     public void AddWeapon(string _weaponName, WeaponStat weaponStat)
@@ -61,9 +62,7 @@ public class UserData : MonoBehaviour
             //무기가 중복일 때, TODO
         }
         else
-        {
             _userWeaponData.Add(_weaponName, weaponStat);
-        }
     }
 
     public void ChangeModel()

@@ -16,7 +16,7 @@ public class MaintainScene : BaseScene
         Init();
     }
 
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
         SceneType = Define.Scene.Maintain;

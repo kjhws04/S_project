@@ -14,7 +14,7 @@ public class UnknownScene : BaseScene
         Dictionary<int, Data.Stat> dict = Managers.Data.StatDict;
     }
 
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
         SceneType = Define.Scene.Unknown;

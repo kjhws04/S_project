@@ -42,8 +42,27 @@ public class UIManager
             canvas.sortingOrder = 0;
             Debug.Log("sort비사용");
         }
-    }    
-    
+    }
+
+    // <summary>
+    // 2D 상황에서 프리펩에는 붙지 않고 직접 붙이고 싶을 때 사용
+    // </summary>
+    public T Make2DUI<T>(Transform parent = null, string name = null) where T : UI_Base
+    {
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
+
+        GameObject go = Managers.Resource.Instantiate($"UI/2D/{name}");
+        if (parent != null)
+            go.transform.SetParent(parent);
+
+        Canvas canvas = go.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace;
+        canvas.worldCamera = Camera.main;
+
+        return Util.GetOrAddComponent<T>(go);
+    }
+
     // <summary>
     // 씬 UI를 보여주는 함수, 스택(info)로 팝업의 sorting order를 관리
     // </summary>

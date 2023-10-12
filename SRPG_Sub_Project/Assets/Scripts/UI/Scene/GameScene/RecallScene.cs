@@ -25,16 +25,7 @@ public class RecallScene : BaseScene
         Init();
     }
 
-    private void FixedUpdate()
-    {
-        #region Mapping
-        GetTextMeshProUGUI((int)Texts.Goods1_Txt).text = $"{_data.Ticket1}";
-        GetTextMeshProUGUI((int)Texts.Goods2_Txt).text = $"{_data.Ticket2}";
-        GetTextMeshProUGUI((int)Texts.Goods3_Txt).text = $"{_data.TicketFriend}";
-        #endregion
-    }
-
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
 
@@ -42,6 +33,15 @@ public class RecallScene : BaseScene
         Managers.UI.ShowPopupUI<Recall0_Info_Popup>();
         #region Bind
         Bind<TextMeshProUGUI>(typeof(Texts));
+        #endregion
+    }
+
+    public void ResetTicket()
+    {
+        #region Mapping
+        GetTextMeshProUGUI((int)Texts.Goods1_Txt).text = $"{_data.Ticket1}";
+        GetTextMeshProUGUI((int)Texts.Goods2_Txt).text = $"{_data.Ticket2}";
+        GetTextMeshProUGUI((int)Texts.Goods3_Txt).text = $"{_data.TicketFriend}";
         #endregion
     }
 
@@ -77,18 +77,22 @@ public class RecallScene : BaseScene
     public void BtnShop1()
     {
         Debug.Log("TODO1");
+        ResetTicket();
     }
     public void BtnShop2()
     {
         Debug.Log("TODO2");
+        ResetTicket();
     }
     public void BtnShop3()
     {
         Debug.Log("TODO3");
+        ResetTicket();
     }
     #endregion
     public void BtnExit()
     {
         Managers.Scene.LoadScene(Define.Scene.Main);
+        ResetTicket();
     }
 }

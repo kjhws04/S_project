@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class WeaponCardSlot : MonoBehaviour, IPointerClickHandler
 {
     UserData _weaponData;
-    WeaponStat _currentWeapon;
     CharacterScene _charScene;
     WeaponSlot_Popup _popup;
 

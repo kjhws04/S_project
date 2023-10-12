@@ -8,13 +8,17 @@ public class Managers : MonoBehaviour
     static Managers Instance { get { Init(); return s_instance; } }
 
     #region Contents
+    BattleManager _battle = new BattleManager();
     CombatManager _combat = new CombatManager();
     GameManager _game = new GameManager();
     MissionManager _mission = new MissionManager();
+    StageManager _stage = new StageManager();
 
+    public static BattleManager Battle { get { return Instance._battle; } }
     public static CombatManager Combat { get { return Instance._combat; } }
     public static GameManager Game { get { return Instance._game; } }
     public static MissionManager Mission { get { return Instance._mission; } }
+    public static StageManager Stage { get { return Instance._stage; } }
     #endregion
 
     #region Core

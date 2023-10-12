@@ -9,6 +9,7 @@ public class Recall_Base : UI_Popup
     public Define.RecallType _type;
     bool isHave = true;
     UserData _data;
+    RecallScene _recall;
 
     enum Buttons
     {
@@ -19,6 +20,8 @@ public class Recall_Base : UI_Popup
     public override void Init()
     {
         base.Init();
+
+        _recall = FindObjectOfType<RecallScene>();
 
         #region Bind
         Bind<Button>(typeof(Buttons));
@@ -42,6 +45,7 @@ public class Recall_Base : UI_Popup
 
         Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
         NowRecall(popup, recallTime);
+        _recall.ResetTicket();
     }
     public void BtnRecall10Time(PointerEventData data)
     {
@@ -52,6 +56,7 @@ public class Recall_Base : UI_Popup
 
         Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
         NowRecall(popup, recallTime);
+        _recall.ResetTicket();
     }
 
     void CheckRecallTicketType(int recallTime)
@@ -103,5 +108,4 @@ public class Recall_Base : UI_Popup
         }
     }
     #endregion
-
 }

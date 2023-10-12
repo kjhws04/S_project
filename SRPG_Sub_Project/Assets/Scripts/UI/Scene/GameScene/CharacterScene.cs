@@ -8,11 +8,10 @@ using UnityEngine.UI;
 public class CharacterScene : BaseScene
 {
     public CharacterSlot[] _charSlot;
+    Sprite glowImage;
 
     UserData _userData;
     Stat _stat;
-    List<Stat> _charStat;
-    Sprite glowImage;
 
     enum Images
     {
@@ -41,7 +40,7 @@ public class CharacterScene : BaseScene
         Init();
     }
 
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
         #region Bind

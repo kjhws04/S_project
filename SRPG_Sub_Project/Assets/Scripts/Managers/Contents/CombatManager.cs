@@ -4,74 +4,16 @@ using UnityEngine;
 
 public class CombatManager
 {
-    #region Attacker Info
-    Define.AttackType _type; //물리 or 마법
-    int _damage; //근력or 지능
-    int _tec; //기술
-    int _speed; //속도
-    int _luck; //행운
-    int[] _damWeapon = new int[2]; //데미지 보정 무기
-    int[] _damEtc = new int[2]; //데미지 기타
-    int[] _accWeapon = new int[2]; //명중 보정 무기
-    int[] _accEtc = new int[2]; //명중 보정 기타
-    int[] _cirWeappon = new int[2]; //치명 보정 무기
-    int[] _criEtc = new int[2]; //치명 보정 기타
-    #endregion
-
-    #region Defencer Info
-    int E_curHp; //남은 체력
-    int E_accSpeed; //속도
-    int E_luck; //행운
-    int E_defence; //수비
-    int E_Mdefence; //마방
-    int[] E_accAvoWeapon = new int[2]; //회피 보정 무기
-    int[] E_accAvoEtc = new int[2]; //회피 보정 기타
-    int[] E_cirAvoWeappon = new int[2]; //치명 회피 보정 무기
-    int[] E_cirAviEtc = new int[2]; //치명 회피 보정 기타
-    #endregion
-
-    private void Start()
-    {
-
-    }
-
-    public void Init()
-    {
-        #region test
-        //_type = Define.AttackType.Magic; //물리 or 마법
-        //_damage = 30; //근력or 지능
-        //_tec = 13; //기술
-        //_speed = 12; //속도
-        //_luck = 40; //행운
-        //_damWeapon[0] = 3; //데미지 보정 무기
-        //_damEtc[0] = 1;
-        //_accWeapon[0] = 20; //명중 보정 무기
-        //_accEtc[0] = 5; //명중 보정 기타
-        //_cirWeappon[0] = 50; //치명 보정 무기
-        //_criEtc[0] = 5; //치명 보정 기타
-        //E_curHp = 40; //남은 체력
-        //E_accSpeed = 7; //속도
-        //E_luck = 2; //행운
-        //E_defence = 3; //수비
-        //E_Mdefence = 30; //마방
-        //E_accAvoWeapon[0] = 10; //회피 보정 무기
-        //E_accAvoEtc[0] = 0; //회피 보정 기타
-        //E_cirAvoWeappon[0] = 10; ; //치명 회피 보정 무기
-        //E_cirAviEtc[0] = 0; //치명 회피 보정 기타
-
-        //int cur;
-        //cur = Combat(E_curHp, _tec, _luck, _accWeapon, _accEtc, E_accSpeed, E_luck, E_accAvoWeapon, E_accAvoEtc, 
-        //       _cirWeappon, _criEtc, E_cirAvoWeappon, E_cirAviEtc, _type, E_defence, E_Mdefence, _damage, _damWeapon, _damEtc);
-        #endregion
-    }
-
+    public bool isCritical = false;
+    public bool isBlock = false;
+    public bool isMiss = false;
 
     // <summary>
     // 추격 여부 (공격자가 피격자보다 속도 스텟이 5이상이라면 추격 발생)
     // </summary>
-    public bool IsChase(int _speed, int E_speed)
+    public bool IsChase(Stat _AttackChar, Stat _DefenceChar)
     {
-        if (_speed - E_speed >= 5)
+        if (_AttackChar.Spd - _DefenceChar.Spd >= 5)
             return true;
         return false;
     }
@@ -79,25 +21,21 @@ public class CombatManager
     // <summary>
     // 대상의 남은 체력과 관련된 데미지
     // </summary>
-    public int Combat(int E_curHp, int _tec, int _luck, int[] _accWeapon, int[] _accEtc, int E_accSpeed, int E_luck, int[] E_accAvoWeapon, int[] E_accAvoEtc,
-                      int[] _cirWeappon, int[] _criEtc, int[] E_cirAvoWeappon, int[] E_cirAviEtc,
-                      Define.AttackType E_type, int E_defence, int E_Mdefence, int _damage, int[] _damWeapon, int[] _damEtc)
+    public int Combat(Stat _AttackChar, Stat _DefenceChar)
     {
-        int damage = FinalDamage(_tec, _luck, _accWeapon, _accEtc, E_accSpeed, E_luck, E_accAvoWeapon, E_accAvoEtc,
-                      _cirWeappon, _criEtc, E_cirAvoWeappon, E_cirAviEtc,
-                      E_type, E_defence, E_Mdefence, _damage, _damWeapon, _damEtc);
-        if (damage >= E_curHp)
-            damage = E_curHp; //대상의 남은 체력보다 높으면 공격력은 남은 체력과 같음. 
+        int damage = FinalDamage(_AttackChar, _DefenceChar);
+        if (damage >= _DefenceChar.CurrentHp)
+            damage = _DefenceChar.CurrentHp; //대상의 남은 체력보다 높으면 공격력은 남은 체력과 같음. 
 
         #region DebugZone
-        //Debug.Log($"최종 데미지 : {damage}, 남은 체력 : {E_curHp - damage}");
-        //Debug.Log($"공격력 : {AttackDamage(E_type, E_defence, E_Mdefence, _damage, _damWeapon, _damEtc)}");
+        //Debug.Log($"최종 데미지 : {damage}, 남은 체력 : {_DefenceChar.CurrentHp - damage}");
+        //Debug.Log($"공격력 : {AttackDamage(_AttackChar, _DefenceChar)}");
 
-        //Debug.Log($"필살 성공률 : {CriticalCalculate(_tec, _cirWeappon, _criEtc, E_luck, E_cirAvoWeappon, E_cirAviEtc)}%");
-        //Debug.Log($"아군 필살 : {CriticalPercentage(_tec, _cirWeappon, _criEtc)}, 상대필살 회피 : {CriticalAvoidPercentage(E_luck, E_cirAvoWeappon, E_cirAviEtc)}");
+        //Debug.Log($"필살 성공률 : {CriticalCalculate(_AttackChar, _DefenceChar)}%");
+        //Debug.Log($"아군 필살 : {CriticalPercentage(_AttackChar)}, 상대필살 회피 : {CriticalAvoidPercentage(_DefenceChar)}");
 
-        //Debug.Log($"명중 성공률 : {AccuracyCalculate(_tec, _luck, _accWeapon, _accEtc, E_accSpeed, E_luck, E_accAvoWeapon, E_accAvoEtc)}%");
-        //Debug.Log($"아군 명중 : {AccuracyPercentage(_tec, _luck, _accWeapon, _accEtc)}, 상대 회피 확률 : {AvoidPercentage(E_accSpeed, E_luck, E_accAvoWeapon, E_accAvoEtc)}");
+        //Debug.Log($"명중 성공률 : {AccuracyCalculate(_AttackChar, _DefenceChar)}%");
+        //Debug.Log($"아군 명중 : {AccuracyPercentage(_AttackChar)}, 상대 회피 확률 : {AvoidPercentage(_DefenceChar)}");
         #endregion
 
         return Mathf.FloorToInt(damage);
@@ -106,19 +44,18 @@ public class CombatManager
     // <summary>
     // 대상의 남은 체력과 상관없는 순수한 데미지 (명중시 공격 else 회피)
     // </summary>
-    public int FinalDamage(int _tec, int _luck, int[] _accWeapon, int[] _accEtc, int E_accSpeed, int E_luck, int[] E_accAvoWeapon, int[] E_accAvoEtc,
-                      int[] _cirWeappon, int[] _criEtc, int[] E_cirAvoWeappon, int[] E_cirAviEtc,
-                      Define.AttackType E_type, int E_defence, int E_Mdefence, int _damage, int[] _damWeapon, int[] _damEtc)
+    public int FinalDamage(Stat _AttackChar, Stat _DefenceChar)
     {
         int damage = 0;
-        if (AccuracyCalculate(_tec, _luck, _accWeapon, _accEtc, E_accSpeed, E_luck, E_accAvoWeapon, E_accAvoEtc) >= RandomVal())
+        if (AccuracyCalculate(_AttackChar, _DefenceChar) >= RandomVal())
         {
-            damage = FinalDamageCalculate(_tec, _cirWeappon, _criEtc, E_luck, E_cirAvoWeappon, E_cirAviEtc,
-                              E_type, E_defence, E_Mdefence, _damage, _damWeapon, _damEtc);
+            damage = FinalDamageCalculate(_AttackChar, _DefenceChar);
+            isMiss = false;
         }
         else
         {
             damage = 0;
+            isMiss = true;
         }
         return damage;
     }
@@ -126,78 +63,81 @@ public class CombatManager
     // <summary>
     // 최종 필살 포함 데미지 계산 (치명타시 * 3)
     // </summary>
-    public int FinalDamageCalculate(int _tec, int[] _cirWeappon, int[] _criEtc, int E_luck, int[] E_cirAvoWeappon, int[] E_cirAviEtc,
-                      Define.AttackType E_type, int E_defence, int E_Mdefence, int _damage, int[] _damWeapon, int[] _damEtc)
+    public int FinalDamageCalculate(Stat _AttackChar, Stat _DefenceChar)
     {
         int cur = 0;
-        if (CriticalCalculate(_tec, _cirWeappon, _criEtc, E_luck, E_cirAvoWeappon, E_cirAviEtc) >= RandomVal())
+        if (CriticalCalculate(_AttackChar, _DefenceChar) >= RandomVal())
         {
-            cur = AttackDamage(E_type, E_defence, E_Mdefence, _damage, _damWeapon, _damEtc) * 3; //cri 
+            cur = AttackDamage(_AttackChar, _DefenceChar) * 3; //cri 
+            isCritical = true;
         }
         else
         {
-            cur = AttackDamage(E_type, E_defence, E_Mdefence, _damage, _damWeapon, _damEtc);
+            cur = AttackDamage(_AttackChar, _DefenceChar);
+            isCritical = false;
         }
         return Mathf.FloorToInt(cur);
     }
 
     // <summary>
-    // 최종 공격 계산 (공격 - 수비or마방)
+    // 타입별 방어수치 포함 최종 공격 계산 (공격 - 수비or마방)
     // </summary>
-    public int AttackDamage(Define.AttackType E_type, int E_defence, int E_Mdefence, int _damage, int[] _weapon, int[] _etc)
+    public int AttackDamage(Stat _AttackChar, Stat _DefenceChar)
     {
         int cur = 0;
         int d_cur = 0;
-        switch (E_type)
+        switch (_AttackChar.attackType)
         {
-            case Define.AttackType.Physical:
-                d_cur = E_defence;
-                cur = AttackTypeCalculate(E_type, _damage, _weapon, _etc) - d_cur;
+            case Weapon.WeaponType.AD:
+                d_cur = _DefenceChar.Def;
+                cur = AttackTypeCalculate(_AttackChar) - d_cur;
                 break;
-            case Define.AttackType.Magic:
-                d_cur = E_Mdefence;
-                cur = AttackTypeCalculate(E_type, _damage, _weapon, _etc) - d_cur;
+            case Weapon.WeaponType.AP:
+                d_cur = _DefenceChar.MDef;
+                cur = AttackTypeCalculate(_AttackChar) - d_cur;
                 break;
         }
-        if (cur <= 0)
-            cur = 0;
+        //방어 여부
+        isBlock = (cur <= 0);
+        cur = isBlock ? 0 : cur;
+
         return Mathf.FloorToInt(cur);
     }
 
     // <summary>
-    // 공격 타입 계산 (근력or지능)
+    // 공격 타입 포함 데미지 계산 (근력or지능 + 무기위력 포함)
     // </summary>
-    public int AttackTypeCalculate(Define.AttackType _type, int _damage, int[] _weapon, int[] _etc)
+    public int AttackTypeCalculate(Stat _AttackChar)
     {
         int cur = 0;
-        switch (_type)
+        switch (_AttackChar.attackType)
         {
-            case Define.AttackType.Physical:
-                cur += AttackDamageCalculate(_damage, _weapon, _etc);
+            case Weapon.WeaponType.AD:
+                cur += AttackDamageCalculate(_AttackChar.Str);
                 break;
-            case Define.AttackType.Magic:
-                cur += AttackDamageCalculate(_damage, _weapon, _etc);
+            case Weapon.WeaponType.AP:
+                cur += AttackDamageCalculate(_AttackChar.Int);
                 break;
         }
         return Mathf.FloorToInt(cur);
     }
 
     // <summary>
-    // 공격 계산 (근력or지능 + 무기위력 + 기타)
+    // 공격 계산 (근력or지능 (+ 무기위력 포함))
     // </summary>
-    public int AttackDamageCalculate(int _damage, int[] _weapon, int[] _etc)
+    public int AttackDamageCalculate(int damage)
     {
-        return Mathf.FloorToInt(_damage + WeaponEffect(_weapon) + EtcEffect(_etc));
+        return Mathf.FloorToInt(damage);
     }
 
     // <summary>
     // 명중 계산 (명중확률 - 회피확률)
     // </summary>
-    public int AccuracyCalculate(int _tec, int _luck, int[] _weapon, int[] _etc, int E_speed, int E_luck, int[] E_weapon, int[] E_etc)
+    public int AccuracyCalculate(Stat _AttackChar, Stat _DefenceChar)
     {
         int cur = 0;
-        cur = Mathf.FloorToInt(AccuracyPercentage(_tec, _luck, _weapon, _etc) -
-                               AvoidPercentage(E_speed, E_luck, E_weapon, E_etc));
+        cur = Mathf.FloorToInt(AccuracyPercentage(_AttackChar) -
+                               AvoidPercentage(_DefenceChar));
         if (cur >= 100)
             cur = 100;
         else if (cur <= 0)
@@ -206,29 +146,28 @@ public class CombatManager
     }
 
     // <summary>
-    // 명중 확률 (기술*2 + 행운/2 + 무기 + 기타)
+    // 명중 확률 (기본 보정 70 + 기술*2 + 행운/2 //+ 무기 + 기타//)
     // </summary>
-    public int AccuracyPercentage(int _tec, int _luck, int[] _weapon, int[] _etc)
+    public int AccuracyPercentage(Stat _AttackChar)
     {
-        return Mathf.FloorToInt((_tec * 2) + Mathf.FloorToInt(_luck / 2) + WeaponEffect(_weapon) + EtcEffect(_etc));
+        return Mathf.FloorToInt(70f + (_AttackChar.Tec * 2) + Mathf.FloorToInt(_AttackChar.Luk / 2)/* + _AttackChar.MainWeapon.increaseVal*/);
     }
 
     // <summary>
-    // 회피 확률 (속도*2 + 행운/2 + 무기 + 기타 ) //E
+    // 회피 확률 (속도*2 + 행운/2 //+ 무기 + 기타// ) //E
     // </summary>
-    public int AvoidPercentage(int _speed, int _luck, int[] _weapon, int[] _etc)
+    public int AvoidPercentage(Stat _DefenceChar)
     {
-        return Mathf.FloorToInt((_speed * 2) + Mathf.FloorToInt(_luck / 2) + WeaponEffect(_weapon) + EtcEffect(_etc));
+        return Mathf.FloorToInt((_DefenceChar.Spd * 2) + Mathf.FloorToInt(_DefenceChar.Luk / 2)/* + _AttackChar.MainWeapon.increaseVal*/);
     }
 
     // <summary>
     // 필살 계산 (필살확률 - 필살회피확률)
     // </summary>
-    public int CriticalCalculate(int _tec, int[] _cirWeappon, int[] _criEtc, int E_luck, int[] E_avoWeappon, int[] E_aviEtc)
+    public int CriticalCalculate(Stat _AttackChar, Stat _DefenceChar)
     {
         int cur = 0;
-        cur = Mathf.FloorToInt(CriticalPercentage(_tec, _cirWeappon, _criEtc) -
-                               CriticalAvoidPercentage(E_luck, E_avoWeappon, E_aviEtc));
+        cur = Mathf.FloorToInt(CriticalPercentage(_AttackChar) - CriticalAvoidPercentage(_DefenceChar));
         if (cur >= 100)
             cur = 100;
         else if (cur <= 0)
@@ -237,19 +176,19 @@ public class CombatManager
     }
 
     // <summary>
-    // 필살 확률 (기술/2 + 무기 + 기타)
+    // 필살 확률 (기술/2 + //무기 + 기타//)
     // </summary>
-    public int CriticalPercentage(int _tec, int[] _weappon, int[] _etc)
+    public int CriticalPercentage(Stat _AttackChar)
     {
-        return Mathf.FloorToInt(Mathf.FloorToInt(_tec / 2) + WeaponEffect(_weappon) + EtcEffect(_etc));
+        return Mathf.FloorToInt(Mathf.FloorToInt(_AttackChar.Tec / 2)/* + _AttackChar.MainWeapon.increaseVal*/);
     }
 
     // <summary>
-    // 필살 회피 확률 (행운 + 무기 + 기타) //E
+    // 필살 회피 확률 (행운 + //무기 + 기타//) //E
     // </summary>
-    public int CriticalAvoidPercentage(int _luck, int[] _weappon, int[] _etc)
+    public int CriticalAvoidPercentage(Stat _DefenceChar)
     {
-        return Mathf.FloorToInt(_luck + WeaponEffect(_weappon) + EtcEffect(_etc));
+        return Mathf.FloorToInt(_DefenceChar.Luk /* + _AttackChar.MainWeapon.increaseVal*/);
     }
 
     // <summary>

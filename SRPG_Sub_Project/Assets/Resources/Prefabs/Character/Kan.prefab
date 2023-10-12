@@ -3880,6 +3880,9 @@ GameObject:
   - component: {fileID: 3418152176368510275}
   - component: {fileID: 5435557419229076875}
   - component: {fileID: 4408323425728134299}
+  - component: {fileID: 1196616690031220984}
+  - component: {fileID: -4920470831894660963}
+  - component: {fileID: 865091004464682486}
   m_Layer: 5
   m_Name: Kan
   m_TagString: Untagged
@@ -3895,7 +3898,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8727087891274414379}
   m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00015256465}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3905,7 +3908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -170}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5435557419229076875
@@ -3946,6 +3949,7 @@ MonoBehaviour:
   cardImage: {fileID: 21300000, guid: b5e56df4057ecdc4ba7c0142e5c7f0b2, type: 3}
   proflieImg: {fileID: 21300000, guid: 31a2812677604e442869d754222680b6, type: 3}
   cardType: 0
+  attackType: 0
   _level: 1
   _maxLevel: 50
   _exp: 0
@@ -3969,7 +3973,7 @@ MonoBehaviour:
   _active: 1
   _haveOrder: 0
   _knight: 0
-  _mianWeapon: 0
+  _mainWeapon: {fileID: 0}
   _subWeapon: 0
   _hp: 22
   _str: 13
@@ -3981,6 +3985,59 @@ MonoBehaviour:
   _luk: 8
   _wei: 0
   _mov: 4
+  _currentHp: 0
+  _spumPref: {fileID: 5435557419229076875}
+  _target: {fileID: 0}
+  _unitFR: 20
+  _unitAR: 1
+  _unitAS: 1
+  _dir: {x: 0, y: 0}
+  _tempDis: {x: 0, y: 0}
+  findTimer: 0
+  attackTimer: 0
+  _unitState: 0
+--- !u!136 &1196616690031220984
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727087891274414379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!54 &-4920470831894660963
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727087891274414379}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &865091004464682486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727087891274414379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fc47cd6e4f46f419bc4c50db6babb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8882596137038171103
 GameObject:
   m_ObjectHideFlags: 0

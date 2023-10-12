@@ -7,29 +7,29 @@ public class CharacterUnityStat : Stat
     // <surmmary>
     // 캐릭터의 현재 스텟 (myUnit)
     // </surmmary>
-    #region Character Current Stat
-    [SerializeField] int _currentHp;
-    [SerializeField] int _currentStr;
-    [SerializeField] int _currentInt;
-    [SerializeField] int _currentTec;
-    [SerializeField] int _currentSpd;
-    [SerializeField] int _currentDef;
-    [SerializeField] int _currentMDef;
-    [SerializeField] int _currentLuk;
-    [SerializeField] int _currentWei;
-    [SerializeField] int _currentMov;
+    //#region Character Current Stat
+    //[SerializeField] int _currentHp;
+    //[SerializeField] int _currentStr;
+    //[SerializeField] int _currentInt;
+    //[SerializeField] int _currentTec;
+    //[SerializeField] int _currentSpd;
+    //[SerializeField] int _currentDef;
+    //[SerializeField] int _currentMDef;
+    //[SerializeField] int _currentLuk;
+    //[SerializeField] int _currentWei;
+    //[SerializeField] int _currentMov;
 
-    public int CurrentHp { get { return _currentHp; } set { _currentHp = value; } }
-    public int CurrentStr { get { return _currentStr; } set { _currentStr = value; } }
-    public int CurrentInt { get { return _currentInt; } set { _currentInt = value; } }
-    public int CurrentTec { get { return _currentTec; } set { _currentTec = value; } }
-    public int CurrentSpd { get { return _currentSpd; } set { _currentSpd = value; } }
-    public int CurrentDef { get { return _currentDef; } set { _currentDef = value; } }
-    public int CurrentMDef { get { return _currentMDef; } set { _currentMDef = value; } }
-    public int CurrentLuk { get { return _currentLuk; } set { _currentLuk = value; } }
-    public int CurrentWei { get { return _currentWei; } set { _currentWei = value; } }
-    public int CurrentMove { get { return _currentMov; } set { _currentMov = value; } }
-    #endregion
+    //public int CurrentHp { get { return _currentHp; } set { _currentHp = value; } }
+    //public int CurrentStr { get { return _currentStr; } set { _currentStr = value; } }
+    //public int CurrentInt { get { return _currentInt; } set { _currentInt = value; } }
+    //public int CurrentTec { get { return _currentTec; } set { _currentTec = value; } }
+    //public int CurrentSpd { get { return _currentSpd; } set { _currentSpd = value; } }
+    //public int CurrentDef { get { return _currentDef; } set { _currentDef = value; } }
+    //public int CurrentMDef { get { return _currentMDef; } set { _currentMDef = value; } }
+    //public int CurrentLuk { get { return _currentLuk; } set { _currentLuk = value; } }
+    //public int CurrentWei { get { return _currentWei; } set { _currentWei = value; } }
+    //public int CurrentMove { get { return _currentMov; } set { _currentMov = value; } }
+    //#endregion
 
     // <surmmary>
     // 캐릭터의 상한 스텟 (myUnit)
