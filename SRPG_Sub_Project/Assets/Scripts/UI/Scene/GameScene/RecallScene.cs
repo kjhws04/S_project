@@ -33,6 +33,8 @@ public class RecallScene : BaseScene
         Managers.UI.ShowPopupUI<Recall0_Info_Popup>();
         #region Bind
         Bind<TextMeshProUGUI>(typeof(Texts));
+
+        ResetTicket();
         #endregion
     }
 

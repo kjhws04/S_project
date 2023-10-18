@@ -65,23 +65,28 @@ public class BattleFieldScene : BaseScene
     #region Buttons List
     public void BtnStage1(PointerEventData data)
     {
-        BtnStage(1, Define.Scene.Stage_1);
+        _userData.Stage = 1;
+        BtnStage(_userData.Stage, Define.Scene.Stage_1);
     }
     public void BtnStage2(PointerEventData data)
     {
-        BtnStage(2, Define.Scene.Stage_2);
+        _userData.Stage = 2;
+        BtnStage(_userData.Stage, Define.Scene.Stage_2);
     }
     public void BtnStage3(PointerEventData data)
     {
-        BtnStage(3, Define.Scene.Stage_3);
+        _userData.Stage = 3;
+        BtnStage(_userData.Stage, Define.Scene.Stage_3);
     }
     public void BtnStage4(PointerEventData data)
     {
-        BtnStage(4, Define.Scene.Stage_4);
+        _userData.Stage = 4;
+        BtnStage(_userData.Stage, Define.Scene.Stage_4);
     }
     public void BtnStage5(PointerEventData data)
     {
-        BtnStage(5, Define.Scene.Stage_5);
+        _userData.Stage = 5;
+        BtnStage(_userData.Stage, Define.Scene.Stage_5);
     }
 
     public void BtnStage(int stageNumber, Define.Scene sceneName)

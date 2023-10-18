@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
+    public Define.GameStep StepType = Define.GameStep.Unknown;
     public List<Transform> _unit = new List<Transform>();
     public List<Stat> _p1UnitList = new List<Stat>();
     public List<Stat> _p2UnitList = new List<Stat>();
     public List<Stat> _p3UnitList = new List<Stat>();
+
+    public bool win;
+    public bool lose;
 
     public float _findTimer = 0.1f;
 
@@ -24,8 +28,8 @@ public class BattleManager : MonoBehaviour
 
         _unit = unit;
         _p1UnitList = _p1Unit;
-        _p1UnitList = _p2Unit;
-        _p1UnitList = _p3Unit;
+        _p2UnitList = _p2Unit;
+        _p3UnitList = _p3Unit;
 
         SetUnitList();
     }
@@ -41,14 +45,17 @@ public class BattleManager : MonoBehaviour
                     case 0:
                         _p1UnitList.Add(_unit[i].GetChild(j).GetComponent<Stat>());
                         _unit[i].GetChild(j).gameObject.tag = "P1";
+                        _p1UnitList[j].BattleStart();
                         break;
                     case 1:
                         _p2UnitList.Add(_unit[i].GetChild(j).GetComponent<Stat>());
                         _unit[i].GetChild(j).gameObject.tag = "P2";
+                        _p2UnitList[j].BattleStart();
                         break;
                     case 2:
                         _p3UnitList.Add(_unit[i].GetChild(j).GetComponent<Stat>());
                         _unit[i].GetChild(j).gameObject.tag = "P3";
+                        _p3UnitList[j].BattleStart();
                         break;
                 }
             }
@@ -72,22 +79,36 @@ public class BattleManager : MonoBehaviour
         {
             float tDis = ((Vector3)tList[i].transform.position - (Vector3)unit.transform.position).sqrMagnitude;
 
-            //if (tDis <= 10 * 10) //unit.Tec * unit.Tec TODO
-            //{
-                if (tList[i].gameObject.activeInHierarchy)
+            if (tList[i].gameObject.activeInHierarchy)
+            {
+                if (tList[i]._unitState != Stat.UnitState.death)
                 {
-                    if (tList[i]._unitState != Stat.UnitState.death)
+                    if (tDis < tsDis)
                     {
-                        if (tDis < tsDis)
-                        {
-                            tUnit = tList[i];
-                            tsDis = tDis;
-                        }
+                        tUnit = tList[i];
+                        tsDis = tDis;
                     }
                 }
-            //}
+            }
         }
 
         return tUnit;
+    }
+
+    public void Win() //TODO
+    {
+        if (!win)
+        {
+            Debug.Log("Win");
+            win = true;
+        }
+    }
+    public void Lose()
+    {
+        if (!lose)
+        {
+            Debug.Log("Lose");
+            lose = true;
+        }
     }
 }

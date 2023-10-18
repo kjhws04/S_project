@@ -5,6 +5,17 @@ using UnityEngine;
 public class Define
 {
     // <surmmary>
+    // 게임을 순서를 결정
+    // </surmmary>
+    public enum GameStep
+    {
+        Unknown,
+        Setting,
+        Battle,
+        Result
+    }
+
+    // <surmmary>
     // 게임을 구성하는 Scene창
     // </surmmary>
     public enum Scene

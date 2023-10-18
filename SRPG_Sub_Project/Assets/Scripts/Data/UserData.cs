@@ -34,6 +34,7 @@ public class UserData : MonoBehaviour
     #endregion
 
     #region Mission Data
+    public int Stage = 1;
     #endregion
 
     private void Awake()
@@ -42,6 +43,7 @@ public class UserData : MonoBehaviour
         GameObject go = Managers.Resource.Instantiate("Character/Knight");
         go.transform.position = new Vector3(2000f, 2000f, 0f);
         go.GetComponent<CapsuleCollider>().enabled = false;
+        go.GetComponent<Stat>().enabled = false;
         //go.GetComponent<UI_HpBar>().enabled = false;
 
         _modelImg = go.GetComponent<Stat>().modelImg;
@@ -54,7 +56,7 @@ public class UserData : MonoBehaviour
         else
             _userCharData.Add(_charName, _charStat);
     }
-
+    
     public void AddWeapon(string _weaponName, WeaponStat weaponStat)
     {
         if (_userWeaponData.ContainsKey(_weaponName))
@@ -67,6 +69,6 @@ public class UserData : MonoBehaviour
 
     public void ChangeModel()
     {
-        Managers.UI.ShowPopupUI<ModelChange_Popup>();
+        //Managers.UI.ShowPopupUI<ModelChange_Popup>();
     }
 }

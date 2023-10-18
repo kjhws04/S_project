@@ -69,6 +69,13 @@ public class CharacterScene : BaseScene
             SaveCharInfo(_stat, i);
             _charSlot[i].gameObject.GetComponent<Image>().sprite = _stat.proflieImg;
         }
+
+        if (list.Count < 1)
+        {
+            Debug.Log("index overflow");
+            return;
+        }
+
         ModelInfoChange(list[0]);
     }
 
@@ -113,6 +120,9 @@ public class CharacterScene : BaseScene
         _orgStat.modelImg = _changeStat.modelImg;
     }
 
+    // <summary>
+    // 오른쪽 캐릭터를 바꿀 때마다, 왼쪽의 stat정보 초기화하는 함수
+    // </summary>
     public void ModelInfoChange(Stat _changeStat)
     {
         if (_changeStat.MainWeapon != null)
@@ -148,6 +158,7 @@ public class CharacterScene : BaseScene
         GetImage((int)Images.Weapon_Img).sprite = glowImage;
     }
 
+    #region Buttons
     public void BtnMain()
     {
         Managers.Scene.LoadScene(Define.Scene.Main);
@@ -166,4 +177,5 @@ public class CharacterScene : BaseScene
             ModelInfoChange(_userData.CurrentChar); //스텟 보여주기 반영
         }
     }
+    #endregion
 }

@@ -16,6 +16,9 @@ public class Stat : MonoBehaviour
     public Sprite proflieImg; //프로필 이미지
     public CardType cardType; //카드 종류
     public Weapon.WeaponType attackType; //무기 속성으로 생성했지만 동일하니 걍 사용 AD, AP
+    public bool isSettingUsed = false; //캐릭터 세팅 여부 true면 선택됨
+
+    public bool IsSettingUsed { get { return isSettingUsed; } set { isSettingUsed = value; } }
     #endregion
 
     // <surmmary>
@@ -156,7 +159,7 @@ public class Stat : MonoBehaviour
         }
     }
 
-    #region SPUM
+    #region SPUM Stat
     public SPUM_Prefabs _spumPref;
     public Stat _target; //공격 타켓
 
@@ -172,6 +175,7 @@ public class Stat : MonoBehaviour
     public float attackTimer; //공격 속도 타이머 변수
 
     private Animator _anim;
+    #endregion
 
     public enum UnitState
     {
@@ -185,20 +189,34 @@ public class Stat : MonoBehaviour
 
     private void Start()
     {
+        if (Managers.Battle.StepType == Define.GameStep.Battle)
+        {
+            _spumPref = GetComponent<SPUM_Prefabs>();
+            GameObject _root = Util.FindChild(gameObject, "UnitRoot", false);
+            _anim = _root.GetComponent<Animator>();
+            Managers.UI.Make2DUI<UI_HpBar>(transform);
+            _currentHp = _hp;
+        }
+    }
+
+    public void BattleStart()
+    {
         _spumPref = GetComponent<SPUM_Prefabs>();
         GameObject _root = Util.FindChild(gameObject, "UnitRoot", false);
         _anim = _root.GetComponent<Animator>();
-
-        //temp
         Managers.UI.Make2DUI<UI_HpBar>(transform);
         _currentHp = _hp;
     }
 
     private void Update()
     {
-        CheckState();
+        if (Managers.Battle.StepType == Define.GameStep.Battle)
+        {
+            CheckState();
+        }
     }
 
+    #region Battle Func
     public UnitState _unitState = UnitState.idle;
 
     // <surmmary>
@@ -458,6 +476,11 @@ public class Stat : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = false;
         Destroy(GetComponent<Rigidbody>());
 
+        if (Managers.Battle._p1UnitList == null || Managers.Battle._p1UnitList.Count == 0)
+            Managers.Battle.Lose();
+        if (Managers.Battle._p2UnitList == null || Managers.Battle._p2UnitList.Count == 0)
+            Managers.Battle.Win();
+
         StartCoroutine(DestroyCoroutine(2.0f));
     }
 
@@ -477,7 +500,8 @@ public class Stat : MonoBehaviour
         if (findTimer > Managers.Battle._findTimer)
         {
             _target = Managers.Battle.GetTarget(this);
-            if (_target != null) SetState(UnitState.run);
+            if (_target != null) 
+                SetState(UnitState.run);
             else SetState(UnitState.idle);
 
             findTimer = 0;
