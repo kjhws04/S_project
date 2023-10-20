@@ -3,35 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Text.RegularExpressions;
 
 public class CharSelSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    private Vector3 orginPos;
     public Image glowImage;
-    Image _orgGlowImage;
+    public Sprite _orgGlowIamge;
+    public GameObject cancelBtn;
     UserData _userData;
+    bool isUsed = false;
 
-    Image charImage;
     Stat _stat;
     Stat copy;
 
     private void Start()
     {
-        orginPos = transform.position;
-        charImage = GetComponent<Image>();
         _stat = GetComponent<Stat>();
         _userData = Managers.Game.GetUserData().GetComponent<UserData>(); //딕셔너리 가져옴
-    }
 
-    void SetColor(string charName)
-    {
-        if (gameObject.CompareTag("charSlot"))
+        if (gameObject.CompareTag("setSlot"))
         {
-            Color color = _userData._userCharData[charName].IsSettingUsed ? Color.gray : Color.white;
-            charImage.color = color;
+            cancelBtn.SetActive(false);
+            AlreadySettingSlot();
         }
     }
 
+    #region Drag & Drop
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (_stat != null)
@@ -63,28 +60,65 @@ public class CharSelSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
         //else 캐릭터가 이미 배틀세팅slot에 세팅되어 있음
     }
+    #endregion
 
+    #region Slot Change
     private void ChangeSlot()
     {
+        if (isUsed)
+            return;
         if (DragSlot._instance.dragSlot.CompareTag("charSlot") && gameObject.CompareTag("setSlot"))
         {
             Stat temp = DragSlot._instance.tempStat; //드레그 슬롯이 들고 있는 stat 정보
             copy = gameObject.GetOrAddComponent<Stat>();
             CopyFrom(copy, temp);
 
-            _orgGlowImage = glowImage; //더하기 이미지 저장
             glowImage.sprite = copy.proflieImg; //더하기 이미지 => 캐릭터 프로필 이미지
 
             if (_userData._userCharData.ContainsKey(copy.Name)) //검산
             {
                 _userData._userCharData[copy.Name].IsSettingUsed = true; //딕셔너리에서 IsUesd를 true로 만듬
+
+                #region Slot Number Setting
+                string objectName = gameObject.name;
+                Match match = Regex.Match(objectName, @"\d+$");
+
+                if (match.Success)
+                {
+                    int number = int.Parse(match.Value);
+                    _userData._userCharData[copy.Name].SettingNum = number + 1;
+                }
+                #endregion
             }
 
             Managers.Battle._p1UnitList.Add(_userData._userCharData[copy.Name]);
-            // X버튼 활성화
+            isUsed = true;
+            cancelBtn.SetActive(true);
         }
     }
+    private void AlreadySettingSlot()
+    {
+        string objectName = gameObject.name;
+        Match match = Regex.Match(objectName, @"\d+$");
+        int number = int.Parse(match.Value) + 1; 
 
+        for (int i = 0; i < Managers.Battle._p1UnitList.Count; i++)
+        {
+            if (Managers.Battle._p1UnitList[i].settingNum == number)
+            {
+                glowImage.sprite = Managers.Battle._p1UnitList[i].proflieImg;
+                copy = gameObject.GetOrAddComponent<Stat>();
+                copy.Name = Managers.Battle._p1UnitList[i].Name;
+                isUsed = true;
+                cancelBtn.SetActive(true);
+                break;
+            }
+            else
+            {
+                cancelBtn.SetActive(false);
+            }
+        }
+    }
     public void CopyFrom(Stat _copy,Stat _stat)
     {
         _copy.modelImg = _stat.modelImg;
@@ -113,4 +147,25 @@ public class CharSelSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         _copy._unitAR = _stat._unitAR;
         _copy._unitAS = _stat._unitAS;
     }
+    #endregion
+
+    #region Btns
+    public void CancelBtn()
+    {
+        //Battle List 초기화 부분
+        Managers.Battle._p1UnitList.RemoveAll(x => x.Name == copy.Name);
+
+        //Char Dic 초기화 부분
+        if (_userData._userCharData.ContainsKey(copy.Name))
+        {
+            _userData._userCharData[copy.Name].IsSettingUsed = false;
+            _userData._userCharData[copy.Name].settingNum = 0;
+        }
+
+        //슬롯 초기화 부분
+        glowImage.sprite = _orgGlowIamge;
+        isUsed = false;
+        cancelBtn.SetActive(false);
+    }
+    #endregion
 }

@@ -34,6 +34,8 @@ public class Stage_1 : BaseScene
         #region Stage Setting
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         int stage = _userData.Stage;
+        Debug.Log(_userData.Stage);
+
         GameSetting(stage);
         Managers.Stage.LoadMap(stage); //맵 세팅
         Managers.Battle.StepType = Define.GameStep.Setting; //캐릭터 세팅 step
@@ -111,18 +113,24 @@ public class Stage_1 : BaseScene
             }
         }
     }
-
     public void AliePositionSetting()
     {
-        int index = 0;
         int unitCount = Mathf.Min(6, _p1UnitList.Count);
-
-        for (int i = -3; i <= -2; i++)
+        Dictionary<int, Vector3> positions = new Dictionary<int, Vector3>
         {
-            for (int j = 1; j >= -1 && index < unitCount; j--)
+            {1, new Vector3(-3, 1, 0)},
+            {2, new Vector3(-3, 0, 0)},
+            {3, new Vector3(-3, -1, 0)},
+            {4, new Vector3(-2, 1, 0)},
+            {5, new Vector3(-2, 0, 0)},
+            {6, new Vector3(-2, -1, 0)}
+        };
+
+        for (int i = 0; i < unitCount; i++)
+        {
+            if (positions.ContainsKey(_p1UnitList[i].SettingNum))
             {
-                _p1UnitList[index].transform.position = new Vector3(i, j, _p1UnitList[index].transform.position.z);
-                index++;
+                _p1UnitList[i].transform.position = positions[_p1UnitList[i].SettingNum];
             }
         }
     }
@@ -158,6 +166,7 @@ public class Stage_1 : BaseScene
     #region Buttons
     public void BtnMain()
     {
+        Managers.Battle.StepType = Define.GameStep.Unknown;
         Managers.Scene.LoadScene(Define.Scene.BattleField);
     }
     #endregion

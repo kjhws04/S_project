@@ -17,8 +17,10 @@ public class Stat : MonoBehaviour
     public CardType cardType; //카드 종류
     public Weapon.WeaponType attackType; //무기 속성으로 생성했지만 동일하니 걍 사용 AD, AP
     public bool isSettingUsed = false; //캐릭터 세팅 여부 true면 선택됨
+    public int settingNum = 0; //캐릭터 세팅 순서 번호
 
     public bool IsSettingUsed { get { return isSettingUsed; } set { isSettingUsed = value; } }
+    public int SettingNum { get { return settingNum; } set { settingNum = value; } }
     #endregion
 
     // <surmmary>
@@ -185,18 +187,6 @@ public class Stat : MonoBehaviour
         stun,
         skill,
         death
-    }
-
-    private void Start()
-    {
-        if (Managers.Battle.StepType == Define.GameStep.Battle)
-        {
-            _spumPref = GetComponent<SPUM_Prefabs>();
-            GameObject _root = Util.FindChild(gameObject, "UnitRoot", false);
-            _anim = _root.GetComponent<Animator>();
-            Managers.UI.Make2DUI<UI_HpBar>(transform);
-            _currentHp = _hp;
-        }
     }
 
     public void BattleStart()
@@ -414,7 +404,7 @@ public class Stat : MonoBehaviour
                 break;
         }
 
-        if (missilePrefab != null)
+        if (_target != null && missilePrefab != null)
         {
             missilePrefab.GetComponent<Missile>().TargetSetting(this, _target, Managers.Combat.Combat(this, _target),
                                                                 Managers.Combat.isMiss,
@@ -465,7 +455,7 @@ public class Stat : MonoBehaviour
         switch (gameObject.tag)
         {
             case "P1":
-                Managers.Battle._p1UnitList.Remove(this);
+                Managers.Battle._p1UnitCheckList.Remove(this);
                 break;
             case "P2":
                 Managers.Battle._p2UnitList.Remove(this);
@@ -476,7 +466,7 @@ public class Stat : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = false;
         Destroy(GetComponent<Rigidbody>());
 
-        if (Managers.Battle._p1UnitList == null || Managers.Battle._p1UnitList.Count == 0)
+        if (Managers.Battle._p1UnitCheckList == null || Managers.Battle._p1UnitCheckList.Count == 0)
             Managers.Battle.Lose();
         if (Managers.Battle._p2UnitList == null || Managers.Battle._p2UnitList.Count == 0)
             Managers.Battle.Win();

@@ -83,7 +83,6 @@ public class StageManager
 
     public void StageSetting(List<Stat> stat, int stage)
     {
-
         switch (stage)
         {
             case 1:
@@ -119,9 +118,10 @@ public class StageManager
             newStat.Luk = (int)statValues[i, 7];
             newStat._unitAR = statValues[i, 8];
             newStat._unitAS = statValues[i, 9];
-            stat.Add(newStat);
+            stat.Add(newStat); //_p2Unit에 새로운 스텟 추가
         }
     }
+
     // <summary>
     // 스테이지의 몬스터 종류와 stat 저장
     // </summary>
@@ -137,7 +137,6 @@ public class StageManager
         {40, 8, 0, 7, 6, 2, 2, 1, 1f, 1f},
         {40, 6, 0, 7, 6, 2, 2, 1, 4f, 1f}
     };
-
         InitializeEnemyStats(stat, enemyTypes, statValues);
     }
     void Stage2(List<Stat> stat)

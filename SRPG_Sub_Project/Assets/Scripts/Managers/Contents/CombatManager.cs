@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CombatManager
 {
+    #region Cri, Blc, Mis attribute
     public bool isCritical = false;
     public bool isBlock = false;
     public bool isMiss = false;
+    #endregion
 
     // <summary>
-    // 추격 여부 (공격자가 피격자보다 속도 스텟이 5이상이라면 추격 발생)
+    // 추격 여부 (공격자가 피격자보다 속도 스텟이 5이상이라면 추격 발생) //1대1 battle에서 사용 예정
     // </summary>
     public bool IsChase(Stat _AttackChar, Stat _DefenceChar)
     {

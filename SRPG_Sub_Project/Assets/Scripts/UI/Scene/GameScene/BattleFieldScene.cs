@@ -71,22 +71,22 @@ public class BattleFieldScene : BaseScene
     public void BtnStage2(PointerEventData data)
     {
         _userData.Stage = 2;
-        BtnStage(_userData.Stage, Define.Scene.Stage_2);
+        BtnStage(_userData.Stage, Define.Scene.Stage_1);
     }
     public void BtnStage3(PointerEventData data)
     {
         _userData.Stage = 3;
-        BtnStage(_userData.Stage, Define.Scene.Stage_3);
+        BtnStage(_userData.Stage, Define.Scene.Stage_1);
     }
     public void BtnStage4(PointerEventData data)
     {
         _userData.Stage = 4;
-        BtnStage(_userData.Stage, Define.Scene.Stage_4);
+        BtnStage(_userData.Stage, Define.Scene.Stage_1);
     }
     public void BtnStage5(PointerEventData data)
     {
         _userData.Stage = 5;
-        BtnStage(_userData.Stage, Define.Scene.Stage_5);
+        BtnStage(_userData.Stage, Define.Scene.Stage_1);
     }
 
     public void BtnStage(int stageNumber, Define.Scene sceneName)
