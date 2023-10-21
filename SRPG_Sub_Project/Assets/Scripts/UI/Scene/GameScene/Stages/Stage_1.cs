@@ -34,7 +34,6 @@ public class Stage_1 : BaseScene
         #region Stage Setting
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         int stage = _userData.Stage;
-        Debug.Log(_userData.Stage);
 
         GameSetting(stage);
         Managers.Stage.LoadMap(stage); //¸Ê ¼¼ÆÃ

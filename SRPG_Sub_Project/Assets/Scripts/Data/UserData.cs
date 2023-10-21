@@ -12,6 +12,7 @@ public class UserData : MonoBehaviour
     [SerializeField] int _ticket1 = 100;
     [SerializeField] int _ticket2 = 21;
     [SerializeField] int _ticketFriend = 100;
+    [SerializeField] int _expItem = 0;
     [SerializeField] Stat _currentChar;
     public Sprite _modelImg;
     public Sprite _moedlDotImg;
@@ -23,6 +24,7 @@ public class UserData : MonoBehaviour
     public int Ticket1 { get { return _ticket1; } set { _ticket1 = value; } }
     public int Ticket2 { get { return _ticket2; } set { _ticket2 = value; } }
     public int TicketFriend { get { return _ticketFriend; } set { _ticketFriend = value; } }
+    public int ExpItem { get { return _expItem; } set { _expItem = value; } }
     public Stat CurrentChar { get { return _currentChar; } set { _currentChar = value; } }
     public int StageCount { get { return _stageCount; } set { _stageCount = value; } }
     #endregion

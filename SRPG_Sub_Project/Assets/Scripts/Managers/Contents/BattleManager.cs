@@ -120,10 +120,12 @@ public class BattleManager : MonoBehaviour
     {
         if (!win)
         {
-            Managers.Battle.StepType = Define.GameStep.Result;
-            _userData = Managers.Game.GetUserData().GetComponent<UserData>();
+            Managers.Battle.StepType = Define.GameStep.Result; //진행상황은 결과로,
+
+            Managers.UI.ShowPopupUI<Result_Popup>().Win(Managers.Stage.ExpItem); //승리 보상 부분
+
+            _userData = Managers.Game.GetUserData().GetComponent<UserData>(); //스테이지 클리어
             _userData.StageCount++;
-            Debug.Log("Win");
             win = true;
         }
     }
@@ -132,7 +134,8 @@ public class BattleManager : MonoBehaviour
         if (!lose)
         {
             Managers.Battle.StepType = Define.GameStep.Result;
-            Debug.Log("Lose");
+
+            Managers.UI.ShowPopupUI<Result_Popup>().Lose();
             lose = true;
         }
     }

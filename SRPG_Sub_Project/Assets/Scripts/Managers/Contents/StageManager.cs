@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class StageManager
 {
+    public int ExpItem = 0;
+
     #region Stage Load
     public Grid CurrentGrid { get; private set; }
 
@@ -127,6 +129,7 @@ public class StageManager
     // </summary>
     void Stage1(List<Stat> stat)
     {
+        ExpItem = 3;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Ax", "Orc_Bow", "Orc_Ax", "Orc_Bow" };
         float[,] statValues = new float[,]
         {
@@ -141,6 +144,7 @@ public class StageManager
     }
     void Stage2(List<Stat> stat)
     {
+        ExpItem = 3;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Ax", "Orc_Bow", "Orc_Ax", "Orc_Bow" };
         float[,] statValues = new float[,]
         {
@@ -156,6 +160,7 @@ public class StageManager
     }
     void Stage3(List<Stat> stat)
     {
+        ExpItem = 4;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Sword", "Orc_Bow", "Demon_Bagic", "Orc_Bow" };
         float[,] statValues = new float[,]
         {
@@ -171,6 +176,7 @@ public class StageManager
     }
     void Stage4(List<Stat> stat)
     {
+        ExpItem = 4;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Sword", "Demon_Bagic", "Demon_Bagic", "Demon_Bagic" };
         float[,] statValues = new float[,]
         {
@@ -186,6 +192,7 @@ public class StageManager
     }
     void Stage5(List<Stat> stat)
     {
+        ExpItem = 5;
         string[] enemyTypes = { "Orc_Bow", "Orc_Bow", "Orc_Bow", "Orc_Bow", "Elf_Boss", "Orc_Bow" };
         float[,] statValues = new float[,]
         {

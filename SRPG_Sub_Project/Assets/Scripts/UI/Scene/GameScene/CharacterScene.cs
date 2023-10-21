@@ -10,9 +10,11 @@ public class CharacterScene : BaseScene
     public CharacterSlot[] _charSlot;
     Sprite glowImage;
 
+    //uesd Component
     UserData _userData;
     Stat _stat;
 
+    #region Mapping Things
     enum Images
     {
         Char_Select_Model, 
@@ -32,8 +34,15 @@ public class CharacterScene : BaseScene
         Mdf,
         Luk,
         Wei,
-        Lv
+        Lv, 
+        ExpCount
     }
+
+    enum GameObjects
+    {
+        ExpBase
+    }
+    #endregion
 
     private void Start()
     {
@@ -46,18 +55,21 @@ public class CharacterScene : BaseScene
         #region Bind
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
+        Bind<GameObject>(typeof(GameObjects));
         #endregion
 
         SceneType = Define.Scene.Character;
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
+
         List<Stat> _statList = new List<Stat>(_userData._userCharData.Values);
-
         glowImage = GetImage((int)Images.Weapon_Img).sprite;
-
         Sorting(_statList);
+        ExpItemSetting();
     }
 
-    //정렬
+    // <summary>
+    // Dic의 Data를 받아 성급이 높은 순서대로 sorting 하는 함수
+    // </summary>
     private void Sorting(List<Stat> _list)
     {
         List<Stat> list = _list.OrderByDescending(character => character.Rank).ToList();
@@ -72,19 +84,16 @@ public class CharacterScene : BaseScene
 
         if (list.Count < 1)
         {
-            Debug.Log("index overflow");
+            Debug.Log("index overflow : no character in Dic");
             return;
         }
-
+        //Init 했을 때, list의 0번에 있는 캐릭터 정보 표시
         ModelInfoChange(list[0]);
     }
 
-    public override void Clear()
-    {
-        //TODO 정보 초기화
-    }
-
-    //값이 바뀌었을 때, userDic에 저장
+    // <summary>
+    //값이 바뀌었을 때, userDic에 저장 (TODO)
+    // </summary>
     public void ModifyStat(string _charName, Stat _stat)
     {
         //userCharData에 있는 Stat 값을 가져와서
@@ -95,13 +104,18 @@ public class CharacterScene : BaseScene
         }
     }
 
+    // <summary>
+    // Slot에 임시 저장된 데이터를 교체하는 함수
+    // </summary>
     public void SaveCharInfo(Stat _stat, int i)
     {
         Stat _copy = _charSlot[i].gameObject.AddComponent<Stat>();
         ChangeStat(_copy, _stat);
     }
 
-    // _orgStat = UserCharDic에 있는 스텟, _changeStat 값을 바꿀 스텟
+    // <summary>
+    // 변경될 데이터 : _orgStat = UserCharDic에 있는 스텟, _changeStat 값을 바꿀 스텟
+    // </summary>
     public void ChangeStat(Stat _orgStat, Stat _changeStat)
     {
         _orgStat.Name = _changeStat.Name;
@@ -150,8 +164,21 @@ public class CharacterScene : BaseScene
         GetTextMeshProUGUI((int)Texts.Lv).text = $"Lv. {_changeStat.Level}";
         GetImage((int)Images.Char_Select_Model).sprite = _changeStat.modelImg;
 
+        float ratio = _changeStat.Exp / (float)_changeStat.MaxExp;
+        GetObject((int)GameObjects.ExpBase).GetComponent<Slider>().value = ratio;
     }
 
+    // <summary>
+    // Exp Item의 개수를 초기화 하는 부분 (아이템 추가시, 해당 함수 밑에 추가)
+    // </summary>
+    public void ExpItemSetting()
+    {
+        GetTextMeshProUGUI((int)Texts.ExpCount).text = $"{_userData.ExpItem}";
+    }
+
+    // <summary>
+    // Weapon을 탈부착할 때, Glow이미지를 불러오기 위한 함수
+    // </summary>
     public void WeaponBaseReset()
     {
         //아이콘 리셋
@@ -177,5 +204,27 @@ public class CharacterScene : BaseScene
             ModelInfoChange(_userData.CurrentChar); //스텟 보여주기 반영
         }
     }
+    public void BtnLevelUp()
+    {
+        if (_userData.ExpItem <= 0)
+            return;
+
+        if (_userData._userCharData.ContainsKey(_stat.Name))
+        {
+            _userData._userCharData[_stat.Name].AddExp();
+        }
+        ModelInfoChange(_userData._userCharData[_stat.Name]);
+
+        _userData.ExpItem--;
+        ExpItemSetting();
+    }
     #endregion
+
+    // <summary>
+    // 씬을 옮길 때, Clear할 데이터 부분
+    // </summary>
+    public override void Clear()
+    {
+        //TODO 정보 초기화
+    }
 }

@@ -161,6 +161,19 @@ public class Stat : MonoBehaviour
         }
     }
 
+    // <surmmary>
+    // 레벨업 & 경험치 아이템 사용
+    // </surmmary>
+    public void AddExp()
+    {
+        Exp += 20;
+        if (Exp >= MaxExp)
+        {
+            Level++;
+            Exp -= MaxExp;
+        }
+    }
+
     #region SPUM Stat
     public SPUM_Prefabs _spumPref;
     public Stat _target; //공격 타켓
@@ -467,9 +480,13 @@ public class Stat : MonoBehaviour
         Destroy(GetComponent<Rigidbody>());
 
         if (Managers.Battle._p1UnitCheckList == null || Managers.Battle._p1UnitCheckList.Count == 0)
+        {
             Managers.Battle.Lose();
+        }
         if (Managers.Battle._p2UnitList == null || Managers.Battle._p2UnitList.Count == 0)
+        {
             Managers.Battle.Win();
+        }
 
         StartCoroutine(DestroyCoroutine(2.0f));
     }
