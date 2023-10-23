@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Stat : MonoBehaviour
 {
+    #region All Stat
     // <surmmary>
     // 카드 속성
     // </surmmary>
@@ -129,6 +130,7 @@ public class Stat : MonoBehaviour
     public int Move { get { return _mov; } set { _mov = value; } }
     public int CurrentHp { get { return _currentHp; } set { _currentHp = value; } }
     #endregion
+    #endregion
 
     // <surmmary>
     // 무기 스텟 적용 함수
@@ -171,6 +173,8 @@ public class Stat : MonoBehaviour
         {
             Level++;
             Exp -= MaxExp;
+            LevelUp_Popup level = Managers.UI.ShowPopupUI<LevelUp_Popup>();
+            level.StatSetting(this);
         }
     }
 

@@ -217,6 +217,7 @@ public class CharacterScene : BaseScene
 
         _userData.ExpItem--;
         ExpItemSetting();
+
     }
     #endregion
 

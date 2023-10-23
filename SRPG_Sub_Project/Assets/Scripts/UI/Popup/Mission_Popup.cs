@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mission_Popup : MonoBehaviour
+public class Mission_Popup : UI_Popup
 {
-    void Start()
+    #region Mapping Things
+    enum Images
     {
         
     }
 
-    void Update()
+    enum Texts
     {
         
     }
+
+    enum GameObjects
+    {
+        
+    }
+    #endregion
 }
