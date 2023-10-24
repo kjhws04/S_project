@@ -12,7 +12,7 @@ public class UserData : MonoBehaviour
     [SerializeField] int _ticket1 = 100;
     [SerializeField] int _ticket2 = 21;
     [SerializeField] int _ticketFriend = 100;
-    [SerializeField] int _expItem = 10;
+    [SerializeField] int _expItem = 100;
     [SerializeField] Stat _currentChar;
     public Sprite _modelImg;
     public Sprite _moedlDotImg;

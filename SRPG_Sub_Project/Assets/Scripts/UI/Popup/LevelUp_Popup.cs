@@ -11,7 +11,6 @@ public class LevelUp_Popup : UI_Popup
     Stat _stat;
 
     #region Mapping Things
-
     enum Texts
     {
         Level_Txt,
@@ -28,30 +27,36 @@ public class LevelUp_Popup : UI_Popup
 
     enum GameObjects
     {
-        LevelUpTitleText
+        LevelUpTitleText,
+        HpPlus,
+        StrPlus,
+        IntPlus,
+        TecPlus,
+        SpdPlus,
+        DefPlus,
+        MdfPlus,
+        LukPlus,
+        WeiPlus
     }
     #endregion
 
-    private void Start()
-    {
-        Init();
-    }
-
-    public override void Init()
-    {
-        #region Bind
-        Bind<GameObject>(typeof(GameObjects));
-        #endregion
-
-        GetObject((int)GameObjects.LevelUpTitleText).GetComponent<Animator>().Play("LevelUpTextAnim");
-    }
-
+    // <surmmary>
+    // 딕셔너리의 데이터를 받아와 다시 스텟을 setting하는 함수
+    // </surmmary>
     public void StatSetting(Stat _charStst)
     {
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
+
+        #region Bind
+        Bind<GameObject>(typeof(GameObjects));
         Bind<TextMeshProUGUI>(typeof(Texts));
+        #endregion
+
+        GetObject((int)GameObjects.LevelUpTitleText).GetComponent<Animator>().Play("LevelUpTextAnim");
 
         _stat = _charStst;
+        StatAnim(_charStst);
+
         GetTextMeshProUGUI((int)Texts.Level_Txt).text = $"{_stat.Level}";
         GetTextMeshProUGUI((int)Texts.Hp).text = $"{_stat.Hp}";
         GetTextMeshProUGUI((int)Texts.Str).text = $"{_stat.Str}";
@@ -62,14 +67,22 @@ public class LevelUp_Popup : UI_Popup
         GetTextMeshProUGUI((int)Texts.Mdf).text = $"{_stat.MDef}";
         GetTextMeshProUGUI((int)Texts.Luk).text = $"{_stat.Luk}";
         GetTextMeshProUGUI((int)Texts.Wei).text = $"{_stat.Wei}";
-
-        LevelUpAfterStat();
     }
 
-    public void LevelUpAfterStat()
+    // <surmmary>
+    // 성장하는 스텟에 에니메이션 재생
+    // </surmmary>
+    public void StatAnim(Stat _charStst)
     {
-        _userData._userCharData[_stat.Name].Hp += 1;
-        Debug.Log("test");
+        if (!_charStst.b_Hp) GetObject((int)GameObjects.HpPlus).SetActive(false); else _charStst.b_Hp = false;
+        if (!_charStst.b_Str) GetObject((int)GameObjects.StrPlus).SetActive(false); else _charStst.b_Str = false;
+        if (!_charStst.b_Int) GetObject((int)GameObjects.IntPlus).SetActive(false); else _charStst.b_Int = false;
+        if (!_charStst.b_Tec) GetObject((int)GameObjects.TecPlus).SetActive(false); else _charStst.b_Tec = false;
+        if (!_charStst.b_Spd) GetObject((int)GameObjects.SpdPlus).SetActive(false); else _charStst.b_Spd = false;
+        if (!_charStst.b_Def) GetObject((int)GameObjects.DefPlus).SetActive(false); else _charStst.b_Def = false;
+        if (!_charStst.b_MDef) GetObject((int)GameObjects.MdfPlus).SetActive(false); else _charStst.b_MDef = false;
+
+        GetObject((int)GameObjects.WeiPlus).SetActive(false);
     }
 
     public void ClosePopupBtn()

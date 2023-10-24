@@ -2373,6 +2373,8 @@ MonoBehaviour:
   proflieImg: {fileID: 21300000, guid: 9ca1d31a8c0ef414a92ff8f70e63082b, type: 3}
   cardType: 0
   attackType: 0
+  isSettingUsed: 0
+  settingNum: 0
   _level: 1
   _maxLevel: 50
   _exp: 0
@@ -2409,6 +2411,14 @@ MonoBehaviour:
   _wei: 0
   _mov: 4
   _currentHp: 0
+  g_hp: 0.3
+  g_str: 0.25
+  g_int: 0.3
+  g_tec: 0.35
+  g_spd: 0.5
+  g_def: 0.15
+  g_Mdef: 0.2
+  g_luk: 0.4
   _spumPref: {fileID: 672310937620248338}
   _target: {fileID: 0}
   _unitFR: 20

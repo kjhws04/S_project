@@ -106,7 +106,7 @@ public class Stat : MonoBehaviour
     // 캐릭터의 스텟 (체력, 근력, 지능, 기술, 속도, 수비, 마방, 행운, 무게, 이동)
     // </surmmary>
     #region Character Stat
-    [SerializeField] int _hp; 
+    [SerializeField] int _hp;
     [SerializeField] int _str;
     [SerializeField] int _int;
     [SerializeField] int _tec;
@@ -129,6 +129,37 @@ public class Stat : MonoBehaviour
     public int Wei { get { return _wei; } set { _wei = value; } }
     public int Move { get { return _mov; } set { _mov = value; } }
     public int CurrentHp { get { return _currentHp; } set { _currentHp = value; } }
+    #endregion
+
+    // <surmmary>
+    // 캐릭터의 성장률 스텟 (체력, 근력, 지능, 기술, 속도, 수비, 마방, 행운, 무게, 이동)
+    // </surmmary>
+    #region Character Grown Stat
+    [SerializeField] float g_hp; bool b_hp = false;
+    [SerializeField] float g_str; bool b_str = false;
+    [SerializeField] float g_int; bool b_int = false;
+    [SerializeField] float g_tec; bool b_tec = false;
+    [SerializeField] float g_spd; bool b_spd = false;
+    [SerializeField] float g_def; bool b_def = false;
+    [SerializeField] float g_Mdef; bool b_Mdef = false;
+    [SerializeField] float g_luk; bool b_luk = false;
+
+    public float g_Hp { get { return g_hp; } set { g_hp = value; } }
+    public bool b_Hp { get { return b_hp; } set { b_hp = value; } }
+    public float g_Str { get { return g_str; } set { g_str = value; } }
+    public bool b_Str { get { return b_str; } set { b_str = value; } }
+    public float g_Int { get { return g_int; } set { g_int = value; } }
+    public bool b_Int { get { return b_int; } set { b_int = value; } }
+    public float g_Tec { get { return g_tec; } set { g_tec = value; } }
+    public bool b_Tec { get { return b_tec; } set { b_tec = value; } }
+    public float g_Spd { get { return g_spd; } set { g_spd = value; } }
+    public bool b_Spd { get { return b_spd; } set { b_spd = value; } }
+    public float g_Def { get { return g_def; } set { g_def = value; } }
+    public bool b_Def { get { return b_def; } set { b_def = value; } }
+    public float g_MDef { get { return g_Mdef; } set { g_Mdef = value; } }
+    public bool b_MDef { get { return b_Mdef; } set { b_Mdef = value; } }
+    public float g_Luk { get { return g_luk; } set { g_luk = value; } }
+    public bool b_Luk { get { return b_luk; } set { b_luk = value; } }
     #endregion
     #endregion
 
@@ -163,6 +194,7 @@ public class Stat : MonoBehaviour
         }
     }
 
+    #region Level Up System
     // <surmmary>
     // 레벨업 & 경험치 아이템 사용
     // </surmmary>
@@ -174,9 +206,28 @@ public class Stat : MonoBehaviour
             Level++;
             Exp -= MaxExp;
             LevelUp_Popup level = Managers.UI.ShowPopupUI<LevelUp_Popup>();
+            LevelUpAfterStat();
             level.StatSetting(this);
         }
     }
+
+    public void LevelUpAfterStat()
+    {
+        if (CheckGrowth(g_Hp)) { Hp++; b_hp = true; }
+        if (CheckGrowth(g_str)) { Str++; b_str = true; }
+        if (CheckGrowth(g_Int)) { Int++; b_int = true; }
+        if (CheckGrowth(g_Tec)) { Tec++; b_tec = true; }
+        if (CheckGrowth(g_Spd)) { Spd++; b_spd = true; }
+        if (CheckGrowth(g_Def)) { Def++; b_def = true; }
+        if (CheckGrowth(g_MDef)) { MDef++; b_Mdef = true; }
+        if (CheckGrowth(g_Luk)) { Luk++; b_luk = true; }
+    }
+
+    bool CheckGrowth(float growthRate)
+    {
+        return Random.value < growthRate;
+    }
+    #endregion
 
     #region SPUM Stat
     public SPUM_Prefabs _spumPref;
@@ -294,7 +345,6 @@ public class Stat : MonoBehaviour
 
         transform.position += (Vector3)_dir * _moveSpeed * Time.deltaTime;
         //길찾기 알고리즘
-        FindWay();
     }
 
     // <surmmary>
@@ -310,10 +360,6 @@ public class Stat : MonoBehaviour
         {
             _spumPref._anim.transform.localScale = new Vector3(1, 1, 1);
         }
-    }
-
-    void FindWay()
-    {
     }
 
     bool CheckDistance()
