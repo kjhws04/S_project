@@ -35,6 +35,9 @@ public class Recall_Base : UI_Popup
         #endregion
     }
 
+    // <summary>
+    // °¡Ã­ 1È¸ºÐ, °¡Ã­ 10È¸ºÐ
+    // </summary>
     #region RecallTime
     public void BtnRecall1Time(PointerEventData data)
     {
@@ -46,6 +49,9 @@ public class Recall_Base : UI_Popup
         Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
         NowRecall(popup, recallTime);
         _recall.ResetTicket();
+
+        _data.Gacha++;
+        Managers.Mission.ConditionComparison(Define.MissionType.GachaCount, _data.Gacha);
     }
     public void BtnRecall10Time(PointerEventData data)
     {
@@ -57,6 +63,8 @@ public class Recall_Base : UI_Popup
         Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
         NowRecall(popup, recallTime);
         _recall.ResetTicket();
+        _data.Gacha += 10;
+        Managers.Mission.ConditionComparison(Define.MissionType.GachaCount, _data.Gacha);
     }
 
     void CheckRecallTicketType(int recallTime)

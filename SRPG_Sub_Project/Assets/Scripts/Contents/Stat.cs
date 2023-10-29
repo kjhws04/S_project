@@ -15,6 +15,7 @@ public class Stat : MonoBehaviour
     public Sprite modelImg; //모델 이미지
     public Sprite cardImage; //카드 이미지
     public Sprite proflieImg; //프로필 이미지
+    public Sprite backGroundImg; //배경 이미지
     public CardType cardType; //카드 종류
     public Weapon.WeaponType attackType; //무기 속성으로 생성했지만 동일하니 걍 사용 AD, AP
     public bool isSettingUsed = false; //캐릭터 세팅 여부 true면 선택됨

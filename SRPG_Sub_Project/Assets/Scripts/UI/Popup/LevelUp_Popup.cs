@@ -67,6 +67,9 @@ public class LevelUp_Popup : UI_Popup
         GetTextMeshProUGUI((int)Texts.Mdf).text = $"{_stat.MDef}";
         GetTextMeshProUGUI((int)Texts.Luk).text = $"{_stat.Luk}";
         GetTextMeshProUGUI((int)Texts.Wei).text = $"{_stat.Wei}";
+
+        _userData.LevelUp++;
+        Managers.Mission.ConditionComparison(Define.MissionType.LevelUp, _userData.LevelUp);
     }
 
     // <surmmary>
@@ -81,6 +84,7 @@ public class LevelUp_Popup : UI_Popup
         if (!_charStst.b_Spd) GetObject((int)GameObjects.SpdPlus).SetActive(false); else _charStst.b_Spd = false;
         if (!_charStst.b_Def) GetObject((int)GameObjects.DefPlus).SetActive(false); else _charStst.b_Def = false;
         if (!_charStst.b_MDef) GetObject((int)GameObjects.MdfPlus).SetActive(false); else _charStst.b_MDef = false;
+        if (!_charStst.b_Luk) GetObject((int)GameObjects.LukPlus).SetActive(false); else _charStst.b_Luk = false;
 
         GetObject((int)GameObjects.WeiPlus).SetActive(false);
     }

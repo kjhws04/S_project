@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,17 +9,9 @@ public class ModelChange_Popup : UI_Popup
     public GameObject[] slot;
 
     UserData _userData;
-    MainScene _main;
 
     private void Start()
     {
-        Init();
-    }
-
-    public override void Init()
-    {
-        base.Init();
-        _main = FindObjectOfType<MainScene>();
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
 
         CharacterShow();
@@ -34,8 +25,21 @@ public class ModelChange_Popup : UI_Popup
         {
             string key_WeaponName = _userData._userCharData.Keys.ElementAt(i);
             slot[i].SetActive(true);
-            slot[i].GetComponent<Image>().sprite = _statList[i].proflieImg;
+
+            #region Copy Component
+            CopyFrom(_statList[i], i);
+            #endregion
         }
+    }
+
+    public void CopyFrom(Stat _stat, int i)
+    {
+        Stat copyStat = slot[i].AddComponent<Stat>();
+        copyStat.proflieImg = _stat.proflieImg;
+        copyStat.modelImg = _stat.modelImg;
+        copyStat.backGroundImg = _stat.backGroundImg;
+
+        slot[i].GetComponent<Image>().sprite = copyStat.proflieImg;
     }
 
     public void BtnExit()

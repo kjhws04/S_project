@@ -655,7 +655,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1942012093479170504}
+      - m_Target: {fileID: 6122993419348646425}
         m_TargetAssemblyTypeName: ModelChange_Popup, Assembly-CSharp
         m_MethodName: BtnExit
         m_Mode: 1
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 2052575757553809712}
   - component: {fileID: 2052575757553809713}
   - component: {fileID: 2052575757553809678}
-  - component: {fileID: 1942012093479170504}
+  - component: {fileID: 6122993419348646425}
   m_Layer: 5
   m_Name: ModelChange_Popup
   m_TagString: Untagged
@@ -726,7 +726,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1942012093479170504
+--- !u!114 &6122993419348646425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2052575757553809676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9d685ca7dde6842ad957a4300b4246, type: 3}
+  m_Script: {fileID: 11500000, guid: 877b5f2ca0053814b9a21758316de576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slot:

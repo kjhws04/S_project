@@ -2371,6 +2371,7 @@ MonoBehaviour:
   modelImg: {fileID: 21300000, guid: 2659b0bd9c1b465449dbde49b3610f92, type: 3}
   cardImage: {fileID: 21300000, guid: b474f40b346eb924bae57699dd1a6e8d, type: 3}
   proflieImg: {fileID: 21300000, guid: 9ca1d31a8c0ef414a92ff8f70e63082b, type: 3}
+  backGroundImg: {fileID: 21300000, guid: f2025f9cc3df003418fb5e6e0747ee1a, type: 3}
   cardType: 0
   attackType: 0
   isSettingUsed: 0

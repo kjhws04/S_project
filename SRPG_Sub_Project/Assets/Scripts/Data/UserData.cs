@@ -10,12 +10,13 @@ public class UserData : MonoBehaviour
     [SerializeField] int _userLevel = 15;
     [SerializeField] int _heart = 200;
     [SerializeField] int _ticket1 = 100;
-    [SerializeField] int _ticket2 = 21;
+    [SerializeField] int _ticket2 = 100;
     [SerializeField] int _ticketFriend = 100;
     [SerializeField] int _expItem = 100;
     [SerializeField] Stat _currentChar;
     public Sprite _modelImg;
     public Sprite _moedlDotImg;
+    public Sprite _backGroundImg;
     public int _stageCount = 1;
     
     public string UserName { get { return _userName; } set { _userName = value; } }
@@ -36,7 +37,9 @@ public class UserData : MonoBehaviour
     #endregion
 
     #region Mission Data
-    public int Stage = 1;
+    public int Stage = 0;
+    public int Gacha = 0;
+    public int LevelUp = 0;
     #endregion
 
     private void Awake()
@@ -71,6 +74,6 @@ public class UserData : MonoBehaviour
 
     public void ChangeModel()
     {
-        //Managers.UI.ShowPopupUI<ModelChange_Popup>();
+        Managers.UI.ShowPopupUI<ModelChange_Popup>();
     }
 }

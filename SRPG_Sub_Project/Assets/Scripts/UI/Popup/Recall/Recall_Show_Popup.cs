@@ -68,10 +68,12 @@ public class Recall_Show_Popup : UI_Popup
 
             //Character
             //1stars(10%)
-            ("Aqua", 1000, true),
+            ("Aqua", 500, true),
+            ("Bittle", 500, true),
 
             //2stars(10%)
-            ("Zion", 1000, true),
+            ("Zion", 500, true),
+            ("Siru", 500, true),
 
             //3stars(20%)
             ("Dmitry", 500, true),
@@ -80,12 +82,15 @@ public class Recall_Show_Popup : UI_Popup
             ("Sakura", 500, true),
 
             //4stars(3%)
-            ("Shy", 150, true),
-            ("Van", 150, true),
+            ("Shy", 75, true),
+            ("Van", 75, true),
+            ("Bigun", 75, true),
+            ("Nova", 75, true),
 
             //5stars(1%)
-            ("Broyna", 50, true),
-            ("Kan", 50, true)
+            ("Broyna", 33, true),
+            ("Kan", 34, true),
+            ("AKA", 33, true)
         #endregion
         );
 
@@ -126,11 +131,16 @@ public class Recall_Show_Popup : UI_Popup
             ("Sakura", 750, true),
 
             //4stars(10%)
-            ("Shy", 500, true),
-            ("Van", 500, true),
+            ("Shy", 250, true),
+            ("Van", 250, true),
+            ("Bigun", 250, true),
+            ("Nova", 250, true),
 
             //5stars(4%)
-            ("Knight", 400, true)
+            ("Broyna", 33, true),
+            ("Kan", 34, true),
+            ("AKA", 33, true),
+            ("Knight", 300, true)
         #endregion
         );
 
@@ -165,10 +175,12 @@ public class Recall_Show_Popup : UI_Popup
 
             //Character
             //1stars(10%)
-            ("Aqua", 1000, true),
+            ("Aqua", 500, true),
+            ("Bittle", 500, true),
 
             //2stars(10%)
-            ("Zion", 1000, true),
+            ("Zion", 500, true),
+            ("Siru", 500, true),
 
             //3stars(24%)
             ("Dmitry", 600, true),

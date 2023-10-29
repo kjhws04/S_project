@@ -43,6 +43,7 @@ public class Class : MonoBehaviour
         Woodcutter,
         Acrcher,
         Assassin,
-        Wizard
+        Wizard,
+        Defencer
     }
 }

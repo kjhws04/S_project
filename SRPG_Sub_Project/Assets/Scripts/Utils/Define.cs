@@ -33,8 +33,19 @@ public class Define
         Stage_3,
         Stage_4,
         Stage_5
-    }    
-    
+    }
+
+    // <surmmary>
+    // 미션 성공에 따른 타입
+    // </surmmary>
+    public enum MissionType
+    {
+        Unknown,
+        StageClear,
+        GachaCount,
+        LevelUp
+    }
+
     // <surmmary>
     // 소환 재화에 따른 타입
     // </surmmary>

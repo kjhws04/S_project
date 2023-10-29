@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour
 
     private void Awake()
     {
-        SoonsoonData.Instance.SAM = this;
+        //SoonsoonData.Instance.SAM = this;
     }
 
     // <summary>
@@ -125,7 +125,11 @@ public class BattleManager : MonoBehaviour
             Managers.UI.ShowPopupUI<Result_Popup>().Win(Managers.Stage.ExpItem); //승리 보상 부분
 
             _userData = Managers.Game.GetUserData().GetComponent<UserData>(); //스테이지 클리어
-            _userData.StageCount++;
+            _userData.StageCount++; //스테이지 해금용
+
+            _userData.Stage++; //미션용
+            Managers.Mission.ConditionComparison(Define.MissionType.StageClear, _userData.Stage);
+
             win = true;
         }
     }

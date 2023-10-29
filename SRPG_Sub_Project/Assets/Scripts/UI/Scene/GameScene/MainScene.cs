@@ -16,7 +16,7 @@ public class MainScene : BaseScene
     public GameObject model;
 
     enum Texts { Soldier_Name }
-    enum Images { Character_Model }
+    enum Images { Character_Model, BackGround }
 
     private void Start()
     {
@@ -35,7 +35,17 @@ public class MainScene : BaseScene
 
         GetTextMeshProUGUI((int)Texts.Soldier_Name).text = _data.UserName;
         model = GetImage((int)Images.Character_Model).gameObject;
-        GetImage((int)Images.Character_Model).sprite = _data._modelImg;
+
+        if (_data._modelImg != null)
+            GetImage((int)Images.Character_Model).sprite = _data._modelImg;
+        if (_data._backGroundImg != null)
+            GetImage((int)Images.BackGround).sprite = _data._backGroundImg;
+    }
+
+    public void ChangeModel(Stat stat)
+    {
+        GetImage((int)Images.Character_Model).sprite = stat.modelImg;
+        GetImage((int)Images.BackGround).sprite = stat.backGroundImg;
     }
 
     //model up down
@@ -55,7 +65,6 @@ public class MainScene : BaseScene
     public void BtnChangeModel()
     {
         _data.ChangeModel();
-        GetImage((int)Images.Character_Model).sprite = _data._modelImg;
     }
     public void BtnBattle()
     {
