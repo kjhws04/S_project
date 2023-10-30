@@ -1,0 +1,14 @@
+1. 캐릭터 추가법
+- Model Img, Card Img, Profile Img, Spum 캐릭터 제작
+- Component : SPUM_Prefabs, Stat(스텟, 성장률), Collider, Rigidbody, Unit_ZPos 필요
+- 뽑기에 추가 : Recall_Show_Popup 에서 통상, 스페셜, 친구 가챠에 맞는 확률로 기제
+- 무기 추가법 : Stat의 CardType를 Weapon으로 (ad,ap 구분) Rank = 추가 공격력
+
+2. 미션 추가법
+- MissionManager의 MissionList()에 작성
+- new Mission("타이틀","내용","int 비교 카운트","미션 타입","보상타입","보상개수") 순으로 저장
+
+3. 스테이지 추가법
+- StageManager의 StageN() 함수로 작성 (기존 복붙)
+- 일반 스테이지는 1++, 이벤트 스테이지는 999--, StageSetting()에 case 추가
+- 스테이지에 맞는 UI 제작
