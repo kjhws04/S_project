@@ -50,11 +50,28 @@ public class Stage_1 : BaseScene
     void GameSetting(int stage)
     {
         Managers.Stage.StageSetting(_p2UnitList, stage);
-        EnemyPositionSetting();
+        switch (Managers.Stage.gameType)
+        {
+            case Define.GameType.NomalStage:
+                EnemyPositionSetting();
+                break;
+            case Define.GameType.BossStage:
+                BossPositionSetting(_p2UnitList, _unit[1].gameObject);
+                break;
+        }
     }
     void EnemyPositionSetting()
     {
         PositionSetting(_p2UnitList, _unit[1].gameObject, 2, 3);
+    }
+    void BossPositionSetting(List<Stat> unitList, GameObject target)
+    {
+        for (int i = 0; i < unitList.Count; i++)
+        {
+            unitList[i].transform.SetParent(target.transform);
+            unitList[i].transform.position = new Vector3(3, 0, unitList[i].transform.position.z);
+            unitList[i].transform.localScale = new Vector3(2, 2, 2);
+        }
     }
     void PositionSetting(List<Stat> unitList, GameObject target, int startX, int endX)
     {

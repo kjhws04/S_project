@@ -36,6 +36,8 @@ public class MissionManager
 {
     //미션 목록을 가지고 있는 변수
     public List<Mission> missions = new List<Mission>();
+    //완료한 목록을 가지고 있는 변수
+    public List<Mission> completeMissions = new List<Mission>();
     //리워드 목록을 가질 변수
     private Dictionary<Define.RecallType, Action<int>> rewardActions = new Dictionary<Define.RecallType, Action<int>>();
 
@@ -104,6 +106,8 @@ public class MissionManager
             }
         }
     }
+    //completeMissions.Add(mission);
+    //missions.Remove(mission);
 
     // <summary>
     // 미션 완료 및 보상 지급 함수
@@ -112,7 +116,8 @@ public class MissionManager
     {
         GiveReward(mission.itemReward, mission.rewardCount);
         mission.isMissionComplete = true;
-        Debug.Log($"미션 : {mission.missionName} 가 {mission.isMissionComplete}");
+        //Debug.Log($"미션 : {mission.missionName} 가 {mission.isMissionComplete}");
+        Managers.UI.ShowPopupUI<MissionComplete_Popup>().ShowPopup(mission);
     }
 
     // <summary>
@@ -123,7 +128,7 @@ public class MissionManager
         if (rewardActions.ContainsKey(reward))
         {
             rewardActions[reward].Invoke(rewardCount);
-            Debug.Log($"보상 : {reward}, 를 {rewardCount} 만큼 지급");
+            //Debug.Log($"보상 : {reward}, 를 {rewardCount} 만큼 지급");
         }
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class StageManager
 {
+    public Define.GameType gameType;
+    public int totalDamage = 0;
+    public int highDamage = 0;
     public int ExpItem = 0;
 
     #region Stage Load
@@ -102,6 +105,9 @@ public class StageManager
             case 5:
                 Stage5(stat);
                 break;
+            case 999:
+                Stage999(stat);
+                break;
         }
     }
 
@@ -125,10 +131,11 @@ public class StageManager
     }
 
     // <summary>
-    // 스테이지의 몬스터 종류와 stat 저장
+    // 통상 스테이지 : 스테이지의 몬스터 종류와 stat 저장
     // </summary>
     void Stage1(List<Stat> stat)
     {
+        gameType = Define.GameType.NomalStage;
         ExpItem = 3;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Ax", "Orc_Bow", "Orc_Ax", "Orc_Bow" };
         float[,] statValues = new float[,]
@@ -144,6 +151,7 @@ public class StageManager
     }
     void Stage2(List<Stat> stat)
     {
+        gameType = Define.GameType.NomalStage;
         ExpItem = 3;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Ax", "Orc_Bow", "Orc_Ax", "Orc_Bow" };
         float[,] statValues = new float[,]
@@ -160,6 +168,7 @@ public class StageManager
     }
     void Stage3(List<Stat> stat)
     {
+        gameType = Define.GameType.NomalStage;
         ExpItem = 4;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Sword", "Orc_Bow", "Demon_Bagic", "Orc_Bow" };
         float[,] statValues = new float[,]
@@ -176,6 +185,7 @@ public class StageManager
     }
     void Stage4(List<Stat> stat)
     {
+        gameType = Define.GameType.NomalStage;
         ExpItem = 4;
         string[] enemyTypes = { "Orc_Sword", "Orc_Sword", "Orc_Sword", "Demon_Bagic", "Demon_Bagic", "Demon_Bagic" };
         float[,] statValues = new float[,]
@@ -192,6 +202,7 @@ public class StageManager
     }
     void Stage5(List<Stat> stat)
     {
+        gameType = Define.GameType.NomalStage;
         ExpItem = 5;
         string[] enemyTypes = { "Orc_Bow", "Orc_Bow", "Orc_Bow", "Orc_Bow", "Elf_Boss", "Orc_Bow" };
         float[,] statValues = new float[,]
@@ -202,8 +213,33 @@ public class StageManager
         {50, 10, 0, 8, 7, 3, 3, 1, 3f, 1f},
         {240, 15, 15, 9, 9, 5, 5, 5, 6f, 0.7f},
         {50, 10, 0, 8, 7, 3, 3, 1, 3f, 1f},
-    };
+        };
 
         InitializeEnemyStats(stat, enemyTypes, statValues);
+    }
+
+    // <summary>
+    // 이벤트 스테이지
+    // </summary>
+    void Stage999(List<Stat> stat)
+    {
+        gameType = Define.GameType.BossStage;
+        ExpItem = 5;
+        string[] enemyTypes = { "Skel_Boss" };
+        float[,] statValues = new float[,]
+        {
+        {10000, 20, 20, 1, 1, 1, 1, 1, 10f, 2f} 
+        };
+
+        InitializeEnemyStats(stat, enemyTypes, statValues);
+    }
+
+    //Battle Manager의 win에서 판별
+    public void HighScoerCheck()
+    {
+        if (totalDamage >= highDamage)
+        {
+            highDamage = totalDamage;
+        }
     }
 }

@@ -1129,8 +1129,11 @@ MonoBehaviour:
   modelImg: {fileID: 0}
   cardImage: {fileID: 0}
   proflieImg: {fileID: 0}
+  backGroundImg: {fileID: 0}
   cardType: 0
   attackType: 1
+  isSettingUsed: 0
+  settingNum: 0
   _level: 1
   _maxLevel: 50
   _exp: 0
@@ -1146,8 +1149,8 @@ MonoBehaviour:
   _sPower: 0
   _explanation: 
   _height: 154
-  _class: 2
-  _weaponClass: 1
+  _class: 7
+  _weaponClass: 6
   _vehicleClass: 1
   _passive: 0
   _equipSkill: 1
@@ -1167,6 +1170,14 @@ MonoBehaviour:
   _wei: 0
   _mov: 0
   _currentHp: 0
+  g_hp: 0
+  g_str: 0
+  g_int: 0
+  g_tec: 0
+  g_spd: 0
+  g_def: 0
+  g_Mdef: 0
+  g_luk: 0
   _spumPref: {fileID: 6888898579414968630}
   _target: {fileID: 0}
   _unitFR: 20

@@ -1523,6 +1523,7 @@ MonoBehaviour:
   modelImg: {fileID: 0}
   cardImage: {fileID: 0}
   proflieImg: {fileID: 0}
+  backGroundImg: {fileID: 0}
   cardType: 0
   attackType: 0
   isSettingUsed: 0
@@ -1563,6 +1564,14 @@ MonoBehaviour:
   _wei: 0
   _mov: 0
   _currentHp: 0
+  g_hp: 0
+  g_str: 0
+  g_int: 0
+  g_tec: 0
+  g_spd: 0
+  g_def: 0
+  g_Mdef: 0
+  g_luk: 0
   _spumPref: {fileID: 0}
   _target: {fileID: 0}
   _unitFR: 0

@@ -14,6 +14,7 @@ public class MainScene : BaseScene
     private float yPos = 0f;
 
     public GameObject model;
+    UserData _userData;
 
     enum Texts { Soldier_Name }
     enum Images { Character_Model, BackGround }
@@ -27,6 +28,7 @@ public class MainScene : BaseScene
     {
         base.Init();
         SceneType = Define.Scene.Main;
+        _userData = Managers.Game.GetUserData().GetComponent<UserData>();
 
         #region Bind
         Bind<Image>(typeof(Images));
@@ -60,32 +62,39 @@ public class MainScene : BaseScene
             model.transform.localScale = new Vector2(model.transform.localScale.x - scaleSpeed, model.transform.localScale.y - scaleSpeed);
     }
 
-    //버튼
     #region Buttons
+    //모델 바꾸기
     public void BtnChangeModel()
     {
         _data.ChangeModel();
     }
+    //전장
     public void BtnBattle()
     {
         Managers.Scene.LoadScene(Define.Scene.BattleField);
     }
+    //소환
     public void BtnRecall()
     {
         Managers.Scene.LoadScene(Define.Scene.Recall);
     }
+    //이벤트
     public void BtnEventField()
     {
-        //TODO
+        _userData.Stage = 999;
+        Managers.Scene.LoadScene(Define.Scene.Stage_1);
     }
+    //장비
     public void BtnMaintain()
     {
         Managers.Scene.LoadScene(Define.Scene.Maintain);
     }
+    //미션
     public void BtnMission()
     {
-        //Managers.UI.ShowPopupUI<Mission_Popup>();
+        Managers.UI.ShowPopupUI<Mission_Popup>();
     }
+    //정비
     public void BtnCharacter()
     {
         Managers.Scene.LoadScene(Define.Scene.Character);

@@ -47,6 +47,16 @@ public class Define
     }
 
     // <surmmary>
+    // 게임 타입
+    // </surmmary>
+    public enum GameType
+    {
+        Unknown,
+        NomalStage,
+        BossStage,
+    }
+
+    // <surmmary>
     // 소환 재화에 따른 타입
     // </surmmary>
     public enum RecallType

@@ -39,6 +39,9 @@ public class CombatManager
         //Debug.Log($"명중 성공률 : {AccuracyCalculate(_AttackChar, _DefenceChar)}%");
         //Debug.Log($"아군 명중 : {AccuracyPercentage(_AttackChar)}, 상대 회피 확률 : {AvoidPercentage(_DefenceChar)}");
         #endregion
+        //보스 데미지 연산
+        if (Managers.Stage.gameType == Define.GameType.BossStage)
+            Managers.Stage.totalDamage += damage;
 
         return Mathf.FloorToInt(damage);
     }

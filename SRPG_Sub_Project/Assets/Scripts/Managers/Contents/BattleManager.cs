@@ -116,7 +116,7 @@ public class BattleManager : MonoBehaviour
     // 진형 배열을 받아 승패를 결정하는 함수
     // </summary>
     #region Result
-    public void Win() //TODO
+    public void Win()
     {
         if (!win)
         {
@@ -127,21 +127,39 @@ public class BattleManager : MonoBehaviour
             _userData = Managers.Game.GetUserData().GetComponent<UserData>(); //스테이지 클리어
             _userData.StageCount++; //스테이지 해금용
 
-            _userData.Stage++; //미션용
-            Managers.Mission.ConditionComparison(Define.MissionType.StageClear, _userData.Stage);
-
-            win = true;
+            _userData.Clear++; //미션용
+            Managers.Mission.ConditionComparison(Define.MissionType.StageClear, _userData.Clear);
+            win = false;
         }
     }
+
     public void Lose()
     {
         if (!lose)
         {
-            Managers.Battle.StepType = Define.GameStep.Result;
-
-            Managers.UI.ShowPopupUI<Result_Popup>().Lose();
-            lose = true;
+            switch (Managers.Stage.gameType)
+            {
+                case Define.GameType.NomalStage:
+                    NormalStageLose();
+                    break;
+                case Define.GameType.BossStage:
+                    BossStage();
+                    break;
+            }
         }
+    }
+    public void BossStage()
+    {
+        Managers.Stage.HighScoerCheck();
+        Managers.Battle.StepType = Define.GameStep.Result;
+        Managers.UI.ShowPopupUI<BossResult_Popup>();
+        lose = false;
+    }
+    public void NormalStageLose()
+    {
+        Managers.Battle.StepType = Define.GameStep.Result;
+        Managers.UI.ShowPopupUI<Result_Popup>().Lose();
+        lose = false;
     }
     #endregion
 }

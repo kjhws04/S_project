@@ -36,8 +36,9 @@ public class UserData : MonoBehaviour
     public Dictionary<string, WeaponStat> _userWeaponData = new Dictionary<string, WeaponStat>();
     #endregion
 
-    #region Mission Data
     public int Stage = 0;
+    #region Mission Data
+    public int Clear = 0;
     public int Gacha = 0;
     public int LevelUp = 0;
     #endregion
