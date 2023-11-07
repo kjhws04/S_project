@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1075709731119",
+    "firebase_url": "https://sproject-51e4b-default-rtdb.firebaseio.com",
+    "project_id": "sproject-51e4b",
+    "storage_bucket": "sproject-51e4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075709731119:android:f9276ead850ad9aa6dc1da",
+        "android_client_info": {
+          "package_name": "com.shyai.project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkTpHjlS8bJS_zm_JnufC7SLUoXzgwIQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
