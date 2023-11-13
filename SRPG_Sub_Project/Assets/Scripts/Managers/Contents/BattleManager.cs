@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+public class BattleManager
 {
     public Define.GameStep StepType = Define.GameStep.Unknown;
     public List<Transform> _unit = new List<Transform>();

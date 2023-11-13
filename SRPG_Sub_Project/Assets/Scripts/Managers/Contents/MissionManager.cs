@@ -49,9 +49,14 @@ public class MissionManager
         MissionList();
 
         //미리 userData에 보상 저장
-        rewardActions.Add(Define.RecallType.Ticket1, (rewardCount) => _userData.Ticket1 += rewardCount);
-        rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => _userData.Ticket2 += rewardCount);
-        rewardActions.Add(Define.RecallType.FriendTicket, (rewardCount) => _userData.TicketFriend += rewardCount);
+        rewardActions.Add(Define.RecallType.Ticket1, (rewardCount) => Managers.Fire.SaveItems("_ticket1", rewardCount));
+        rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => Managers.Fire.SaveItems("_ticket2", rewardCount));
+        rewardActions.Add(Define.RecallType.FriendTicket, (rewardCount) => Managers.Fire.SaveItems("_ticketFriend", rewardCount));
+
+        Debug.Log("해당 부분 테스트중");
+        //rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => _userData.Ticket2 += rewardCount);
+        //rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => _userData.Ticket2 += rewardCount);
+        //rewardActions.Add(Define.RecallType.FriendTicket, (rewardCount) => _userData.TicketFriend += rewardCount);
     }
 
     // <summary>

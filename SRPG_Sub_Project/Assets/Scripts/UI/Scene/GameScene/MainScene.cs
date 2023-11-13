@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Firebase.Database;
+using Firebase.Extensions;
 
 public class MainScene : BaseScene
 {
@@ -35,7 +37,7 @@ public class MainScene : BaseScene
         Bind<TextMeshProUGUI>(typeof(Texts));
         #endregion
 
-        GetTextMeshProUGUI((int)Texts.Soldier_Name).text = _data.UserName;
+        GetTextMeshProUGUI((int)Texts.Soldier_Name).text = GetUsernameFromEmail(Managers.Fire.user.Email);//_data.UserName;
         model = GetImage((int)Images.Character_Model).gameObject;
 
         if (_data._modelImg != null)
@@ -62,7 +64,22 @@ public class MainScene : BaseScene
             model.transform.localScale = new Vector2(model.transform.localScale.x - scaleSpeed, model.transform.localScale.y - scaleSpeed);
     }
 
+    // <summary>
+    // 이메일 형식의 string을 받아 아이디 부분만 추출하는 함수
+    // </summary>
+    private string GetUsernameFromEmail(string email)
+    {
+        int atIndex = email.IndexOf('@');
+        if (atIndex != -1)
+        {
+            return email.Substring(0, atIndex);
+        }
+        // 이메일 형식이 아닐시, 그냥 반환
+        return email;
+    }
+
     #region Buttons
+    //1. 메인 버튼
     //모델 바꾸기
     public void BtnChangeModel()
     {
@@ -98,6 +115,20 @@ public class MainScene : BaseScene
     public void BtnCharacter()
     {
         Managers.Scene.LoadScene(Define.Scene.Character);
+    }
+
+    //2. 설정 버튼
+    public void Btn_Chat()
+    {
+        Managers.UI.ShowPopupUI<Chat_Popup>();
+    }
+    public void Btn_Audio()
+    {
+
+    }
+    public void Btn_Exit()
+    {
+        Application.Quit();
     }
     #endregion
 

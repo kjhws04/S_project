@@ -37,7 +37,9 @@ public class Result_Popup : UI_Popup
     // </summary>
     public void Reword(int count)
     {
-        _data.ExpItem += count; //아이템 책 data에 추가
+        Managers.Fire.SaveItems("_expItem", count);
+        Debug.Log("테스트중");
+        //_data.ExpItem += count; //아이템 책 data에 추가
         expItem = Resources.Load<Sprite>("Item/ExpBook"); //아이템 책 이미지
         for (int i = 0; i < 1; i++)
         {

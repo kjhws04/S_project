@@ -38,13 +38,18 @@ public class RecallScene : BaseScene
         #endregion
     }
 
-    public void ResetTicket()
+    public async void ResetTicket()
     {
         #region Mapping
-        GetTextMeshProUGUI((int)Texts.Goods1_Txt).text = $"{_data.Ticket1}";
-        GetTextMeshProUGUI((int)Texts.Goods2_Txt).text = $"{_data.Ticket2}";
-        GetTextMeshProUGUI((int)Texts.Goods3_Txt).text = $"{_data.TicketFriend}";
+        GetTextMeshProUGUI((int)Texts.Goods1_Txt).text = $"{await Managers.Fire.GetItemCountAsync("_ticket1")}";
+        GetTextMeshProUGUI((int)Texts.Goods2_Txt).text = $"{await Managers.Fire.GetItemCountAsync("_ticket2")}";
+        GetTextMeshProUGUI((int)Texts.Goods3_Txt).text = $"{await Managers.Fire.GetItemCountAsync("_ticketFriend")}";
         #endregion
+        //#region Mapping QWER
+        //GetTextMeshProUGUI((int)Texts.Goods1_Txt).text = $"{_data.Ticket1}";
+        //GetTextMeshProUGUI((int)Texts.Goods2_Txt).text = $"{_data.Ticket2}";
+        //GetTextMeshProUGUI((int)Texts.Goods3_Txt).text = $"{_data.TicketFriend}";
+        //#endregion
     }
 
     public override void Clear()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,9 +172,31 @@ public class CharacterScene : BaseScene
     // <summary>
     // Exp Item의 개수를 초기화 하는 부분 (아이템 추가시, 해당 함수 밑에 추가)
     // </summary>
-    public void ExpItemSetting()
+    async void ExpItemSetting()
     {
-        GetTextMeshProUGUI((int)Texts.ExpCount).text = $"{_userData.ExpItem}";
+        int item = 0;
+        try
+        {
+            int itemCount = await Managers.Fire.GetItemCountAsync("_ticket1");
+
+            if (itemCount != -1)
+            {
+                item = itemCount;
+            }
+            else
+            {
+                Debug.LogError("Failed to get item count");
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("An error occurred: " + e.Message);
+        }
+
+        GetTextMeshProUGUI((int)Texts.ExpCount).text = $"{item}";
+
+        //Debug.Log("테스트중"); QWER
+        //GetTextMeshProUGUI((int)Texts.ExpCount).text = $"{_userData.ExpItem}";
     }
 
     // <summary>
@@ -204,20 +227,49 @@ public class CharacterScene : BaseScene
             ModelInfoChange(_userData.CurrentChar); //스텟 보여주기 반영
         }
     }
-    public void BtnLevelUp()
+    public async void BtnLevelUp()
     {
-        if (_userData.ExpItem <= 0)
-            return;
+        #region Return
+        try
+        {
+            bool isCountGreaterThanZero = await Managers.Fire.CompareItemAsync("_expItem", 0);
+
+            if (!isCountGreaterThanZero)
+            {
+                return;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("An error occurred: " + e.Message);
+        }
+        Debug.Log("테스트중");
+        //if (_userData.ExpItem <= 0)
+        //    return;
+        #endregion
 
         if (_userData._userCharData.ContainsKey(_stat.Name))
         {
             _userData._userCharData[_stat.Name].AddExp();
         }
+
         ModelInfoChange(_userData._userCharData[_stat.Name]);
 
-        _userData.ExpItem--;
-        ExpItemSetting();
+        #region UseItem
+        try
+        {
+            await Managers.Fire.SaveItemsAsync("_expItem", -1);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("An error occurred: " + e.Message);
+        }
 
+        Debug.Log("테스");
+        //_userData.ExpItem--;
+        #endregion
+
+        ExpItemSetting();
     }
     #endregion
 

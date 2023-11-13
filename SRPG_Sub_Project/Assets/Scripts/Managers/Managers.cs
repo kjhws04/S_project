@@ -23,6 +23,7 @@ public class Managers : MonoBehaviour
 
     #region Core
     DataManager _data = new DataManager();
+    FireBaseManager _fire = new FireBaseManager();
     PoolManager _pool = new PoolManager();
     ResourceManager _resource = new ResourceManager();
     SceneManagerEx _scene = new SceneManagerEx();
@@ -30,6 +31,7 @@ public class Managers : MonoBehaviour
     UIManager _ui = new UIManager();
 
     public static DataManager Data { get { return Instance._data; } }
+    public static FireBaseManager Fire { get { return Instance._fire; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
@@ -67,6 +69,7 @@ public class Managers : MonoBehaviour
     {
         s_instance._game.Init();
 
+        //s_instance._fire.Init(); //LoginScene¿¡¼­ init()
         s_instance._data.Init();
         s_instance._pool.Init();
         s_instance._sound.Init();

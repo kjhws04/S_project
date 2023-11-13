@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
     GameObject _userData;
 
@@ -22,9 +22,8 @@ public class GameManager : MonoBehaviour
             go = new GameObject { name = "@UserData" };
             go.AddComponent<UserData>();
         }
-        DontDestroyOnLoad(go);
+        GameObject.DontDestroyOnLoad(go);
 
         _userData = go; 
     }
-
 }
