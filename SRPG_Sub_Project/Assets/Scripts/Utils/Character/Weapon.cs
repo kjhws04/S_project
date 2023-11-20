@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// <surmmary>
+// 캐릭터의 착용 무기 상태를 정의 하는 Define class
+// </surmmary>
 public class Weapon : MonoBehaviour
 {
     // <surmmary>

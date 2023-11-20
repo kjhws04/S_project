@@ -18,6 +18,9 @@ public class CharSelSlotBase : MonoBehaviour
         CharacterShow();
     }
 
+    // <summary>
+    // 유저데이터로부터 캐릭터 데이터를 가져와 정렬후, 정보를 화면에 표시
+    // </summary>
     private void CharacterShow()
     {
         List<Stat> _statList = new List<Stat>(_userData._userCharData.Values).OrderByDescending(character => character.Rank).ToList();
@@ -33,6 +36,9 @@ public class CharSelSlotBase : MonoBehaviour
         }
     }
 
+    // <summary>
+    // 유저데이터로부터 캐릭터 데이터의 스텟을 copy하는 함수
+    // </summary>
     public void CopyFrom(Stat _stat, int i)
     {
         Stat copyStat = slot[i].AddComponent<Stat>();

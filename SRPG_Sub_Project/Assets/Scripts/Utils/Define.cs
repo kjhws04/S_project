@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// <surmmary>
+// 여러 게임의 구성요소를 표현하는 Define class
+// </surmmary>
 public class Define
 {
     // <surmmary>

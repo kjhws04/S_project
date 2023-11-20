@@ -224,11 +224,11 @@ public class StageManager
     void Stage999(List<Stat> stat)
     {
         gameType = Define.GameType.BossStage;
-        ExpItem = 5;
+        ExpItem = 10;
         string[] enemyTypes = { "Skel_Boss" };
         float[,] statValues = new float[,]
         {
-        {10000, 20, 20, 1, 1, 1, 1, 1, 10f, 2f} 
+        {50000, 30, 30, 50, 10, 1, 1, 10, 10f, 2f} 
         };
 
         InitializeEnemyStats(stat, enemyTypes, statValues);

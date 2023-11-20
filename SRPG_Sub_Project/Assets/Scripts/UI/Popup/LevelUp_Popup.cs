@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// <summary>
+// 캐릭터 화면에서 캐릭터의 레벨이 올랐을 때 popup
+// </summary>
 public class LevelUp_Popup : UI_Popup
 {
     //uesd Component

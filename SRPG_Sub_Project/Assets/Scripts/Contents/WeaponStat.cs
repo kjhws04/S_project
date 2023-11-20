@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// <surmmary>
+// 무기 제작용 class 유니티 project에서 사용
+// </surmmary>
 [CreateAssetMenu(fileName = "New Weapon", menuName = "New Weapon/Weapon")]
 public class WeaponStat : ScriptableObject
 {

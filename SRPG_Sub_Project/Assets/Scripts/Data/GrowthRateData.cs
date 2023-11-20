@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// <surmmary>
+// 캐릭터의 성장률에 따른 레벨업시 스텟 변화용 함수 (현재는 사용하지 않고 인스팩터에서 직접 사용) => db 이관 필요
+// </surmmary>
 public class GrowthRateData
 {
     // <summary>
@@ -29,14 +32,4 @@ public class GrowthRateData
         return Random.value < growthRate;
     }
 
-    //public void LevelUp()
-    //{
-    //    level++;
-    //    for (int i = 0; i < stats.Length; i++)
-    //    {
-    //        if (CheckGrowth([i]))
-    //        {
-    //        }
-    //    }
-    //}
 }

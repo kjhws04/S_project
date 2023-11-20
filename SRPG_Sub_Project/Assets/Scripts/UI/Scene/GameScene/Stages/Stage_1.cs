@@ -24,6 +24,8 @@ public class Stage_1 : BaseScene
     private void Start()
     {
         Init();
+        Util.ChangeResolution();
+        Managers.Sound.Play("BGM_02", Define.Sound.Bgm, 0.75f);
     }
 
     protected override void Init()
@@ -35,9 +37,9 @@ public class Stage_1 : BaseScene
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         int stage = _userData.Stage;
 
-        GameSetting(stage);
-        Managers.Stage.LoadMap(stage); //맵 세팅
-        Managers.Battle.StepType = Define.GameStep.Setting; //캐릭터 세팅 step
+        GameSetting(stage); // 게임을 세팅하는 부분
+        Managers.Stage.LoadMap(stage); // 맵을 세팅하는 부분
+        Managers.Battle.StepType = Define.GameStep.Setting; //캐릭터 세팅 step (게임 step에 따라 동작)
         #endregion
     }
 
@@ -45,12 +47,14 @@ public class Stage_1 : BaseScene
     {
 
     }
-   
-    //Stage Setting
+
+    // <summary>
+    // 1. 초기 게임을 세팅하는 부분 : 게임 타입 결정 (노말, 보스)
+    // </summary>
     void GameSetting(int stage)
     {
         Managers.Stage.StageSetting(_p2UnitList, stage);
-        switch (Managers.Stage.gameType)
+        switch (Managers.Stage.gameType) // 게임 타입에 따라 다른 설정 수행
         {
             case Define.GameType.NomalStage:
                 EnemyPositionSetting();
@@ -60,10 +64,18 @@ public class Stage_1 : BaseScene
                 break;
         }
     }
+
+    // <summary>
+    // 1. 초기 게임을 세팅하는 부분 : 적의 pos 위치를 세팅 (노말)
+    // </summary>
     void EnemyPositionSetting()
     {
         PositionSetting(_p2UnitList, _unit[1].gameObject, 2, 3);
     }
+
+    // <summary>
+    // 1. 초기 게임을 세팅하는 부분 : 적의 pos,scale 위치를 세팅 (보스)
+    // </summary>
     void BossPositionSetting(List<Stat> unitList, GameObject target)
     {
         for (int i = 0; i < unitList.Count; i++)
@@ -73,6 +85,10 @@ public class Stage_1 : BaseScene
             unitList[i].transform.localScale = new Vector3(2, 2, 2);
         }
     }
+
+    // <summary>
+    // 1. 초기 게임을 세팅하는 부분 : EnemyPositionSetting()에서 x값을 이용해 for문으로 캐릭터의 위치 세팅
+    // </summary>
     void PositionSetting(List<Stat> unitList, GameObject target, int startX, int endX)
     {
         for (int i = 0; i < unitList.Count; i++)
@@ -92,14 +108,20 @@ public class Stage_1 : BaseScene
             }
         }
     }
+
+    // <summary>
+    // 2. 게임을 시작하는 부분 : 아래의 주석으로 설명 (초기화 완료, 버튼으로 시작)
+    // </summary>
     //Alie Setting & Start
     public void StartBtn()
     {
-        if (Managers.Battle._p1UnitList == null)
+        if (Managers.Battle._p1UnitList == null) // 설정된 아군이 없는 경우
             return;
 
-        settingBase.SetActive(false);
-        startBtn.SetActive(false);
+        Managers.Sound.Play("BGM_02", Define.Sound.Bgm); // bgm 세팅
+
+        settingBase.SetActive(false); // 팝업창 닫음
+        startBtn.SetActive(false); // 팝업창 닫음
 
         #region Choose Alie Character
         AlieCharSetting();
@@ -111,6 +133,10 @@ public class Stage_1 : BaseScene
         #endregion
         Managers.Battle.StepType = Define.GameStep.Battle; //게임시작
     }
+    
+    // <summary>
+    // 3. 아군 포지션 세팅 : Battle 메니저의 저장된 list를 받아 옴
+    // </summary>
     void AlieCharSetting()
     {
         _p1UnitList.Clear();
@@ -129,6 +155,10 @@ public class Stage_1 : BaseScene
             }
         }
     }
+
+    // <summary>
+    // 3. 아군 포지션 세팅 : 받은 list의 포지션을 직접 세팅
+    // </summary>
     public void AliePositionSetting()
     {
         int unitCount = Mathf.Min(6, _p1UnitList.Count);
@@ -151,6 +181,9 @@ public class Stage_1 : BaseScene
         }
     }
 
+    // <summary>
+    // 캐릭터의 stat을 카피하는 함수
+    // </summary>
     public void CopyFrom(Stat _copy, Stat _stat)
     {
         _copy.modelImg = _stat.modelImg;
@@ -179,11 +212,20 @@ public class Stage_1 : BaseScene
         _copy._unitAR = _stat._unitAR;
         _copy._unitAS = _stat._unitAS;
     }
+
     #region Buttons
     public void BtnMain()
     {
         Managers.Battle.StepType = Define.GameStep.Unknown;
-        Managers.Scene.LoadScene(Define.Scene.BattleField);
+        switch (Managers.Stage.gameType) // 게임 타입에 따라 다른 설정 수행
+        {
+            case Define.GameType.NomalStage:
+                Managers.Scene.LoadScene(Define.Scene.BattleField);
+                break;
+            case Define.GameType.BossStage:
+                Managers.Scene.LoadScene(Define.Scene.Main);
+                break;
+        }
     }
     #endregion
 }

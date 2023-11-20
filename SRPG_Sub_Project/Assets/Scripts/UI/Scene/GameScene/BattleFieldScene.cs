@@ -30,6 +30,8 @@ public class BattleFieldScene : BaseScene
         base.Init();
         SceneType = Define.Scene.BattleField;
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
+        Util.ChangeResolution();
+
         StageImageSetting();
 
         #region Bind

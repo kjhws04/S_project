@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+// <summary>
+// 캐릭터 화면에서 무기 버튼을 눌렸을 때 popup
+// </summary>
 public class WeaponSlot_Popup : UI_Popup
 {
     public UserData _userData;
@@ -27,7 +30,9 @@ public class WeaponSlot_Popup : UI_Popup
         ShowWeaponCard(_chooseData);
     }
 
+    // <summary>
     // WeaponType이 _weaponClass인 데이터 추출하는 함수
+    // </summary>
     private Dictionary<string, WeaponStat> ExtractWeapons(Dictionary<string, WeaponStat> dictionary, Class.WeaponClass type)
     {
         Dictionary<string, WeaponStat> weaponType = new Dictionary<string, WeaponStat>();
@@ -43,6 +48,9 @@ public class WeaponSlot_Popup : UI_Popup
         return weaponType;
     }
 
+    // <summary>
+    // 리스트를 돌아 rank 순으로 정렬하고, 무기 카드를 보여주는 함수
+    // </summary>
     private void ShowWeaponCard(Dictionary<string, WeaponStat> weaponType)
     {
         List<WeaponStat> sortedWeapons = weaponType.Values.OrderByDescending(stat => stat.rank).ToList();
@@ -56,6 +64,9 @@ public class WeaponSlot_Popup : UI_Popup
         ResetSlotColor();
     }
 
+    // <summary>
+    // 무기가 사용중이면 회색으로, 비 사용중이면 원래대로 돌리는 함수
+    // </summary>
     public void ResetSlotColor()
     {
         for (int i = 0; i < Mathf.Min(Slot.Length, _chooseList.Count); i++)
@@ -71,6 +82,9 @@ public class WeaponSlot_Popup : UI_Popup
         }
     }
 
+    // <summary>
+    // 미리 stat을 받아 저장시키는 함수
+    // </summary>
     public void SaveCharType(Stat _stat)
     {
         stat = _stat;

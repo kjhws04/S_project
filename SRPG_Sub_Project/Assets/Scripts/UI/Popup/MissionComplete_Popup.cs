@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// <summary>
+// 어떠한 미션이 성공 되었을 때, 화면의 오른쪽 위에 popup
+// </summary>
 public class MissionComplete_Popup : UI_Popup
 {
     WaitForSeconds wait;

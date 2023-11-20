@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 테스트용 scene
 public class UnknownScene : BaseScene
 {
     private void Start()

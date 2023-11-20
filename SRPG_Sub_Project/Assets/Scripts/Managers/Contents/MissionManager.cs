@@ -41,22 +41,25 @@ public class MissionManager
     //리워드 목록을 가질 변수
     private Dictionary<Define.RecallType, Action<int>> rewardActions = new Dictionary<Define.RecallType, Action<int>>();
 
-    UserData _userData;
-
     public void Init()
     {
-        _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         MissionList();
 
-        //미리 userData에 보상 저장
-        rewardActions.Add(Define.RecallType.Ticket1, (rewardCount) => Managers.Fire.SaveItems("_ticket1", rewardCount));
-        rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => Managers.Fire.SaveItems("_ticket2", rewardCount));
-        rewardActions.Add(Define.RecallType.FriendTicket, (rewardCount) => Managers.Fire.SaveItems("_ticketFriend", rewardCount));
+        //try
+        //{
+        //    t1 = await Managers.Fire.GetItemCountAsync("_ticket1");
+        //    t2 = await Managers.Fire.GetItemCountAsync("_ticket2");
+        //    ft = await Managers.Fire.GetItemCountAsync("_ticketFriend");
+        //}
+        //catch (Exception e)
+        //{
+        //    Debug.LogError("An error occurred: " + e.Message);
+        //}
 
-        Debug.Log("해당 부분 테스트중");
-        //rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => _userData.Ticket2 += rewardCount);
-        //rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => _userData.Ticket2 += rewardCount);
-        //rewardActions.Add(Define.RecallType.FriendTicket, (rewardCount) => _userData.TicketFriend += rewardCount);
+        ////미리 userData에 보상 저장
+        //rewardActions.Add(Define.RecallType.Ticket1, (rewardCount) => t1 += rewardCount);
+        //rewardActions.Add(Define.RecallType.Ticket2, (rewardCount) => t2 += rewardCount);
+        //rewardActions.Add(Define.RecallType.FriendTicket, (rewardCount) => ft += rewardCount);
     }
 
     // <summary>
@@ -128,12 +131,24 @@ public class MissionManager
     // <summary>
     // 미션을 성공시 보상 지급과, 미션 on/off 관여
     // </summary>
-    public void GiveReward(Define.RecallType reward, int rewardCount)
+    public async void GiveReward(Define.RecallType reward, int rewardCount)
     {
-        if (rewardActions.ContainsKey(reward))
+        //if (rewardActions.ContainsKey(reward))
+        //{
+        //    rewardActions[reward].Invoke(rewardCount);
+        //    //Debug.Log($"보상 : {reward}, 를 {rewardCount} 만큼 지급");
+        //}
+        switch (reward)
         {
-            rewardActions[reward].Invoke(rewardCount);
-            //Debug.Log($"보상 : {reward}, 를 {rewardCount} 만큼 지급");
+            case Define.RecallType.Ticket1:
+                await Managers.Fire.SaveItemsAsync("_ticket1", rewardCount);
+                break;
+            case Define.RecallType.Ticket2:
+                await Managers.Fire.SaveItemsAsync("_ticket2", rewardCount);
+                break;
+            case Define.RecallType.FriendTicket:
+                await Managers.Fire.SaveItemsAsync("_ticketFriend", rewardCount);
+                break;
         }
     }
 }

@@ -39,7 +39,7 @@ public class Recall_Base : UI_Popup
     }
 
     // <summary>
-    // 가챠 1회분, 가챠 10회분
+    // 가챠 1회분, 가챠 10회분 버튼에 대한 함수
     // </summary>
     #region RecallTime
     public void BtnRecall1Time(PointerEventData data)
@@ -47,30 +47,36 @@ public class Recall_Base : UI_Popup
         int recallTime = 1;
         Btn(recallTime);
     }
-
     public void BtnRecall10Time(PointerEventData data)
     {
         int recallTime = 10;
         Btn(recallTime);
     }
 
+    // <summary>
+    // 버튼들의 기본 세팅 함수
+    // </summary>
     public async void Btn(int recallTime)
     {
-        await CheckTicketCount();
-        CheckRecallTicketType(recallTime);
-        if (!isHave)
+        await CheckTicketCount(); //티켓 개수 확인
+
+        CheckRecallTicketType(recallTime); // db에서 reacllTime만큼 차감 (isHave 상태 변화)
+         
+        if (!isHave) //티켓 부족
             return;
 
-        Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>();
-        NowRecall(popup, recallTime);
+        Recall_Show_Popup popup = Managers.UI.ShowPopupUI<Recall_Show_Popup>(); // 가챠 화면 띄움
+        NowRecall(popup, recallTime); // 가챠 화면 구성
         isHave = false;
 
-        _data.Gacha += recallTime;
+        _data.Gacha += recallTime; // 미션용
         Managers.Mission.ConditionComparison(Define.MissionType.GachaCount, _data.Gacha);
-        _recall.ResetTicket();
+        _recall.ResetTicket(); // 티켓 변경 화면에 적용
     }
 
-    //티켓 개수 확인
+    // <summary>
+    // firebase의 티켓 개수 확인
+    // </summary>
     async Task CheckTicketCount()
     {
         try
@@ -95,7 +101,9 @@ public class Recall_Base : UI_Popup
         }
     }
 
-    //db의 티켓 갯수를 확인하고 실제 차감
+    // <summary>
+    // firebase의 티켓 갯수를 확인하고 실제 차감
+    // </summary>
     private void CheckRecallTicketType(int recallTime)
     {
         try
@@ -137,39 +145,9 @@ public class Recall_Base : UI_Popup
         }
     }
 
-    //void CheckRecallTicketType(int recallTime)
-    //{
-    //    switch (_type)
-    //    {
-    //        case Define.RecallType.Ticket1:
-    //            if (_data.Ticket1 >= recallTime)
-    //                _data.Ticket1 -= recallTime;
-    //            else
-    //            {
-    //                Managers.UI.ShowPopupUI<RecallWaring>();
-    //                isHave = false;
-    //            }
-    //            break;
-    //        case Define.RecallType.Ticket2:
-    //            if (_data.Ticket2 >= recallTime)
-    //                _data.Ticket2 -= recallTime;
-    //            else
-    //            {
-    //                Managers.UI.ShowPopupUI<RecallWaring>();
-    //                isHave = false;
-    //            }
-    //            break;
-    //        case Define.RecallType.FriendTicket:
-    //            if (_data.TicketFriend >= recallTime)
-    //                _data.TicketFriend -= recallTime;
-    //            else
-    //            {
-    //                Managers.UI.ShowPopupUI<RecallWaring>();
-    //                isHave = false;
-    //            }
-    //            break;
-    //    }
-    //}
+    // <summary>
+    // 가챠 테마에 따른 실제 소환
+    // </summary>
     void NowRecall(Recall_Show_Popup _popup, int _recallTime)
     {
         switch (_type)

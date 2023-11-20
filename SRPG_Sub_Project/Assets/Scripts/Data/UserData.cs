@@ -74,7 +74,10 @@ public class UserData : MonoBehaviour
         else
             _userCharData.Add(_charName, _charStat);
     }
-    
+
+    // <summary>
+    // 뽑기 무기 중복시 (해당 기능 구현 X)
+    // </summary>
     public void AddWeapon(string _weaponName, WeaponStat weaponStat)
     {
         if (_userWeaponData.ContainsKey(_weaponName))

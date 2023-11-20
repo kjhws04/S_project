@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *   - 유닛의 stat을 받아 전투를 실행하는 함수
+ *   - 함수의 debug는 Combat()의 DebugZone으로 확인 가능
+ *   - 보스의 데미지 또한 Combat()에서 쌓음
+ */
 public class CombatManager
 {
     #region Cri, Blc, Mis attribute

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// <surmmary>
+// 캐릭터의 stat을 정의 하는 Define class
+// </surmmary>
 public class CharacterDefine : MonoBehaviour
 {
     // <surmmary>

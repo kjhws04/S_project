@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+//UI_Scene 주석과 일맥상통
 public abstract class UI_Base : MonoBehaviour
 {
     Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();

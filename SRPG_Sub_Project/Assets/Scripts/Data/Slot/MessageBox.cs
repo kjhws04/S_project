@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// <surmmary>
+// 채팅 텍스트 박스 슬롯
+// </surmmary>
 public class MessageBox : MonoBehaviour
 {
     public TextMeshProUGUI user;

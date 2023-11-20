@@ -24,20 +24,4 @@ public class Test : MonoBehaviour
         //Managers.Sound.Play("(Sound산하 경로)/(Sound이름)", Define.Sound.BGM); //Bgm
         //Managers.Sound.Play("(Sound산하 경로)/(Sound이름)"); //Effect
     }
-
-    // 전투 시스템 테스트
-    //IEnumerator test()
-    //{
-    //    for (int i = 0; i < 10; i++)
-    //    {
-    //        Managers.Combat.Init();
-    //        new WaitForSeconds(0.1f);
-    //    }
-    //    yield return null;
-    //}
-
-    void Update()
-    {
-        
-    }
 }

@@ -32,6 +32,8 @@ public class MainScene : BaseScene
         SceneType = Define.Scene.Main;
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
 
+        Util.ChangeResolution();
+
         #region Bind
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -44,6 +46,8 @@ public class MainScene : BaseScene
             GetImage((int)Images.Character_Model).sprite = _data._modelImg;
         if (_data._backGroundImg != null)
             GetImage((int)Images.BackGround).sprite = _data._backGroundImg;
+
+        Managers.Sound.Play("BGM_03", Define.Sound.Bgm);
     }
 
     public void ChangeModel(Stat stat)
@@ -85,47 +89,50 @@ public class MainScene : BaseScene
     {
         _data.ChangeModel();
     }
-    //전장
+    //전장 이동
     public void BtnBattle()
     {
         Managers.Scene.LoadScene(Define.Scene.BattleField);
     }
-    //소환
+    //소환창 이동
     public void BtnRecall()
     {
         Managers.Scene.LoadScene(Define.Scene.Recall);
     }
-    //이벤트
+    //이벤트창 이동
     public void BtnEventField()
     {
         _userData.Stage = 999;
         Managers.Scene.LoadScene(Define.Scene.Stage_1);
     }
-    //장비
+    //장비창 이동
     public void BtnMaintain()
     {
         Managers.Scene.LoadScene(Define.Scene.Maintain);
     }
-    //미션
+    //미션 팝업 생성
     public void BtnMission()
     {
         Managers.UI.ShowPopupUI<Mission_Popup>();
     }
-    //정비
+    //정비창 이동
     public void BtnCharacter()
     {
         Managers.Scene.LoadScene(Define.Scene.Character);
     }
 
     //2. 설정 버튼
+    //채팅창 열기
     public void Btn_Chat()
     {
         Managers.UI.ShowPopupUI<Chat_Popup>();
     }
+    //오디오 조절
     public void Btn_Audio()
     {
-
+        Managers.UI.ShowPopupUI<SoundSetting_Popup>();
     }
+    //게임 종료
     public void Btn_Exit()
     {
         Application.Quit();

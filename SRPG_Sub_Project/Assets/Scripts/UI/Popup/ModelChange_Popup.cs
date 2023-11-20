@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+// <summary>
+// 메인 화면에서 모델 전환 버튼을 눌렸을 때 popup
+// </summary>
 public class ModelChange_Popup : UI_Popup
 {
     public GameObject[] slot;
@@ -17,6 +20,9 @@ public class ModelChange_Popup : UI_Popup
         CharacterShow();
     }
 
+    // <summary>
+    // 딕셔너리에서 character의 정보를 가져오는 함수
+    // </summary>
     private void CharacterShow()
     {
         List<Stat> _statList = new List<Stat>(_userData._userCharData.Values).OrderByDescending(character => character.Rank).ToList();
@@ -32,6 +38,9 @@ public class ModelChange_Popup : UI_Popup
         }
     }
 
+    // <summary>
+    // 모델로 설정할 캐릭터의 정보를 카피
+    // </summary>
     public void CopyFrom(Stat _stat, int i)
     {
         Stat copyStat = slot[i].AddComponent<Stat>();

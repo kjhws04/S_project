@@ -21,18 +21,27 @@ public class MaintainScene : BaseScene
         base.Init();
         SceneType = Define.Scene.Maintain;
 
+        Util.ChangeResolution();
+
         _userData = Managers.Game.GetUserData().GetComponent<UserData>();
 
         List<WeaponStat> _statList = new List<WeaponStat>(_userData._userWeaponData.Values);
         _weaponList = _statList;
         Sorting(_weaponList);
+        Managers.Sound.Play("BGM_04", Define.Sound.Bgm);
     }
 
+    // <summary>
+    // 무기리스트를 정렬하는 버튼 함수 (성급별, 클래스별, 등등 todo)
+    // </summary>
     public void BtnSoring()
     {
         Sorting(_weaponList);
     }
 
+    // <summary>
+    // 무기리스트를 자동으로 정렬하는 함수
+    // </summary>
     private void Sorting(List<WeaponStat> _list)
     {
         List<WeaponStat> list = _list.OrderByDescending(weapon => weapon.rank).ToList();
@@ -55,5 +64,4 @@ public class MaintainScene : BaseScene
     {
         Managers.Scene.LoadScene(Define.Scene.Main);
     }
-
 }

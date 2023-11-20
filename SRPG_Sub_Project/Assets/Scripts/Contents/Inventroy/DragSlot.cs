@@ -18,6 +18,9 @@ public class DragSlot : MonoBehaviour
         tempStat = GetComponent<Stat>();
     }
 
+    // <summary>
+    // 드레그 중인 이미지 세팅
+    // </summary>
     public void DragSetImage(Stat _orgStat, Sprite _charProfile)
     {
         charProfile.sprite = _charProfile;
@@ -25,6 +28,9 @@ public class DragSlot : MonoBehaviour
         SetColor(1);
     }
 
+    // <summary>
+    // 유저데이터로부터 캐릭터 데이터의 스텟을 copy하는 함수
+    // </summary>
     public void CopyFrom(Stat _stat)
     {
         tempStat.modelImg = _stat.modelImg;
@@ -54,6 +60,9 @@ public class DragSlot : MonoBehaviour
         tempStat._unitAS = _stat._unitAS;
     }
 
+    // <summary>
+    // image의 alpha를 조절하는 함수
+    // </summary>
     public void SetColor(float _alpha)
     {
         Color color = charProfile.color;

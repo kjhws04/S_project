@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Extensions;
 using UnityEngine.UI;
+using System.Linq;
 
+// <summary>
+// 메인 화면에서 채팅 버튼을 눌렸을 때 popup
+// </summary>
 public class Chat_Popup : UI_Popup
 {
     List<string> receiveKey = new List<string>();
@@ -15,7 +19,8 @@ public class Chat_Popup : UI_Popup
     private void Start()
     {
         DatabaseReference chatDB = FirebaseDatabase.DefaultInstance.GetReference("ChatMessage");
-        chatDB.OrderByChild("timestamp").LimitToLast(1).ValueChanged += ReceiveMessage;
+        //chatDB.OrderByChild("timestamp").LimitToLast(1).ValueChanged += ReceiveMessage; 
+        chatDB.OrderByChild("timestamp").ValueChanged += ReceiveMessage;
     }
 
     // <summary>
@@ -24,10 +29,15 @@ public class Chat_Popup : UI_Popup
     public void ReceiveMessage(object sender, ValueChangedEventArgs e) 
     {
         DataSnapshot snapshot = e.Snapshot;
-        foreach (var message in snapshot.Children)
+        Debug.Log($"받은 메시지 수: {snapshot.ChildrenCount}");
+
+        // 데이터를 timestamp 내림차순으로 정렬
+        var sortedMessages = snapshot.Children.OrderByDescending(child => (long)child.Child("timestamp").Value).Reverse();
+
+        foreach (var message in sortedMessages)
         {
             Debug.Log($"{message.Key} + {message.Child("username").Value.ToString()} + {message.Child("message").Value.ToString()}");
-            //timestamp를 사용하면, 2번 출력이 되는데(정상실행), 출력 한번을 방지하기 위한 코드
+            //timestamp를 사용하면, 2번 출력이 되는데(2번 출력이 정상임), 출력을 한번만 하도록 방지하기 위한 코드
             if (!receiveKey.Contains(message.Key))
             {
                 AddChatMessage(message.Child("username").Value.ToString(), message.Child("message").Value.ToString());
@@ -59,6 +69,8 @@ public class Chat_Popup : UI_Popup
                 Debug.Log("Send Message");
             }
         });
+
+        input.text = "";
     }
 
     // <summary>

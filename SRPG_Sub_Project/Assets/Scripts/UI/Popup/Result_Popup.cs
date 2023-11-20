@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// <summary>
+// 배틀 화면에서 승리 또는 패배 했을 때 popup
+// </summary>
 public class Result_Popup : UI_Popup
 {
     public GameObject winBase;
@@ -35,19 +38,15 @@ public class Result_Popup : UI_Popup
     // <summary>
     // 승리 시, 보상을 정리하는 함수 (ExpBook)
     // </summary>
-    public void Reword(int count)
+    public async void Reword(int count)
     {
-        Managers.Fire.SaveItems("_expItem", count);
-        Debug.Log("테스트중");
-        //_data.ExpItem += count; //아이템 책 data에 추가
+        await Managers.Fire.SaveItemsAsync("_expItem", count); //아이템 책 db 추가
+
         expItem = Resources.Load<Sprite>("Item/ExpBook"); //아이템 책 이미지
         for (int i = 0; i < 1; i++)
         {
             expItem = Slot[i].transform.GetChild(0).GetComponent<Image>().sprite;
-            Debug.Log("Tes");
         }
-
-        Debug.Log("Test");
     }
 
     // <summary>

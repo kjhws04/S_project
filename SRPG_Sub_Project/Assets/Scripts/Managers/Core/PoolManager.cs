@@ -7,23 +7,24 @@ public class PoolManager
     #region Pool
     class Pool
     {
-        public GameObject Original { get; private set; }
-        public Transform Root { get; set; }
+        public GameObject Original { get; private set; } // 풀링할 원본 오브젝트
+        public Transform Root { get; set; } // 생성된 object를 담을 부모 root의 transform
 
-        Stack<Poolable> _poolStack = new Stack<Poolable>();
+        Stack<Poolable> _poolStack = new Stack<Poolable>(); // 재사용 가능한 오브젝트들을 담을 스택
 
         public void Init(GameObject original, int count = 5)
         {
             Original = original;
             Root = new GameObject().transform;
             Root.name = $"{original.name}_Root";
-
+            // 지정된 개수만큼 미리 오브잭트를 생성한 후 풀에 추가
             for (int i = 0; i < count; i++)
             {
                 Push(Create());
             }
         }
 
+        // 새로운 Poolable 오브젝트 생성
         Poolable Create()
         {
             GameObject go = Object.Instantiate<GameObject>(Original);
@@ -31,6 +32,7 @@ public class PoolManager
             return go.GetOrAddComponent<Poolable>();
         }
 
+        // 풀에 Poolable 오브젝트 추가
         public void Push(Poolable poolable)
         {
             if (poolable == null)
@@ -42,6 +44,8 @@ public class PoolManager
             _poolStack.Push(poolable);
         }
 
+
+        // 풀에서 Poolable 오브젝트 가져오기
         public Poolable Pop(Transform parent)
         {
             Poolable poolable;
@@ -101,13 +105,16 @@ public class PoolManager
         return _pool[org.name].Pop(parent);
     }
 
+    // <summary>
+    // 오브잭트 풀을 생성, 초기화
+    // </summary>
     public void CreatePool(GameObject org, int count = 5)
     {
         Pool pool = new Pool();
         pool.Init(org, count);
         pool.Root.parent = _root;
 
-        _pool.Add(org.name, pool);
+        _pool.Add(org.name, pool); // 풀을 _pool 딕셔너리에 추가
     }
 
     // <summary>

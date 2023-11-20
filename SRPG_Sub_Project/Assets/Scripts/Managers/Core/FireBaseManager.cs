@@ -14,19 +14,14 @@ public class FireBaseManager
 
     public DatabaseReference reference; //데이터 저장용
 
+    public Action<string> OnTextChanged; //ChangeText()
     public Action<bool> LoginStat;
     public string UserId => user.UserId;
 
-    public bool loginSuccess = false;
-
-    string em;
-    string pw;
-
-    UserData _userData;
+    public bool loginSuccess = false;    
 
     public void Init()
     {
-        _userData = Managers.Game.GetUserData().GetComponent<UserData>();
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         CheckAsync();
     }
@@ -75,24 +70,25 @@ public class FireBaseManager
         {
             if (task.IsCanceled) //등록 취소 (인터넷 연결 확인)
             {
-                Debug.LogError("Registration canceled. Make sure you have a stable internet connection and try again.");
-                return;
+                string message = $"Registration canceled. Make sure you have a stable internet connection and try again.";
+                ChangeText(message);
             }
             if (task.IsFaulted)
             {
-                string errorMessage = "Registration failed. Errors: ";
+                string errorMessage = "Registration failed. Errors : ";
                 foreach (Exception exception in task.Exception.Flatten().InnerExceptions)
                 {
-                    errorMessage += exception.Message + " ";
+                    string message = errorMessage += exception.Message + " ";
+                    ChangeText(message);
                 }
-                Debug.LogError(errorMessage);
                 return;
             }
             if (task.IsCompleted)
             {
-                //회원 가입 성공
-                Debug.Log("Registration successful.");
-                Managers.Fire.RegisterAfterSetting(); //기본 세팅
+            //    //회원 가입 성공
+            //    string message = $"Registration successful!";
+            //    ChangeText(message);
+                  Managers.Fire.RegisterAfterSetting(); //기본 세팅
             }
         });
     }
@@ -106,13 +102,18 @@ public class FireBaseManager
         {
             var task = await auth.SignInWithEmailAndPasswordAsync(email, password);
             user = task.User;
-            Debug.Log($"Login Success. Welcome {user.Email}");
+            Managers.Mission.Init();
+
+            string message = $"Loding...";
+            ChangeText(message);
+
             Debug.Log(UserId);
             Managers.Scene.LoadScene(Define.Scene.Main);
         }
         catch (Exception e)
         {
-            Debug.Log("Login Failed. Exception message: " + e.Message);
+            string message = "Login Failed. Errors : " + e.Message;
+            ChangeText(message);
         }
     }
 
@@ -122,7 +123,17 @@ public class FireBaseManager
     public void Logout()
     {
         auth.SignOut();
-        Debug.Log("Logout Complete");
+        string message = "Logout Complete";
+        ChangeText(message);
+    }
+
+    // <summary>
+    // 타 씬에서 해당 함수 델리게이트 호출로 원하는 텍스트를 구독시키주는 함수
+    // </summary>
+    public void ChangeText(string text)
+    {
+        // 델리게이트 호출
+        OnTextChanged?.Invoke(text);
     }
     #endregion
 
@@ -155,7 +166,7 @@ public class FireBaseManager
 
     #region Item DB
     // <summary>
-    // Firebase에 아이템을 저장하는 함수
+    // Firebase에 아이템을 바로 저장 하는 함수 [ 필요 예시) ticket1 0개로 설정 ]
     // </summary>
     public void SaveItems(string _itemName, int itemCount)
     {
@@ -178,7 +189,7 @@ public class FireBaseManager
     }
 
     // <summary>
-    // Firebase에 아이템을 차감 증감하는 함수
+    // Firebase에 아이템을 증감하는 함수 [ 필요 예시) ticket1 1개 추가 ]
     // </summary>
     public async Task SaveItemsAsync(string itemName, int itemCountChange)
     {
@@ -216,45 +227,7 @@ public class FireBaseManager
     }
 
     // <summary>
-    // Firebase에 아이템 비교할 수 있는 함수
-    // </summary>
-    public async Task<bool> CompareItemAsync(string itemNameToCompare, int compareCount)
-    {
-        try
-        {
-            DataSnapshot dataSnapshot = await reference.Child("users").Child(UserId).Child("items").Child(itemNameToCompare).GetValueAsync();
-
-            int itemCount = -1;
-            if (dataSnapshot.Exists)
-            {
-                if (int.TryParse(dataSnapshot.Value.ToString(), out itemCount))
-                {
-                    Debug.Log($"{itemNameToCompare} Count: {itemCount}");
-
-                    // itemCount와 compareCount 비교
-                    return itemCount > compareCount;
-                }
-                else
-                {
-                    Debug.LogError("Failed to parse item count as an integer");
-                    return false;
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"Item {itemNameToCompare} not found");
-                return false;
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("An error occurred: " + e.Message);
-            return false;
-        }
-    }
-
-    // <summary>
-    // Firebase에 아이템 개수를 가져오는 함수
+    // Firebase에 아이템 개수를 가져오는 함수 [ 필요 예시) firebase에 ticket1 100개 있음 ]
     // </summary>
     public async Task<int> GetItemCountAsync(string itemName)
     {
@@ -289,25 +262,62 @@ public class FireBaseManager
         }
     }
 
-    public async Task SaveItemCountAsync(string itemName, int itemCount)
+    // <summary>
+    // 초기 아이템의 개수를 저장하는 함수
+    // </summary>
+    public void RegisterAfterSetting()
+    {
+        SaveItems("_ticket1", 5000);
+        SaveItems("_ticket2", 5000);
+        SaveItems("_ticketFriend", 5000);
+        SaveItems("_expItem", 5000);
+    }
+    #endregion
+
+    #region Stage DB    
+    // <summary>
+    // Firebase에 하이 스코어를 save 하는 함수
+    // </summary>
+    public async Task SaveHighScore(string bossName, int score)
     {
         try
         {
-            await reference.Child("users").Child(UserId).Child("items").Child(itemName).SetValueAsync(itemCount);
-            Debug.Log($"Saved {itemName} count: {itemCount}");
+            await reference.Child("users").Child(UserId).Child("boss").Child(bossName).SetValueAsync(score);
+            Debug.Log("Save Successful");
         }
-        catch (Exception e)
+        catch (OperationCanceledException)
         {
-            Debug.LogError("An error occurred: " + e.Message);
+            Debug.LogError("Save Cancel");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Save Error: " + ex);
         }
     }
 
-    public void RegisterAfterSetting()
+    // <summary>
+    // Firebase에 하이 스코어를 get 하는 함수
+    // </summary>
+    public async Task<int> GetHighScore(string bossName)
     {
-        SaveItems("_ticket1", 10);
-        SaveItems("_ticket2", 0);
-        SaveItems("_ticketFriend", 50);
-        SaveItems("_expItem", 10);
+        try
+        {
+            var snapshot = await reference.Child("users").Child(UserId).Child("boss").Child(bossName).GetValueAsync();
+            if (snapshot.Exists)
+            {
+                return Convert.ToInt32(snapshot.Value);
+            }
+            else
+            {
+                Debug.LogError("해당 하는 보스 이름이 없음");
+                return 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Get HighScore Error: " + ex);
+            throw; // 필요한 경우 다시 throw하여 전파
+        }
     }
     #endregion
 }

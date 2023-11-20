@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// <surmmary>
+// charcter scene의 무기 장착 코드
+// </surmmary>
 public class WeaponCardSlot : MonoBehaviour, IPointerClickHandler
 {
     UserData _weaponData;
@@ -22,6 +25,9 @@ public class WeaponCardSlot : MonoBehaviour, IPointerClickHandler
         _thisImg = GetComponent<Image>();
     }
 
+    // <surmmary>
+    // 캐릭터의 무기를 장착하는 코드
+    // </surmmary>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (_weaponData.CurrentChar.MainWeapon == null) //현재 아이템이 없다면,
@@ -51,6 +57,9 @@ public class WeaponCardSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    // <surmmary>
+    // 무기를 장착함 (무기 귀속 : 사용중/무기 dic : 사용중/무기 장착 스텟 변화/Slot 색 변화/작용 스텟 화면에 표시)
+    // </surmmary>
     private void AddWeapon(bool _isUsed) 
     {
         _weaponData.CurrentChar.MainWeapon.isUsed = !_isUsed;
@@ -59,7 +68,10 @@ public class WeaponCardSlot : MonoBehaviour, IPointerClickHandler
         _popup.ResetSlotColor();
         _charScene.ModelInfoChange(_weaponData.CurrentChar); //적용 스텟 표시
     }
-    
+
+    // <surmmary>
+    // 무기를 해제함 (무기 귀속 : 비사용중/무기 dic : 비사용중/무기 장착 스텟 변화/캐릭터 메인 무기 : null/Slot 색 변화/작용 스텟 화면에 표시)
+    // </surmmary>
     private void DeleteWeapon()
     {
         _weaponData.CurrentChar.MainWeapon.isUsed = false;

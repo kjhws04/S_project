@@ -26,6 +26,7 @@ public class Recall_Show_Popup : UI_Popup
     {
         if (isShowing)
             return;
+        FindObjectOfType<RecallScene>().ResetTicket();
 
         Managers.UI.ClosePopupUI();
     }

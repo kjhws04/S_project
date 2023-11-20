@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// <surmmary>
+// 캐릭터의 무기, 직업, 기승 상태를 정의 하는 Define class
+// </surmmary>
 public class Class : MonoBehaviour
 {
     // <surmmary>
@@ -18,10 +21,10 @@ public class Class : MonoBehaviour
         Staff,
         Dagger,
         Shield,
-    }    
-    
+    }
+
     // <surmmary>
-    // 캐릭터의 무기별 클래스
+    // 기승 상태별 클래스
     // </surmmary>
     public enum VehicleClass
     {

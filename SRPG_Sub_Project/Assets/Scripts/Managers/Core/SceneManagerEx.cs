@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerEx
 {
-    public BaseScene CurrentScene{get { return GameObject.FindObjectOfType<BaseScene>(); }
-    }
+    public BaseScene CurrentScene{get { return GameObject.FindObjectOfType<BaseScene>(); } }
 
     // <summary>
     // Aync계열 함수 사용과, 구조상의 Init(), Clear() 작업을 위해 따로 LoadScene() 함수를 사용

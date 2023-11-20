@@ -11,6 +11,7 @@ public class GameManager
     public void Init()
     {
         UserData();
+        Application.targetFrameRate = 60;
     }
 
     //蜡历狼 单捞磐 积己

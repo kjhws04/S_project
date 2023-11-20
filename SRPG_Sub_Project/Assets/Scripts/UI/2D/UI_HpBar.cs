@@ -34,6 +34,9 @@ public class UI_HpBar : UI_Base
         SetHpRatio(ratio);
     }
 
+    // <summary>
+    // ratio를 받아 체력바를 조절하는 함수
+    // </summary>
     public void SetHpRatio(float ratio)
     {
         GetObject((int)GameObjects.HpBar).GetComponent<Slider>().value = ratio;

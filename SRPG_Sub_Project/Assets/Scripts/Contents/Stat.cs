@@ -199,9 +199,9 @@ public class Stat : MonoBehaviour
     // <surmmary>
     // 레벨업 & 경험치 아이템 사용
     // </surmmary>
-    public void AddExp()
+    public void AddExp(int exp)
     {
-        Exp += 20;
+        Exp += exp;
         if (Exp >= MaxExp)
         {
             Level++;
@@ -212,6 +212,9 @@ public class Stat : MonoBehaviour
         }
     }
 
+    // <surmmary>
+    // 유닛의 성장률 비교 후 실체 스텟에 적용 (후에 db에 저장)
+    // </surmmary>
     public void LevelUpAfterStat()
     {
         if (CheckGrowth(g_Hp)) { Hp++; b_hp = true; }
@@ -224,6 +227,9 @@ public class Stat : MonoBehaviour
         if (CheckGrowth(g_Luk)) { Luk++; b_luk = true; }
     }
 
+    // <surmmary>
+    // 랜덤 값과 유닛의 성장률 비교 후 bool값을 리턴하는 함수
+    // </surmmary>
     bool CheckGrowth(float growthRate)
     {
         return Random.value < growthRate;
@@ -258,6 +264,9 @@ public class Stat : MonoBehaviour
         death
     }
 
+    // <surmmary>
+    // 전투할 때, 실행할 함수 (유닛의 체력바, spum_prefabs 를 달아줌)
+    // </surmmary>
     public void BattleStart()
     {
         _spumPref = GetComponent<SPUM_Prefabs>();
@@ -363,40 +372,47 @@ public class Stat : MonoBehaviour
         }
     }
 
+    // <surmmary>
+    // 유닛이 목표 지점까지의 거리를 체크하여, 적절한 상태로 전환하는 함수
+    // </surmmary>
     bool CheckDistance()
     {
         _tempDis = (Vector2)(_target.transform.localPosition - transform.position);
 
         float tDis = _tempDis.sqrMagnitude;
 
-        if (tDis <= _unitAR * _unitAR)
+        if (tDis <= _unitAR * _unitAR) // 거리가 유닛의 공격 범위의 제곱 이내인지 확인
         {
             SetState(UnitState.attack); 
             return true;
         }
         else
         {
-            if (!CheckTarget()) 
-                SetState(UnitState.idle);
+            if (!CheckTarget()) // 목표 확인
+                SetState(UnitState.idle); // 없으면 대기
             else 
-                SetState(UnitState.run);
+                SetState(UnitState.run); // 있으면 해당 목표로 이동
 
             return false;
         }
     }
 
+    // <surmmary>
+    // 유닛이 실제 공격을 수행할지 판단 후, 조건에 맞으면 공격을 수행하는 함수
+    // </surmmary>
     void CheckAttack()
     {
         if (!CheckTarget()) 
-            return;
+            return; // 목표가 없으면 리턴
         if (!CheckDistance()) 
-            return;
+            return; // 거리가 너무 멀면 리턴
 
         _anim.SetFloat("RunState", 0f);
-        attackTimer += Time.deltaTime;
-        if (attackTimer > _unitAS)
+
+        attackTimer += Time.deltaTime; // 공격 딜레이
+        if (attackTimer > _unitAS) // 딜레이와 공격 속도 비교
         {
-            DoAttack();
+            DoAttack(); //공격 실행
             attackTimer = 0;
         }
     }
@@ -477,23 +493,6 @@ public class Stat : MonoBehaviour
         }
     }
 
-    #region Test
-    // <surmmary>
-    // 데미지 계산 함수 (temp)
-    // </surmmary>
-    //public int AttackDamageCurc()
-    //{
-    //    int damage = 0;
-
-    //    if (_mainWeapon != null)
-    //        damage = _mainWeapon.weaponAttackType == Weapon.WeaponType.AD ? _str : _int;
-    //    else
-    //        damage = attackType == Weapon.WeaponType.AD ? _str : _int;
-
-    //    return damage;
-    //}
-    #endregion
-
     // <surmmary>
     // 공격 계산 함수 (타켓의 남은 체력 - 공격력), hp가 0이면 사망
     // </surmmary>
@@ -524,8 +523,6 @@ public class Stat : MonoBehaviour
             case "P2":
                 Managers.Battle._p2UnitList.Remove(this);
                 break;
-            default:
-                break;
         }
         GetComponent<CapsuleCollider>().enabled = false;
         Destroy(GetComponent<Rigidbody>());
@@ -536,7 +533,8 @@ public class Stat : MonoBehaviour
         }
         if (Managers.Battle._p2UnitList == null || Managers.Battle._p2UnitList.Count == 0)
         {
-            Managers.Battle.Win();
+            if (Managers.Battle.win)
+                Managers.Battle.Win();
         }
 
         StartCoroutine(DestroyCoroutine(2.0f));
@@ -588,27 +586,5 @@ public class Stat : MonoBehaviour
         return val;
     }
 
-    //TEMP
-    private void OnCollisionEnter(Collision collision)
-    {
-        //string tTag = "";
-        //switch (gameObject.tag)
-        //{
-        //    case "P1": tTag = "P2"; 
-        //        break;
-        //    case "P2": tTag = "P1";
-        //        break;
-        //}
-
-        //if (collision.gameObject.CompareTag(tTag))
-        //{
-        //    Debug.Log("With Target");
-        //}
-        //else if (collision.gameObject.CompareTag(gameObject.tag))
-        //{
-        //    Debug.Log("Stop");
-        //    SetState(UnitState.idle);
-        //}
-    }
     #endregion
 }

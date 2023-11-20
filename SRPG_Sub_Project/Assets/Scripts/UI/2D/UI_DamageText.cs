@@ -14,20 +14,14 @@ public class UI_DamageText : UI_Base
         Damage
     }
 
-    private void Update()
-    {
-    //    if (_stat._unitState == Stat.UnitState.death)
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
-    }
-
     public override void Init()
     {
         
     }
 
+    // <summary>
+    // block, miss, cri 여부를 확인해서 캐릭터의 머리 위로 damage를 표시하는 함수
+    // </summary>
     public void ShowDamageText(int _damage, bool _isBlock, bool _isMiss, bool _isCritical)
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -61,6 +55,9 @@ public class UI_DamageText : UI_Base
         }
     }
 
+    // <summary>
+    // 애니메이션 종료후 destroy
+    // </summary>
     public void DestroyText()
     {
         Destroy(gameObject);

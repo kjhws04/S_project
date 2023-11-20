@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class BattleManager
     public List<Stat> _p2UnitList = new List<Stat>();
     public List<Stat> _p3UnitList = new List<Stat>();
 
-    public bool win;
+    public bool win = true;
     public bool lose;
 
     public float _findTimer = 0.1f;
@@ -28,7 +29,7 @@ public class BattleManager
     // </summary>
     public void UnitSetting(List<Transform> unit,List<Stat> _p1Unit, List<Stat> _p2Unit, List<Stat> _p3Unit)
     {
-        win = false;
+        win = true;
         _p1UnitList.Clear();
         _p1UnitCheckList.Clear();
         _p2UnitList.Clear();
@@ -119,20 +120,19 @@ public class BattleManager
     public void Win()
     {
         if (!win)
-        {
-            Managers.Battle.StepType = Define.GameStep.Result; //진행상황은 결과로,
+            return;
+        win = false;
 
-            Managers.UI.ShowPopupUI<Result_Popup>().Win(Managers.Stage.ExpItem); //승리 보상 부분
+        Managers.Battle.StepType = Define.GameStep.Result; //진행상황은 결과로,
 
-            _userData = Managers.Game.GetUserData().GetComponent<UserData>(); //스테이지 클리어
-            _userData.StageCount++; //스테이지 해금용
+        Managers.UI.ShowPopupUI<Result_Popup>().Win(Managers.Stage.ExpItem); //승리 보상 부분
 
-            _userData.Clear++; //미션용
-            Managers.Mission.ConditionComparison(Define.MissionType.StageClear, _userData.Clear);
-            win = false;
-        }
+        _userData = Managers.Game.GetUserData().GetComponent<UserData>(); //스테이지 클리어
+        _userData.StageCount++; //스테이지 해금용
+
+        _userData.Clear++; //미션용
+        Managers.Mission.ConditionComparison(Define.MissionType.StageClear, _userData.Clear);
     }
-
     public void Lose()
     {
         if (!lose)

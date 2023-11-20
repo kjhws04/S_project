@@ -124,7 +124,7 @@ public class CharacterUnityStat : MonoBehaviour
     #endregion
 
     // <surmmary>
-    // 무기 스텟 적용 함수
+    // 무기의 종류에 따른 스텟 변화용 함수
     // </surmmary>
     public void WeaponApply(WeaponStat _weapon, bool _isUesd)
     {
@@ -153,7 +153,6 @@ public class CharacterUnityStat : MonoBehaviour
             }
         }
     }
-
 
     // <surmmary>
     // 캐릭터의 상한 스텟 (myUnit)

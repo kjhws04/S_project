@@ -8,6 +8,9 @@ using UnityEngine;
 // </summary>
 public class SoundManager
 {
+    public float bgmPer = 0.1f;
+    public float sfxPer = 0.5f;
+
     AudioSource[] _audioSource = new AudioSource[(int)Define.Sound.MaxCount];
 
     // <summary>
@@ -39,12 +42,12 @@ public class SoundManager
     }
 
     // <summary>
-    // AudioClip을 연결하여, 상황에 맞게 재생(경로, BGM or EFFECT, 피치)
+    // AudioClip을 연결하여, 상황에 맞게 재생(경로, BGM or EFFECT, 피치[배속?], 볼륨)
     // </summary>
     public void Play(string path, Define.Sound type = Define.Sound.Effect, float pitch =  1.0f)
     {
         if (path.Contains("Sounds/") == false)
-            path = $"Souns/{path}";
+            path = $"Sounds/{path}";
 
         if (type == Define.Sound.Bgm)
         {
@@ -60,6 +63,7 @@ public class SoundManager
             if (audioSource.isPlaying)
                 audioSource.Stop();
 
+            audioSource.volume = bgmPer;
             audioSource.pitch = pitch;
             audioSource.clip = audioClip;
             audioSource.Play();
@@ -74,6 +78,7 @@ public class SoundManager
             }
 
             AudioSource audioSource = _audioSource[(int)Define.Sound.Effect];
+            audioSource.volume = sfxPer;
             audioSource.pitch = pitch;
             audioSource.PlayOneShot(audioClip);
         }

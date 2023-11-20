@@ -73,4 +73,12 @@ public class Util
             return null;
         }
     }
+
+    // <summary>
+    // 해상도를 변경해주는 함수 (기본값은 갤럭시s20 기준으로 작성)
+    // </summary>
+    public static void ChangeResolution(int x = 3200, int y = 1440)
+    {
+        Screen.SetResolution(x, y, true);
+    }
 }

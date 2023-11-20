@@ -73,7 +73,7 @@ public class Managers : MonoBehaviour
         s_instance._data.Init();
         s_instance._pool.Init();
         s_instance._sound.Init();
-        s_instance._mission.Init();
+        //s_instance._mission.Init(); //Firebase Manager의 Login 함수에서 init()
     }
 
     public static void Clear()
