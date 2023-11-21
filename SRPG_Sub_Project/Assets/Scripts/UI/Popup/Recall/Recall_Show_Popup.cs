@@ -92,7 +92,7 @@ public class Recall_Show_Popup : UI_Popup
             ("Broyna", 33, true),
             ("Kan", 34, true),
             ("AKA", 33, true)
-        #endregion
+        #endregion //가중치 저장 Data
         );
 
         RecallCard(wRecall, recallTime);
@@ -151,7 +151,7 @@ public class Recall_Show_Popup : UI_Popup
     }
 
     //친구 가챠
-    public void FrendRecall(int recallTime)
+    public void FriendRecall(int recallTime)
     {
         var wRecall = new Gacha<string>();
         wRecall.Add(

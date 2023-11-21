@@ -159,7 +159,7 @@ public class Recall_Base : UI_Popup
                 _popup.SpecialRecall(_recallTime);
                 break;
             case Define.RecallType.FriendTicket:
-                _popup.FrendRecall(_recallTime);
+                _popup.FriendRecall(_recallTime);
                 break;
         }
     }

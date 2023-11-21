@@ -44,7 +44,6 @@ public class PoolManager
             _poolStack.Push(poolable);
         }
 
-
         // 풀에서 Poolable 오브젝트 가져오기
         public Poolable Pop(Transform parent)
         {
